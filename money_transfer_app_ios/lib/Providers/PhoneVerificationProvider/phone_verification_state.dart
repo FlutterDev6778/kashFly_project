@@ -1,0 +1,58 @@
+import 'package:flutter/material.dart';
+import 'package:meta/meta.dart';
+import 'package:equatable/equatable.dart';
+import 'package:money_transfer_framework/money_transfer_framework.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+
+class PhoneVerificationState extends Equatable {
+  final int progressState; // 0: init, 1: progressing, 2: success, 3: failed
+  final String errorString;
+
+  PhoneVerificationState({
+    @required this.errorString,
+    @required this.progressState,
+  });
+
+  factory PhoneVerificationState.init() {
+    return PhoneVerificationState(
+      progressState: 0,
+      errorString: "",
+    );
+  }
+
+  PhoneVerificationState copyWith({
+    int progressState,
+    String errorString,
+  }) {
+    return PhoneVerificationState(
+      progressState: progressState ?? this.progressState,
+      errorString: errorString ?? this.errorString,
+    );
+  }
+
+  PhoneVerificationState update({
+    int progressState,
+    String errorString,
+  }) {
+    return copyWith(
+      progressState: progressState,
+      errorString: errorString,
+    );
+  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "progressState": progressState,
+      "errorString": errorString,
+    };
+  }
+
+  @override
+  List<Object> get props => [
+        progressState,
+        errorString,
+      ];
+
+  @override
+  bool get stringify => true;
+}
