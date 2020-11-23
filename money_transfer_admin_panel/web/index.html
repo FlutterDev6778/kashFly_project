@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta content="IE=Edge" http-equiv="X-UA-Compatible" />
+    <meta name="description" content="A new Flutter project." />
+
+    <!-- iOS meta tags & icons -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta
+      name="apple-mobile-web-app-title"
+      content="money_transfer_admin_panel"
+    />
+    <link rel="apple-touch-icon" href="icons/Icon-192.png" />
+
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="favicon.png" />
+
+    <title>money_transfer_admin_panel</title>
+    <link rel="manifest" href="manifest.json" />
+  </head>
+  <body>
+    <!-- This script installs service_worker.js to provide PWA functionality to
+       application. For more information, see:
+       https://developers.google.com/web/fundamentals/primers/service-workers -->
+    <script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-storage.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.22.0/firebase-analytics.js"></script>
+    <script>
+      // Your web app's Firebase configuration
+    
+      const firebaseConfig = {
+        apiKey: "AIzaSyBlDmSd7-4fzuILJhUYlRQBpy3KyFS7_3E",
+        authDomain: "kashfly-48eaa.firebaseapp.com",
+        databaseURL: "https://kashfly-48eaa.firebaseio.com",
+        projectId: "kashfly-48eaa",
+        storageBucket: "kashfly-48eaa.appspot.com",
+        messagingSenderId: "425270968391",
+        appId: "1:425270968391:web:2bb79c0d5c936627b5b162",
+        measurementId: "G-V4WDZ9FJGM",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
+
+    <script>
+      // const messaging = firebase.messaging();
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+          navigator.serviceWorker.register("./firebase-messaging-sw.js").then(
+            function (registration) {
+              console.log(
+                "Service worker registration succeeded:",
+                registration
+              );
+              // messaging.useServiceWorker(registration);
+            },
+            function (error) {
+              console.log("Service worker registration failed:", error);
+            }
+          );
+        });
+      } else {
+        console.log("Service workers are not supported.");
+      }
+    </script>
+
+    <!-- <script>
+      if ("serviceWorker" in navigator) {
+        window.addEventListener("load", function () {
+          navigator.serviceWorker.register("flutter_service_worker.js");
+        });
+      }
+    </script> -->
+    <script src="main.dart.js" type="application/javascript"></script>
+  </body>
+</html>

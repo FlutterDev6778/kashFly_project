@@ -1,0 +1,56 @@
+{
+  "project_info": {
+    "project_number": "425270968391",
+    "firebase_url": "https://kashfly-48eaa.firebaseio.com",
+    "project_id": "kashfly-48eaa",
+    "storage_bucket": "kashfly-48eaa.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:425270968391:android:2d827f36b6291e01b5b162",
+        "android_client_info": {
+          "package_name": "com.kashfly.kashFly"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "425270968391-248ggjedpfvpmhdnku6k5prhf23gql6j.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kashfly.kashFly",
+            "certificate_hash": "fc607c06d2709502da544e46614df85e6ee7ff57"
+          }
+        },
+        {
+          "client_id": "425270968391-odopbggvom7g2b8pvhdc8f3deq2atorr.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.kashfly.kashFly",
+            "certificate_hash": "4fed0033b9c201460fcec0f9ecd941270bc2bee5"
+          }
+        },
+        {
+          "client_id": "425270968391-se26olpofisrp3ncp9k9l2vlketjs7dj.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNIwth2CRPE95e6zi7ZmkNzkP451Al7Ws"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "425270968391-se26olpofisrp3ncp9k9l2vlketjs7dj.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
