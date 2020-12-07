@@ -41,9 +41,14 @@ class _TransferViewState extends State<HomeView> {
     _settingsDataProvider = SettingsDataProvider.of(context);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       if (TransactionHistoryProvider.of(context).transactionHistoryState.totalTransactionAmountStream == null)
-        TransactionHistoryProvider.of(context).getTotalTransactionAmountStream(UserProvider.of(context).userState.userModel.id);
+        TransactionHistoryProvider.of(context)
+            .getTotalTransactionAmountStream(UserProvider.of(context).userState.userModel.id);
       if (TransactionHistoryProvider.of(context).transactionHistoryState.transactionListStream == null)
-        TransactionHistoryProvider.of(context).getTransactioinListStream(UserProvider.of(context).userState.userModel.id);
+        TransactionHistoryProvider.of(context).getSuccessTransactioinListStream(
+          UserProvider.of(context).userState.userModel.id,
+          UserProvider.of(context).userState.userModel.customerReferenceNo,
+          5,
+        );
     });
   }
 
@@ -126,7 +131,7 @@ class _TransferViewState extends State<HomeView> {
                   Icon(Icons.sort, size: widget.homePageStyles.widthDp * 30, color: AppColors.whiteColor),
                   SizedBox(height: widget.homePageStyles.widthDp * 30),
                   Text(
-                    "Total Spend: \$$value",
+                    "Total Spend: \$${value.toStringAsFixed(2)}",
                     style: widget.homePageStyles.titleStyle,
                   ),
                 ],
@@ -250,8 +255,8 @@ class _TransferViewState extends State<HomeView> {
             // Divider(height: 1, thickness: 1, color: Colors.grey.withAlpha(150)),
             // SizedBox(height: widget.homePageStyles.widthDp * 10),
             Consumer<UserProvider>(builder: (context, userProvider, _) {
-              int monthlyAvailableAmount =
-                  _settingsDataProvider.settingsDataState.cashLimits['monthly'] - userProvider.userState.userModel.monthlyCount;
+              int monthlyAvailableAmount = _settingsDataProvider.settingsDataState.cashLimits['monthly'] -
+                  userProvider.userState.userModel.monthlyCount;
               int currentAmount = userProvider.userState.userModel.monthlyCount;
 
               return Container(
@@ -314,7 +319,8 @@ class _TransferViewState extends State<HomeView> {
                         PieChartData(
                           pieTouchData: PieTouchData(touchCallback: (pieTouchResponse) {
                             setState(() {
-                              if (pieTouchResponse.touchInput is FlLongPressEnd || pieTouchResponse.touchInput is FlPanEnd) {
+                              if (pieTouchResponse.touchInput is FlLongPressEnd ||
+                                  pieTouchResponse.touchInput is FlPanEnd) {
                                 touchedIndex = -1;
                               } else {
                                 touchedIndex = pieTouchResponse.touchedSectionIndex;
@@ -325,26 +331,32 @@ class _TransferViewState extends State<HomeView> {
                           borderData: FlBorderData(
                             show: false,
                           ),
-                          sectionsSpace: (currentAmount == 0 || currentAmount == _settingsDataProvider.settingsDataState.cashLimits['monthly'])
+                          sectionsSpace: (currentAmount == 0 ||
+                                  currentAmount == _settingsDataProvider.settingsDataState.cashLimits['monthly'])
                               ? 0
                               : widget.homePageStyles.widthDp * 4,
                           centerSpaceRadius: 0,
                           sections: [
                             PieChartSectionData(
                               color: AppColors.secondaryColor,
-                              value: 100 * currentAmount / _settingsDataProvider.settingsDataState.cashLimits['monthly'],
+                              value:
+                                  100 * currentAmount / _settingsDataProvider.settingsDataState.cashLimits['monthly'],
                               title: '',
                               radius: widget.homePageStyles.widthDp * 45,
-                              titleStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: const Color(0xff044d7c)),
+                              titleStyle:
+                                  TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: const Color(0xff044d7c)),
                               titlePositionPercentageOffset: 0.55,
                               showTitle: false,
                             ),
                             PieChartSectionData(
                               color: AppColors.primaryColor,
-                              value: 100 * monthlyAvailableAmount / _settingsDataProvider.settingsDataState.cashLimits['monthly'],
+                              value: 100 *
+                                  monthlyAvailableAmount /
+                                  _settingsDataProvider.settingsDataState.cashLimits['monthly'],
                               title: '',
                               radius: widget.homePageStyles.widthDp * 40,
-                              titleStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: const Color(0xff90672d)),
+                              titleStyle:
+                                  TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: const Color(0xff90672d)),
                               titlePositionPercentageOffset: 0.55,
                               showTitle: false,
                             )
@@ -465,8 +477,9 @@ class _TransferViewState extends State<HomeView> {
                   ),
                   SizedBox(height: widget.homePageStyles.widthDp * 5),
                   Column(
-                    children:
-                        List<int>.generate(transactionSnapshot.data.length < 2 ? transactionSnapshot.data.length : 2, (index) => index).map((index) {
+                    children: List<int>.generate(
+                            transactionSnapshot.data.length < 2 ? transactionSnapshot.data.length : 2, (index) => index)
+                        .map((index) {
                       return StreamBuilder<Map<String, dynamic>>(
                           stream: transactionSnapshot.data[index],
                           builder: (context, snapshot) {
@@ -561,7 +574,9 @@ class _TransferViewState extends State<HomeView> {
                                           ),
                                           Text(
                                             transactionModel.state == 0 ? "Pending" : "Sent",
-                                            style: transactionModel.state == 0 ? widget.homePageStyles.pendingStyle : widget.homePageStyles.sentStyle,
+                                            style: transactionModel.state == 0
+                                                ? widget.homePageStyles.pendingStyle
+                                                : widget.homePageStyles.sentStyle,
                                             overflow: TextOverflow.ellipsis,
                                             textAlign: TextAlign.center,
                                           ),

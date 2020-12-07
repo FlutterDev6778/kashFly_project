@@ -61,7 +61,7 @@ class HomePageMobileStyles extends HomePageStyles {
     heightDp = ScreenUtil().setHeight(1);
     fontSp = ScreenUtil().setSp(1, allowFontScalingSelf: false);
     // mainHeight = deviceHeight - bottombarHeight;
-    mainHeight = deviceHeight - 93;
+    mainHeight = deviceHeight - widthDp * 80;
 
     primaryHorizontalPadding = widthDp * 20;
     primaryVerticalPadding = widthDp * 20;

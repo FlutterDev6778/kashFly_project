@@ -17,6 +17,7 @@ import 'package:keicy_utils/date_time_convert.dart';
 
 import 'package:money_transfer_app/Pages/App/index.dart';
 import 'package:money_transfer_app/Providers/index.dart';
+import 'package:money_transfer_app/DataProviders/index.dart';
 
 import 'index.dart';
 
@@ -79,7 +80,11 @@ class _TransferViewState extends State<TransactionHistoryView> with TickerProvid
       );
 
       if (_transactionHistoryProvider.transactionHistoryState.transactionListStream == null)
-        _transactionHistoryProvider.getTransactioinListStream(UserProvider.of(context).userState.userModel.id);
+        _transactionHistoryProvider.getTransactioinListStream(
+          UserProvider.of(context).userState.userModel.id,
+          UserProvider.of(context).userState.userModel.customerReferenceNo,
+          5,
+        );
     });
   }
 
@@ -162,83 +167,86 @@ class _TransferViewState extends State<TransactionHistoryView> with TickerProvid
                     addRepaintBoundaries: false,
                     itemBuilder: (context, index) {
                       return StreamBuilder<Map<String, dynamic>>(
-                          stream: transactionSnapshot.data[index],
-                          builder: (context, snapshot) {
-                            if (!snapshot.hasData) {
-                              return Container(
-                                height: widget.transactionHistoryPageStyles.historyCardHeight,
-                                child: Center(child: KeicyCupertinoIndicator()),
-                              );
-                            }
+                        stream: transactionSnapshot.data[index],
+                        builder: (context, snapshot) {
+                          if (!snapshot.hasData) {
+                            return Container(
+                              height: widget.transactionHistoryPageStyles.historyCardHeight,
+                              child: Center(child: KeicyCupertinoIndicator()),
+                            );
+                          }
 
-                            if (snapshot.data == null) {
-                              return SizedBox();
-                            }
+                          if (snapshot.data == null) {
+                            return SizedBox();
+                          }
 
-                            TransactionModel transactionModel = snapshot.data["transactionModel"];
-                            RecipientModel recipientModel = snapshot.data["recipientModel"];
+                          TransactionModel transactionModel = snapshot.data["transactionModel"];
+                          RecipientModel recipientModel = snapshot.data["recipientModel"];
 
-                            return GestureDetector(
-                              onTap: () {},
+                          return GestureDetector(
+                            onTap: () {},
+                            child: Container(
+                              padding: EdgeInsets.symmetric(
+                                horizontal: widget.transactionHistoryPageStyles.historyCardHorizontalPadding,
+                              ),
                               child: Container(
+                                // height: widget.transactionHistoryPageStyles.historyCardHeight,
+                                margin: EdgeInsets.all(widget.transactionHistoryPageStyles.widthDp * 5),
                                 padding: EdgeInsets.symmetric(
-                                  horizontal: widget.transactionHistoryPageStyles.historyCardHorizontalPadding,
+                                  horizontal: widget.transactionHistoryPageStyles.widthDp * 20,
+                                  vertical: widget.transactionHistoryPageStyles.widthDp * 10,
                                 ),
-                                child: Container(
-                                  // height: widget.transactionHistoryPageStyles.historyCardHeight,
-                                  margin: EdgeInsets.all(widget.transactionHistoryPageStyles.widthDp * 5),
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: widget.transactionHistoryPageStyles.widthDp * 20,
-                                    vertical: widget.transactionHistoryPageStyles.widthDp * 10,
-                                  ),
-                                  decoration: BoxDecoration(
-                                    color: AppColors.whiteColor,
-                                    borderRadius: BorderRadius.circular(widget.transactionHistoryPageStyles.widthDp * 15),
-                                    // boxShadow: [
-                                    //   BoxShadow(
-                                    //     color: Colors.grey.withOpacity(0.5),
-                                    //     spreadRadius: 0,
-                                    //     blurRadius: widget.transactionHistoryPageStyles.widthDp * 5,
-                                    //     offset: Offset(0, 0), // changes position of shadow
-                                    //   ),
-                                    // ],
-                                  ),
-                                  alignment: Alignment.center,
-                                  child: Row(
-                                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                    children: <Widget>[
-                                      Row(
-                                        children: [
-                                          KeicyAvatarImage(
-                                            url: recipientModel.avatarUrl,
-                                            userName: recipientModel.firstName,
-                                            width: widget.transactionHistoryPageStyles.widthDp * 49,
-                                            height: widget.transactionHistoryPageStyles.widthDp * 49,
-                                            borderRadius: widget.transactionHistoryPageStyles.widthDp * 10,
-                                          ),
-                                          SizedBox(width: widget.transactionHistoryPageStyles.widthDp * 15),
-                                          Column(
-                                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                            children: [
-                                              Text(
-                                                recipientModel.firstName,
-                                                style: widget.transactionHistoryPageStyles.textStyle,
-                                                overflow: TextOverflow.ellipsis,
-                                                textAlign: TextAlign.center,
-                                              ),
-                                              SizedBox(height: widget.transactionHistoryPageStyles.widthDp * 5),
-                                              Text(
-                                                "${KeicyDateTime.convertMillisecondsToDateString(ms: transactionModel.ts)}",
-                                                style: widget.transactionHistoryPageStyles.birthDayStyle,
-                                                overflow: TextOverflow.ellipsis,
-                                                textAlign: TextAlign.center,
-                                              ),
-                                            ],
-                                          ),
-                                        ],
-                                      ),
-                                      Column(
+                                decoration: BoxDecoration(
+                                  color: AppColors.whiteColor,
+                                  borderRadius: BorderRadius.circular(widget.transactionHistoryPageStyles.widthDp * 15),
+                                  // boxShadow: [
+                                  //   BoxShadow(
+                                  //     color: Colors.grey.withOpacity(0.5),
+                                  //     spreadRadius: 0,
+                                  //     blurRadius: widget.transactionHistoryPageStyles.widthDp * 5,
+                                  //     offset: Offset(0, 0), // changes position of shadow
+                                  //   ),
+                                  // ],
+                                ),
+                                alignment: Alignment.center,
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: <Widget>[
+                                    Row(
+                                      children: [
+                                        KeicyAvatarImage(
+                                          url: recipientModel.avatarUrl,
+                                          userName: recipientModel.firstName,
+                                          width: widget.transactionHistoryPageStyles.widthDp * 49,
+                                          height: widget.transactionHistoryPageStyles.widthDp * 49,
+                                          borderRadius: widget.transactionHistoryPageStyles.widthDp * 10,
+                                        ),
+                                        SizedBox(width: widget.transactionHistoryPageStyles.widthDp * 15),
+                                        Column(
+                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                          children: [
+                                            Text(
+                                              recipientModel.firstName,
+                                              style: widget.transactionHistoryPageStyles.textStyle,
+                                              overflow: TextOverflow.ellipsis,
+                                              textAlign: TextAlign.center,
+                                            ),
+                                            SizedBox(height: widget.transactionHistoryPageStyles.widthDp * 5),
+                                            Text(
+                                              "${KeicyDateTime.convertMillisecondsToDateString(ms: transactionModel.ts)}",
+                                              style: widget.transactionHistoryPageStyles.birthDayStyle,
+                                              overflow: TextOverflow.ellipsis,
+                                              textAlign: TextAlign.center,
+                                            ),
+                                          ],
+                                        ),
+                                      ],
+                                    ),
+                                    Expanded(
+                                      child: Column(
                                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                        crossAxisAlignment: CrossAxisAlignment.end,
                                         children: [
                                           Text(
                                             "\$${transactionModel.amount}",
@@ -246,22 +254,57 @@ class _TransferViewState extends State<TransactionHistoryView> with TickerProvid
                                             overflow: TextOverflow.ellipsis,
                                             textAlign: TextAlign.center,
                                           ),
-                                          Text(
-                                            transactionModel.state == 0 ? "Pending" : "Sent",
-                                            style: transactionModel.state == 0
-                                                ? widget.transactionHistoryPageStyles.pendingStyle
-                                                : widget.transactionHistoryPageStyles.sentStyle,
-                                            overflow: TextOverflow.ellipsis,
-                                            textAlign: TextAlign.center,
-                                          ),
+                                          transactionModel.jubaReferenceNum == ""
+                                              ? Text(
+                                                  transactionModel.transactioinErrorString,
+                                                  style: transactionModel.state == 0
+                                                      ? widget.transactionHistoryPageStyles.pendingStyle
+                                                      : widget.transactionHistoryPageStyles.sentStyle,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  textAlign: TextAlign.right,
+                                                  maxLines: 3,
+                                                )
+                                              : StreamBuilder<Map<String, dynamic>>(
+                                                  stream: Stream.fromFuture(
+                                                    SendRemittanceStatusDataProvider.getSendRemittanceStatus(
+                                                      referenceNum: transactionModel.jubaReferenceNum,
+                                                    ),
+                                                  ),
+                                                  builder: (context, snapshot) {
+                                                    if (!snapshot.hasData) {
+                                                      return Container(
+                                                        height: widget.transactionHistoryPageStyles.historyCardHeight,
+                                                        child: Center(child: KeicyCupertinoIndicator()),
+                                                      );
+                                                    }
+
+                                                    if (snapshot.data == null) {
+                                                      return SizedBox();
+                                                    }
+
+                                                    Map<String, dynamic> jubaTransactionState = snapshot.data;
+
+                                                    return Text(
+                                                      AppConstants.jubaTransactionState[jubaTransactionState["Data"][0]
+                                                          ["Status"]],
+                                                      style: transactionModel.state == 0
+                                                          ? widget.transactionHistoryPageStyles.pendingStyle
+                                                          : widget.transactionHistoryPageStyles.sentStyle,
+                                                      overflow: TextOverflow.ellipsis,
+                                                      textAlign: TextAlign.center,
+                                                    );
+                                                  },
+                                                ),
                                         ],
                                       ),
-                                    ],
-                                  ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            );
-                          });
+                            ),
+                          );
+                        },
+                      );
                     },
                     // separatorBuilder: (context, index) {
                     //   return SizedBox(width: widget.transactionHistoryPageStyles.widthDp * 10);

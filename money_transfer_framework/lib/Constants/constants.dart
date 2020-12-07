@@ -8,8 +8,30 @@ class AppConstants {
     {"text": "United Sate of America", "value": 0},
   ];
 
-  static String maskString = '+242 (##) ###-##-##';
-  // static String maskString = '+1 (###) ###-##-##';
+  // static String maskString = '+242 (##) ###-##-##';
+  static String maskString = '+1 (###) ###-##-##';
+
+  static List<String> reasonList = [
+    "Medical",
+    "Travel",
+    "Educational",
+    "Business",
+    "Investment",
+    "Charity",
+    "Other",
+    "FamilySupport",
+  ];
+
+  static Map<int, String> jubaTransactionState = {
+    3: "OnHold",
+    4: "Transit",
+    5: "ReadyToPay",
+    6: "Paid",
+    8: "ReadyToReturn",
+    9: "Returned",
+    11: "RequestForCancel",
+    13: "UndoForPayment",
+  };
 
   static Map<String, dynamic> usStatesCities = {
     "New York": [
@@ -748,7 +770,19 @@ class AppConstants {
       "Lake Oswego",
       "Keizer"
     ],
-    "Oklahoma": ["Oklahoma City", "Tulsa", "Norman", "Broken Arrow", "Lawton", "Edmond", "Moore", "Midwest City", "Enid", "Stillwater", "Muskogee"],
+    "Oklahoma": [
+      "Oklahoma City",
+      "Tulsa",
+      "Norman",
+      "Broken Arrow",
+      "Lawton",
+      "Edmond",
+      "Moore",
+      "Midwest City",
+      "Enid",
+      "Stillwater",
+      "Muskogee"
+    ],
     "Wisconsin": [
       "Milwaukee",
       "Madison",
@@ -855,8 +889,30 @@ class AppConstants {
       "Moorhead",
       "Shakopee"
     ],
-    "Kansas": ["Wichita", "Overland Park", "Kansas City", "Olathe", "Topeka", "Lawrence", "Shawnee", "Manhattan", "Lenexa", "Salina", "Hutchinson"],
-    "Louisiana": ["New Orleans", "Baton Rouge", "Shreveport", "Lafayette", "Lake Charles", "Kenner", "Bossier City", "Monroe", "Alexandria"],
+    "Kansas": [
+      "Wichita",
+      "Overland Park",
+      "Kansas City",
+      "Olathe",
+      "Topeka",
+      "Lawrence",
+      "Shawnee",
+      "Manhattan",
+      "Lenexa",
+      "Salina",
+      "Hutchinson"
+    ],
+    "Louisiana": [
+      "New Orleans",
+      "Baton Rouge",
+      "Shreveport",
+      "Lafayette",
+      "Lake Charles",
+      "Kenner",
+      "Bossier City",
+      "Monroe",
+      "Alexandria"
+    ],
     "Hawaii": ["Honolulu"],
     "Alaska": ["Anchorage"],
     "New Jersey": [

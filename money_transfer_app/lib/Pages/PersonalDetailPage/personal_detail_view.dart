@@ -402,6 +402,6 @@ class _PersonalDetailViewState extends State<PersonalDetailView> with TickerProv
     userModel.street = _streetController.text.trim();
     userModel.ts = DateTime.now().millisecondsSinceEpoch;
 
-    _userProvider.saveUserData(userID: userModel.id, data: userModel.toJson());
+    _userProvider.saveUserData(userID: userModel.id, userModel: userModel);
   }
 }

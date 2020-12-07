@@ -13,14 +13,7 @@ class TransferPageString {
   static String commentLabel = "Reasons";
   static String commentHintLabel = "Please choose reason ....";
   static String selectErrorString = "Please choose items";
-  static List<String> reasonList = [
-    "Family and Friends",
-    "Educational Purpose",
-    "Health Purpose",
-    "Purchase Property",
-    "Donation",
-    "Business Purpose",
-  ];
+
   // static List<Map<String, dynamic>> reasonList = [
   //   {"text": "Family and Friends", "value": "Family and Friends"},
   //   {"text": "Educational Purpose", "value": "Educational Purpose"},

@@ -4,7 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/services.dart';
 import 'package:keicy_stripe_payment/keicy_stripe_payment.dart';
+import 'package:money_transfer_app/DataProviders/index.dart';
+import 'package:money_transfer_app/Providers/index.dart';
 import 'package:provider/provider.dart';
+import 'package:date_time_format/date_time_format.dart';
 
 import 'package:keicy_firebase_auth_0_18/keicy_firebase_auth_0_18.dart';
 import 'package:keicy_fcm_for_mobile_7_0/keicy_fcm_for_mobile_7_0.dart';
@@ -28,13 +31,27 @@ class UserProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> saveUserData({
-    @required String userID,
-    @required Map<String, dynamic> data,
-    bool isNotifiable = true,
-  }) async {
+  Future<void> saveUserData({@required String userID, @required UserModel userModel, bool isNotifiable = true, bool updateJuba = false}) async {
     try {
-      var result = await UserRepository.updateUser(userID, data);
+      /// juba express register
+
+      if (updateJuba && userModel.customerReferenceNo != "") {
+        Map<String, dynamic> _userData = userModel.toJson();
+        _userData["DateOfBirth"] = DateTimeFormat.format(
+          DateTime.fromMillisecondsSinceEpoch(userModel.dobTs),
+          format: "m/d/Y",
+        );
+        _userData["City"] = "MNS";
+        _userData["State"] = "USA";
+
+        var jubaResult = await UpdateCustomerDataProvider.updateCustomer(customerData: _userData);
+
+        if (jubaResult["Response"]["Code"] == "001") {}
+      }
+
+      //////////////////////////////////////////////////////
+      ///
+      var result = await UserRepository.updateUser(userID, userModel.toJson());
 
       if (result["success"]) {
         _userState = _userState.update(
@@ -62,14 +79,32 @@ class UserProvider extends ChangeNotifier {
     bool isNotifiable = true,
   }) async {
     try {
+      /// juba express register
+      Map<String, dynamic> _userData = userModel.toJson();
+      _userData["DateOfBirth"] = DateTimeFormat.format(
+        DateTime.fromMillisecondsSinceEpoch(userModel.dobTs),
+        format: "m/d/Y",
+      );
+      _userData["City"] = "MNS";
+      _userData["State"] = "USA";
+
+      var jubaResult = await RegisterCustomerDataProvider.registerCustomer(customerData: _userData);
+
+      if (jubaResult["Response"]["Code"] == "001") {
+        userModel.customerReferenceNo = jubaResult["Data"]["CustomerReferenceNo"];
+      } else {
+        _userState = _userState.update(
+          progressState: -1,
+          errorString: jubaResult["Response"]["Message"],
+        );
+        notifyListeners();
+        return;
+      }
+      //////////////////////////////////////////////////////
+
       var result = await UserRepository.addUser(userModel);
 
       if (result["success"]) {
-        _userState = _userState.update(
-          progressState: 2,
-          errorString: "",
-          userModel: _userState.userModel.update(result["data"][0]),
-        );
       } else {
         _userState = _userState.update(
           progressState: -1,

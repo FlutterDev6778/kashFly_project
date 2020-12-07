@@ -51,7 +51,7 @@ class UploadDocumentPageMobileStyles extends UploadDocumentPageStyles {
     heightDp = ScreenUtil().setHeight(1);
     fontSp = ScreenUtil().setSp(1, allowFontScalingSelf: false);
     // mainHeight = deviceHeight - bottombarHeight;
-    mainHeight = deviceHeight - 93;
+    mainHeight = deviceHeight - widthDp * 80;
 
     primaryHorizontalPadding = widthDp * 25;
     primaryVerticalPadding = widthDp * 20;

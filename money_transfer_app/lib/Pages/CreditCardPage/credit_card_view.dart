@@ -4,6 +4,7 @@ import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:money_transfer_app/Pages/Components/index.dart';
 import 'package:money_transfer_app/Pages/MyBankPage/my_bank_page.dart';
+import 'package:money_transfer_framework/money_transfer_framework.dart';
 import 'package:provider/provider.dart';
 import 'package:status_alert/status_alert.dart';
 import 'package:stripe_payment/stripe_payment.dart';
@@ -92,10 +93,15 @@ class _CreditCardViewState extends State<CreditCardView> with TickerProviderStat
             onPressHandler: () async {
               if (_selectedPaymentMethod != _userProvider.userState.userModel.seledtedPaymentMethod) {
                 await _keicyProgressDialog.show();
+
+                UserModel _userModel = UserModel.fromJson(_userProvider.userState.userModel.toJson());
+                _userModel.seledtedPaymentMethod = _selectedPaymentMethod;
+
                 await _userProvider.saveUserData(
                   userID: _userProvider.userState.userModel.id,
-                  data: {"seledtedPaymentMethod": _selectedPaymentMethod},
+                  userModel: _userModel,
                 );
+
                 _keicyProgressDialog.hide();
               }
               Navigator.of(context).pop();
@@ -268,26 +274,12 @@ class _CreditCardViewState extends State<CreditCardView> with TickerProviderStat
                                   _paymentMethod.card.toJson(),
                                   index,
                                 );
+
+                                showDeleteSuccessDialog();
+
                                 setState(() {
                                   _selectedPaymentMethod = _userProvider.userState.userModel.seledtedPaymentMethod;
                                 });
-                                StatusAlert.show(
-                                  context,
-                                  duration: Duration(seconds: 2),
-                                  title: 'Successfully deleted',
-                                  titleOptions: StatusAlertTextConfiguration(
-                                    style: TextStyle(fontSize: widget.creditCardPageStyles.fontSp * 16, color: AppColors.blackColor),
-                                  ),
-                                  margin: EdgeInsets.all(widget.creditCardPageStyles.widthDp * 80),
-                                  padding: EdgeInsets.all(widget.creditCardPageStyles.widthDp * 20),
-                                  configuration: IconConfiguration(
-                                    icon: Icons.check_circle_outline,
-                                    color: AppColors.primaryColor,
-                                    size: widget.creditCardPageStyles.widthDp * 80,
-                                  ),
-                                  blurPower: 3,
-                                  backgroundColor: Colors.white,
-                                );
                               }
                             },
                             child: (widget.isSelectable)
@@ -311,6 +303,26 @@ class _CreditCardViewState extends State<CreditCardView> with TickerProviderStat
           },
         );
       },
+    );
+  }
+
+  void showDeleteSuccessDialog() {
+    StatusAlert.show(
+      context,
+      duration: Duration(seconds: 2),
+      title: 'Successfully deleted',
+      titleOptions: StatusAlertTextConfiguration(
+        style: TextStyle(fontSize: widget.creditCardPageStyles.fontSp * 16, color: AppColors.blackColor),
+      ),
+      margin: EdgeInsets.all(widget.creditCardPageStyles.widthDp * 80),
+      padding: EdgeInsets.all(widget.creditCardPageStyles.widthDp * 20),
+      configuration: IconConfiguration(
+        icon: Icons.check_circle_outline,
+        color: AppColors.primaryColor,
+        size: widget.creditCardPageStyles.widthDp * 80,
+      ),
+      blurPower: 3,
+      backgroundColor: Colors.white,
     );
   }
 }

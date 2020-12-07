@@ -56,7 +56,7 @@ class TransactionHistoryPageMobileStyles extends TransactionHistoryPageStyles {
     heightDp = ScreenUtil().setHeight(1);
     fontSp = ScreenUtil().setSp(1, allowFontScalingSelf: false);
     // mainHeight = deviceHeight - bottombarHeight;
-    mainHeight = deviceHeight - 93;
+    mainHeight = deviceHeight - widthDp * 80;
 
     primaryHorizontalPadding = widthDp * 30;
     primaryVerticalPadding = widthDp * 30;

@@ -10,12 +10,17 @@ class MyInfoPageString {
   static String birthDayHint = "Birth Day";
   static String emailHint = "Email";
   static String phoneHint = "Phone Number";
-  static String detailLabel = "Address Detail";
+  // static String telephoneHint = "Telephone Number";
+  static String detailLabel = "Address & Payment Detail";
   static String countryHint = "Country";
   static String stateHint = "State";
   static String cityHint = "City";
   static String addressHint = "Address";
   static String streetHint = "Street";
-  static String aptHint = "Apt";
-  static String zipCodeHint = "Zid code";
+  static String aptHint = "Apt Number";
+  static String zipCodeHint = "Zip code";
+  static String nationalityHint = "Nationality";
+  // static String placeOfBirthHint = "Place of Birth";
+  // static String occupationHint = "Occupation";
+  static String remaksHint = "Remarks";
 }

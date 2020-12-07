@@ -37,7 +37,13 @@ class _LandingViewState extends State<LandingView> {
           height: widget.landingPageStyles.mainHeight,
           child: Stack(
             children: [
-              SvgPicture.asset(AppAssets.backImg, width: widget.landingPageStyles.deviceWidth, fit: BoxFit.fitWidth),
+              Container(
+                child: Image.asset(
+                  AppAssets.backImg,
+                  width: widget.landingPageStyles.deviceWidth,
+                  fit: BoxFit.fitWidth,
+                ),
+              ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [

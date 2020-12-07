@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_masked_text/flutter_masked_text.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:money_transfer_app/Pages/Components/index.dart';
+import 'package:money_transfer_app/Pages/DocumentCategoryPage/index.dart';
+import 'package:money_transfer_app/Pages/SSNPage/index.dart';
 import 'package:money_transfer_app/Pages/TransferPage/index.dart';
+import 'package:money_transfer_app/Pages/UploadDocumentPage/index.dart';
 import 'package:status_alert/status_alert.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 
@@ -157,49 +160,80 @@ class _AmountViewState extends State<AmountView> {
               disabledColor: Colors.grey,
               onPressed: (str != "")
                   ? null
-                  : () async {
-                      FocusScope.of(context).requestFocus(FocusNode());
-                      double amount = double.parse(_amountController.text.trim().replaceAll("\$", "").trim());
-                      if (amount < SettingsDataProvider.of(context).settingsDataState.minAmount) {
-                        StatusAlert.show(
-                          context,
-                          duration: Duration(seconds: 2),
-                          title: AmountPageString.amountValidateString + SettingsDataProvider.of(context).settingsDataState.minAmount.toString(),
-                          titleOptions: StatusAlertTextConfiguration(
-                            style: TextStyle(fontSize: widget.amountPageStyles.fontSp * 16, color: AppColors.blackColor),
-                          ),
-                          margin: EdgeInsets.all(widget.amountPageStyles.widthDp * 80),
-                          padding: EdgeInsets.all(widget.amountPageStyles.widthDp * 20),
-                          configuration: IconConfiguration(
-                            icon: Icons.error_outline,
-                            color: Colors.redAccent,
-                            size: widget.amountPageStyles.widthDp * 80,
-                          ),
-                          blurPower: 3,
-                          backgroundColor: Colors.white,
-                        );
-                        Future.delayed(Duration(seconds: 2), () {
-                          FocusScope.of(context).requestFocus(_amountFocusNode);
-                        });
-                      } else {
-                        BottomNavbarProvider.of(context).setBottomNavbarState(BottomNavbarProvider.of(context).bottomNavbarState.update(type: 0));
-                        await pushNewScreen(
-                          context,
-                          screen: TransferPage(amount: amount),
-                          withNavBar: false,
-                        );
-                        // await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => TransferPage(amount: amount)));
-                        setState(() {
-                          _amountController.clear();
-                          _amountController.text = "0.00";
-                        });
-                        BottomNavbarProvider.of(context).setBottomNavbarState(BottomNavbarProvider.of(context).bottomNavbarState.update(type: 1));
-                      }
+                  : () {
+                      _sendHandler(context);
                     },
             ),
           ),
         ],
       );
     });
+  }
+
+  void _sendHandler(BuildContext context) async {
+    FocusScope.of(context).requestFocus(FocusNode());
+    double amount = double.parse(_amountController.text.trim().replaceAll("\$", "").trim());
+
+    ///
+    /// Check amount validation
+    ///
+    if (amount < SettingsDataProvider.of(context).settingsDataState.minAmount) {
+      StatusAlert.show(
+        context,
+        duration: Duration(seconds: 2),
+        title: AmountPageString.amountValidateString + SettingsDataProvider.of(context).settingsDataState.minAmount.toString(),
+        titleOptions: StatusAlertTextConfiguration(
+          style: TextStyle(fontSize: widget.amountPageStyles.fontSp * 16, color: AppColors.blackColor),
+        ),
+        margin: EdgeInsets.all(widget.amountPageStyles.widthDp * 80),
+        padding: EdgeInsets.all(widget.amountPageStyles.widthDp * 20),
+        configuration: IconConfiguration(
+          icon: Icons.error_outline,
+          color: Colors.redAccent,
+          size: widget.amountPageStyles.widthDp * 80,
+        ),
+        blurPower: 3,
+        backgroundColor: Colors.white,
+      );
+      Future.delayed(Duration(seconds: 2), () {
+        FocusScope.of(context).requestFocus(_amountFocusNode);
+      });
+      return;
+    }
+
+    ///
+    ////  Check document validation
+    ///
+
+    if (_userProvider.userState.userModel.documents.length == 0) {
+      pushNewScreen(
+        context,
+        screen: UploadDocumentPage(documentType: DocumentCategoryPageString.itemList[0], fullScreen: true),
+        withNavBar: false,
+      );
+      return;
+    } else if (_userProvider.userState.userModel.totalAmount >= 3000 && _userProvider.userState.userModel.documents["category2"] == null) {
+      pushNewScreen(
+        context,
+        screen: SSNPage(documentType: DocumentCategoryPageString.itemList[1]),
+        withNavBar: false,
+      );
+      return;
+    }
+
+    ///   --------------------------------------------
+
+    BottomNavbarProvider.of(context).setBottomNavbarState(BottomNavbarProvider.of(context).bottomNavbarState.update(type: 0));
+    await pushNewScreen(
+      context,
+      screen: TransferPage(amount: amount),
+      withNavBar: false,
+    );
+    // await Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => TransferPage(amount: amount)));
+    setState(() {
+      _amountController.clear();
+      _amountController.text = "0.00";
+    });
+    BottomNavbarProvider.of(context).setBottomNavbarState(BottomNavbarProvider.of(context).bottomNavbarState.update(type: 1));
   }
 }

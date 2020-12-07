@@ -94,7 +94,7 @@ class _BottomNavbarState extends State<BottomNavbar> with TickerProviderStateMix
             controller: _controller,
             screens: _buildScreens(),
             items: _navBarsItems(bottomNavbarProvider),
-            navBarHeight: 93,
+            navBarHeight: _bottomNavbarStyles.widthDp * 80,
             confineInSafeArea: true,
             backgroundColor: bottomNavbarProvider.bottomNavbarState.type == 0 ? Colors.white : AppColors.primaryColor,
             handleAndroidBackButtonPress: true,

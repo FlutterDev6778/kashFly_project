@@ -11,8 +11,9 @@ class TransferState extends Equatable {
   final int deliveryOption;
   final PaymentMethod paymentMethod;
   final RecipientModel recipientModel;
-  final String reason;
+  final int purpose;
   final double amount;
+  final double fee;
 
   TransferState({
     @required this.errorString,
@@ -20,8 +21,9 @@ class TransferState extends Equatable {
     @required this.deliveryOption,
     @required this.paymentMethod,
     @required this.recipientModel,
-    @required this.reason,
+    @required this.purpose,
     @required this.amount,
+    @required this.fee,
   });
 
   factory TransferState.init() {
@@ -31,8 +33,9 @@ class TransferState extends Equatable {
       deliveryOption: -1,
       paymentMethod: null,
       recipientModel: RecipientModel(),
-      reason: "",
+      purpose: 0,
       amount: 0.0,
+      fee: 0.0,
     );
   }
 
@@ -42,8 +45,9 @@ class TransferState extends Equatable {
     int deliveryOption,
     PaymentMethod paymentMethod,
     RecipientModel recipientModel,
-    String reason,
+    int purpose,
     double amount,
+    double fee,
   }) {
     return TransferState(
       progressState: progressState ?? this.progressState,
@@ -51,8 +55,9 @@ class TransferState extends Equatable {
       deliveryOption: deliveryOption ?? this.deliveryOption,
       paymentMethod: paymentMethod ?? this.paymentMethod,
       recipientModel: recipientModel ?? this.recipientModel,
-      reason: reason ?? this.reason,
+      purpose: purpose ?? this.purpose,
       amount: amount ?? this.amount,
+      fee: fee ?? this.fee,
     );
   }
 
@@ -62,8 +67,9 @@ class TransferState extends Equatable {
     int deliveryOption,
     PaymentMethod paymentMethod,
     RecipientModel recipientModel,
-    String reason,
+    int purpose,
     double amount,
+    double fee,
   }) {
     return copyWith(
       progressState: progressState,
@@ -71,8 +77,9 @@ class TransferState extends Equatable {
       deliveryOption: deliveryOption,
       paymentMethod: paymentMethod,
       recipientModel: recipientModel,
-      reason: reason,
+      purpose: purpose,
       amount: amount,
+      fee: fee,
     );
   }
 
@@ -83,8 +90,9 @@ class TransferState extends Equatable {
       "deliveryOption": deliveryOption,
       "paymentMethod": paymentMethod.toJson(),
       "recipientModel": recipientModel.toJson(),
-      "reason": reason,
+      "purpose": purpose,
       "amount": amount,
+      "fee": fee,
     };
   }
 
@@ -95,8 +103,9 @@ class TransferState extends Equatable {
         deliveryOption,
         paymentMethod != null ? paymentMethod.toJson().toString() : null,
         recipientModel,
-        reason,
+        purpose,
         amount,
+        fee,
       ];
 
   @override

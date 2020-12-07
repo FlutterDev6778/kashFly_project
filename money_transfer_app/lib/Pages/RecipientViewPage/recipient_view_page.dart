@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl_phone_number_input/intl_phone_number_input.dart';
@@ -222,7 +223,10 @@ class _RecipientViewPageState extends State<RecipientViewPage> {
                     Icon(Icons.person_outline, color: AppColors.secondaryColor, size: _recipientViewPageStyles.iconSize),
                   ],
                   textStyle: _recipientViewPageStyles.textStyle,
-                  keyboardType: TextInputType.text,
+                  keyboardType: TextInputType.name,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter(RegExp("[a-zA-Z]"), allow: true),
+                  ],
                   textInputAction: TextInputAction.next,
                   hintText: RecipientViewPageString.fistNameHint,
                   hintStyle: _recipientViewPageStyles.hintStyle,
@@ -250,7 +254,10 @@ class _RecipientViewPageState extends State<RecipientViewPage> {
                     Icon(Icons.person_outline, color: AppColors.secondaryColor, size: _recipientViewPageStyles.iconSize),
                   ],
                   textStyle: _recipientViewPageStyles.textStyle,
-                  keyboardType: TextInputType.text,
+                  keyboardType: TextInputType.name,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter(RegExp("[a-zA-Z]"), allow: true),
+                  ],
                   textInputAction: TextInputAction.next,
                   hintText: RecipientViewPageString.middleNameHint,
                   hintStyle: _recipientViewPageStyles.hintStyle,
@@ -278,7 +285,10 @@ class _RecipientViewPageState extends State<RecipientViewPage> {
                     Icon(Icons.person_outline, color: AppColors.secondaryColor, size: _recipientViewPageStyles.iconSize),
                   ],
                   textStyle: _recipientViewPageStyles.textStyle,
-                  keyboardType: TextInputType.text,
+                  keyboardType: TextInputType.name,
+                  inputFormatters: <TextInputFormatter>[
+                    FilteringTextInputFormatter(RegExp("[a-zA-Z]"), allow: true),
+                  ],
                   textInputAction: TextInputAction.next,
                   hintText: RecipientViewPageString.lastNameHint,
                   hintStyle: _recipientViewPageStyles.hintStyle,
@@ -355,7 +365,7 @@ class _RecipientViewPageState extends State<RecipientViewPage> {
                   ],
                   textStyle: _recipientViewPageStyles.textStyle,
                   keyboardType: TextInputType.text,
-                  textInputAction: TextInputAction.next,
+                  textInputAction: TextInputAction.done,
                   hintText: RecipientViewPageString.cityHint,
                   hintStyle: _recipientViewPageStyles.hintStyle,
                   validatorHandler: (input) => (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,

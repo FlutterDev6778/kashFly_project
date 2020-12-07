@@ -1,6 +1,6 @@
 class AppAssets {
   static String activityIcon = "lib/Assets/Images/activity_icon.svg";
-  static String backImg = "lib/Assets/Images/back_img.svg";
+  static String backImg = "lib/Assets/Images/back_img.png";
   static String backspaceIcon = "lib/Assets/Images/backspace_icon.svg";
   static String bannerTextImg = "lib/Assets/Images/banner_txt.svg";
   static String cityIcon = "lib/Assets/Images/city_icon.svg";

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:keicy_navigator/keicy_navigator.dart';
 import 'package:keicy_text_form_field/keicy_text_form_field.dart';
@@ -69,7 +70,7 @@ class _LoginViewState extends State<LoginView> {
             onTap: () {},
             child: Stack(
               children: [
-                SvgPicture.asset(AppAssets.backImg, width: widget.loginPageStyles.deviceWidth, fit: BoxFit.fitWidth),
+                Image.asset(AppAssets.backImg, width: widget.loginPageStyles.deviceWidth, fit: BoxFit.fitWidth),
                 Column(
                   children: [
                     SizedBox(height: widget.loginPageStyles.widthDp * 300),
@@ -276,8 +277,11 @@ class _LoginViewState extends State<LoginView> {
                 ),
               ],
               textStyle: widget.loginPageStyles.textFormFieldTextStyle,
-              keyboardType: TextInputType.text,
+              keyboardType: TextInputType.name,
               textInputAction: TextInputAction.next,
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter(RegExp("[a-zA-Z]"), allow: true),
+              ],
               hintText: LoginPageString.firstNameHint,
               hintStyle: widget.loginPageStyles.hintTextStyle,
               validatorHandler: (input) => (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
@@ -312,8 +316,11 @@ class _LoginViewState extends State<LoginView> {
                 ),
               ],
               textStyle: widget.loginPageStyles.textFormFieldTextStyle,
-              keyboardType: TextInputType.text,
+              keyboardType: TextInputType.name,
               textInputAction: TextInputAction.next,
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter(RegExp("[a-zA-Z]"), allow: true),
+              ],
               hintText: LoginPageString.middleNameHint,
               hintStyle: widget.loginPageStyles.hintTextStyle,
               validatorHandler: (input) => (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
@@ -348,7 +355,10 @@ class _LoginViewState extends State<LoginView> {
                 ),
               ],
               textStyle: widget.loginPageStyles.textFormFieldTextStyle,
-              keyboardType: TextInputType.text,
+              keyboardType: TextInputType.name,
+              inputFormatters: <TextInputFormatter>[
+                FilteringTextInputFormatter(RegExp("[a-zA-Z]"), allow: true),
+              ],
               textInputAction: TextInputAction.next,
               hintText: LoginPageString.lastNameHint,
               hintStyle: widget.loginPageStyles.hintTextStyle,

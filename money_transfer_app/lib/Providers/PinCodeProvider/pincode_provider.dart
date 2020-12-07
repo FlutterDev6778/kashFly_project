@@ -92,7 +92,7 @@ class PinCodeProvider extends ChangeNotifier {
             _userModel.month = DateTime.now().month;
           }
 
-          userProvider.saveUserData(userID: _userModel.id, data: _userModel.toJson());
+          userProvider.saveUserData(userID: _userModel.id, userModel: _userModel);
           userProvider.setUserState(
             userProvider.userState.update(userModel: _userModel),
             isNotifiable: false,

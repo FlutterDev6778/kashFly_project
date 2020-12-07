@@ -308,9 +308,9 @@ class _TransferViewState extends State<TransferView> {
                 ),
               ),
               SizedBox(width: widget.transferPageStyles.widthDp * 10),
-              (transferProvider.transferState.reason == "")
+              (transferProvider.transferState.purpose == 0)
                   ? Text(TransferPageString.commentHintLabel, style: widget.transferPageStyles.commentHintTextStyle)
-                  : Text(transferProvider.transferState.reason, style: widget.transferPageStyles.textStyle),
+                  : Text(AppConstants.reasonList[transferProvider.transferState.purpose - 1], style: widget.transferPageStyles.textStyle),
             ],
           ),
         ),
@@ -621,7 +621,7 @@ class _TransferViewState extends State<TransferView> {
 
   CupertinoActionSheet _containerCupertinoActionSheet(BuildContext context) {
     return CupertinoActionSheet(
-      actions: TransferPageString.reasonList
+      actions: AppConstants.reasonList
           .map(
             (item) => CupertinoButton(
               color: AppColors.scaffoldBackColor,
@@ -635,7 +635,7 @@ class _TransferViewState extends State<TransferView> {
               onPressed: () {
                 Navigator.pop(context);
                 _transferProvider.setTransferState(
-                  _transferProvider.transferState.update(reason: item),
+                  _transferProvider.transferState.update(purpose: AppConstants.reasonList.indexOf(item) + 1),
                 );
               },
             ),
@@ -717,7 +717,7 @@ class _TransferViewState extends State<TransferView> {
                     );
                     return;
                   }
-                  if (_transferProvider.transferState.reason == "") {
+                  if (_transferProvider.transferState.purpose == 0) {
                     StatusAlert.show(
                       context,
                       duration: Duration(seconds: 2),
@@ -805,7 +805,7 @@ class _TransferViewState extends State<TransferView> {
         );
         return;
       }
-      if (_transferProvider.transferState.reason == "") {
+      if (_transferProvider.transferState.purpose == 0) {
         StatusAlert.show(
           context,
           duration: Duration(seconds: 2),
@@ -826,7 +826,10 @@ class _TransferViewState extends State<TransferView> {
         return;
       }
       _transferProvider.setTransferState(
-        _transferProvider.transferState.update(amount: widget.amount),
+        _transferProvider.transferState.update(
+          amount: widget.amount,
+          fee: ((widget.amount - 1) ~/ 50 + 1) * 1.5,
+        ),
         isNotifiable: false,
       );
 

@@ -6,7 +6,8 @@ class TransactionRepository {
   static String _collectionName = "/TransactionHistorys";
 
   static Future<Map<String, dynamic>> addTransaction(TransactionModel transactionModel) async {
-    Map<String, dynamic> result = await KeicyFireStoreDataProvider.instance.addDocument(path: _collectionName, data: transactionModel.toJson());
+    Map<String, dynamic> result =
+        await KeicyFireStoreDataProvider.instance.addDocument(path: _collectionName, data: transactionModel.toJson());
     return result;
   }
 
@@ -40,8 +41,16 @@ class TransactionRepository {
   static Stream<List<TransactionModel>> getTransactionModelListStream({
     List<Map<String, dynamic>> wheres,
     List<Map<String, dynamic>> orderby,
+    int limit,
   }) {
-    return KeicyFireStoreDataProvider.instance.getDocumentsStream(path: _collectionName, wheres: wheres, orderby: orderby).map(
+    return KeicyFireStoreDataProvider.instance
+        .getDocumentsStream(
+          path: _collectionName,
+          wheres: wheres,
+          orderby: orderby,
+          limit: limit,
+        )
+        .map(
           (dataList) => dataList.map((data) => TransactionModel.fromJson(data)).toList(),
         );
   }
@@ -50,7 +59,8 @@ class TransactionRepository {
     List<Map<String, dynamic>> wheres,
     List<Map<String, dynamic>> orderby,
   ) async {
-    Map<String, dynamic> result = await KeicyFireStoreDataProvider.instance.getDocumentData(path: _collectionName, wheres: wheres, orderby: orderby);
+    Map<String, dynamic> result = await KeicyFireStoreDataProvider.instance
+        .getDocumentData(path: _collectionName, wheres: wheres, orderby: orderby);
     return result;
   }
 }

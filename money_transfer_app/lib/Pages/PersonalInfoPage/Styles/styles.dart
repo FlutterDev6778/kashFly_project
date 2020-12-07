@@ -51,7 +51,7 @@ class PersonalInfoPageMobileStyles extends PersonalInfoPageStyles {
     heightDp = ScreenUtil().setHeight(1);
     fontSp = ScreenUtil().setSp(1, allowFontScalingSelf: false);
     // mainHeight = deviceHeight - bottombarHeight;
-    mainHeight = deviceHeight - 93;
+    mainHeight = deviceHeight - widthDp * 80;
 
     titleStyle = TextStyle(fontSize: fontSp * 20, color: AppColors.whiteColor, fontFamily: "Exo-SemiBold");
 

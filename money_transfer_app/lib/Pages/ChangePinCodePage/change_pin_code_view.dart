@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:money_transfer_app/Pages/Components/index.dart';
+import 'package:money_transfer_framework/money_transfer_framework.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
 import 'package:status_alert/status_alert.dart';
@@ -257,6 +258,12 @@ class _ChangePinCodeViewState extends State<ChangePinCodeView> with TickerProvid
 
     FocusScope.of(context).requestFocus(FocusNode());
 
-    _userProvider.saveUserData(userID: _userProvider.userState.userModel.id, data: {"pinCode": _pinCodeController.text.trim()});
+    UserModel _userModel = UserModel.fromJson(_userProvider.userState.userModel.toJson());
+    _userModel.pinCode = _pinCodeController.text.trim();
+
+    _userProvider.saveUserData(
+      userID: _userProvider.userState.userModel.id,
+      userModel: _userModel,
+    );
   }
 }

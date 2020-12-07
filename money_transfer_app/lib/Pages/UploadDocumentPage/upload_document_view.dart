@@ -27,11 +27,13 @@ import 'index.dart';
 class UploadDocumentView extends StatefulWidget {
   final Map<String, dynamic> documentType;
   final UploadDocumentPageStyles uploadDocumentPageStyles;
+  final bool fullScreen;
 
   const UploadDocumentView({
     Key key,
     this.documentType,
     this.uploadDocumentPageStyles,
+    this.fullScreen,
   }) : super(key: key);
 
   @override
@@ -172,7 +174,7 @@ class _UploadDocumentViewState extends State<UploadDocumentView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        height: widget.uploadDocumentPageStyles.mainHeight,
+        height: widget.fullScreen ? widget.uploadDocumentPageStyles.deviceHeight : widget.uploadDocumentPageStyles.mainHeight,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

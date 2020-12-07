@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter_spinkit/flutter_spinkit.dart';
 import 'package:money_transfer_app/Pages/Components/header_widget.dart';
+import 'package:money_transfer_app/Pages/TransferPage/index.dart';
 import 'package:status_alert/status_alert.dart';
 
 import 'package:keicy_inkwell/keicy_inkwell.dart';
@@ -10,6 +11,8 @@ import 'package:keicy_raised_button/keicy_raised_button.dart';
 
 import 'package:money_transfer_app/Pages/App/index.dart';
 import 'package:money_transfer_app/Providers/index.dart';
+
+import 'package:money_transfer_framework/money_transfer_framework.dart';
 
 import 'index.dart';
 
@@ -29,7 +32,6 @@ class ConfirmTransferView extends StatefulWidget {
 
 class _ConfirmTransferViewState extends State<ConfirmTransferView> {
   KeicyProgressDialog _keicyProgressDialog;
-  double fee;
 
   @override
   void initState() {
@@ -249,17 +251,17 @@ class _ConfirmTransferViewState extends State<ConfirmTransferView> {
   }
 
   Widget _containerDetails(BuildContext context) {
-    print(SettingsDataProvider.of(context).settingsDataState.ratesInfo);
-    for (var i = 0; i < SettingsDataProvider.of(context).settingsDataState.ratesInfo.length; i++) {
-      if (widget.transferProvider.transferState.amount >= SettingsDataProvider.of(context).settingsDataState.ratesInfo[i]["min"] &&
-          widget.transferProvider.transferState.amount <=
-              (SettingsDataProvider.of(context).settingsDataState.ratesInfo[i]["max"] == -1
-                  ? 9999999999
-                  : SettingsDataProvider.of(context).settingsDataState.ratesInfo[i]["max"])) {
-        fee = double.parse(SettingsDataProvider.of(context).settingsDataState.ratesInfo[i]["fee"].toString());
-        break;
-      }
-    }
+    // print(SettingsDataProvider.of(context).settingsDataState.ratesInfo);
+    // for (var i = 0; i < SettingsDataProvider.of(context).settingsDataState.ratesInfo.length; i++) {
+    //   if (widget.transferProvider.transferState.amount >= SettingsDataProvider.of(context).settingsDataState.ratesInfo[i]["min"] &&
+    //       widget.transferProvider.transferState.amount <=
+    //           (SettingsDataProvider.of(context).settingsDataState.ratesInfo[i]["max"] == -1
+    //               ? 9999999999
+    //               : SettingsDataProvider.of(context).settingsDataState.ratesInfo[i]["max"])) {
+    //     break;
+    //   }
+    // }
+
     return Stack(
       children: [
         Container(
@@ -321,7 +323,8 @@ class _ConfirmTransferViewState extends State<ConfirmTransferView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(ConfirmTransferPageString.messageLabel, style: widget.confirmTransferPageStyles.descriptionStyle),
-                  Text(widget.transferProvider.transferState.reason, style: widget.confirmTransferPageStyles.detailBoldTextStyle),
+                  Text(AppConstants.reasonList[widget.transferProvider.transferState.purpose - 1],
+                      style: widget.confirmTransferPageStyles.detailBoldTextStyle),
                 ],
               ),
               SizedBox(height: widget.confirmTransferPageStyles.widthDp * 15),
@@ -329,7 +332,10 @@ class _ConfirmTransferViewState extends State<ConfirmTransferView> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(ConfirmTransferPageString.feeLabel, style: widget.confirmTransferPageStyles.descriptionStyle),
-                  Text(fee.toStringAsFixed(2), style: widget.confirmTransferPageStyles.detailBoldTextStyle),
+                  Text(
+                    widget.transferProvider.transferState.fee.toStringAsFixed(1),
+                    style: widget.confirmTransferPageStyles.detailBoldTextStyle,
+                  ),
                 ],
               ),
               SizedBox(height: widget.confirmTransferPageStyles.widthDp * 10),
@@ -397,8 +403,10 @@ class _ConfirmTransferViewState extends State<ConfirmTransferView> {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Text(ConfirmTransferPageString.totalAmountLabel, style: widget.confirmTransferPageStyles.totalLabeltextStyle),
-              Text("\$" + (fee + widget.transferProvider.transferState.amount).toStringAsFixed(2),
-                  style: widget.confirmTransferPageStyles.totalAmounttextStyle),
+              Text(
+                "\$" + (widget.transferProvider.transferState.fee + widget.transferProvider.transferState.amount).toStringAsFixed(2),
+                style: widget.confirmTransferPageStyles.totalAmounttextStyle,
+              ),
             ],
           ),
         ),
@@ -440,7 +448,7 @@ class _ConfirmTransferViewState extends State<ConfirmTransferView> {
         widget.transferProvider.setTransferState(
           widget.transferProvider.transferState.update(progressState: 1),
         );
-        widget.transferProvider.makeTransaction(fee + widget.transferProvider.transferState.amount, UserProvider.of(context));
+        widget.transferProvider.makeTransaction(UserProvider.of(context));
       },
     );
   }

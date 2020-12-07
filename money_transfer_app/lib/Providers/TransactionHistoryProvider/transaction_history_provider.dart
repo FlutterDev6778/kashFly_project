@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:keicy_stripe_payment/keicy_stripe_payment.dart';
+import 'package:money_transfer_app/DataProviders/index.dart';
 import 'package:money_transfer_app/Providers/index.dart';
 import 'package:money_transfer_framework/money_transfer_framework.dart';
 import 'package:provider/provider.dart';
@@ -22,7 +23,7 @@ class TransactionHistoryProvider extends ChangeNotifier {
     }
   }
 
-  void getTransactioinListStream(String userID) {
+  void getTransactioinListStream(String userID, String referenceNum, int limit) async {
     setTransactionHistoryState(
       _transactionHistoryState.update(
         transactionListStream: TransactionRepository.getTransactionModelListStream(
@@ -33,6 +34,34 @@ class TransactionHistoryProvider extends ChangeNotifier {
           orderby: [
             {"key": "ts", "desc": true}
           ],
+          limit: limit,
+        ).map(
+          (list) {
+            return list.map(
+              (transactionModel) {
+                return RecipientRepository.getRecipientModelStreamByID(transactionModel.recipientID).map(
+                  (recipientModel) => {"transactionModel": transactionModel, "recipientModel": recipientModel},
+                );
+              },
+            ).toList();
+          },
+        ),
+      ),
+    );
+  }
+
+  void getSuccessTransactioinListStream(String userID, String referenceNum, int limit) async {
+    setTransactionHistoryState(
+      _transactionHistoryState.update(
+        transactionListStream: TransactionRepository.getTransactionModelListStream(
+          wheres: [
+            {"key": "senderID", "val": userID},
+            {"key": "state", "val": 1}
+          ],
+          orderby: [
+            {"key": "ts", "desc": true}
+          ],
+          limit: limit,
         ).map(
           (list) {
             return list.map(
