@@ -63,7 +63,8 @@ class _SSNViewState extends State<SSNView> {
       isNotifiable: false,
     );
 
-    _documentModel = DocumentModel.fromJson(_userProvider.userState.userModel.documents[widget.documentType["category"]]);
+    _documentModel =
+        DocumentModel.fromJson(_userProvider.userState.userModel.documents[widget.documentType["category"]]);
     _documentModel.subCategory = "ssn";
     _documentModel.title = "SSN";
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -224,12 +225,13 @@ class _SSNViewState extends State<SSNView> {
             keyboardType: TextInputType.phone,
             textInputAction: TextInputAction.done,
             inputFormatters: [
-              MaskTextInputFormatter(mask: '#########', filter: {'#': RegExp(r'[0-9]')}),
+              MaskTextInputFormatter(mask: '#########', filter: {'0': RegExp(r'[0-9]')}),
             ],
             readOnly: true,
             hintText: SSNPageString.ssnHint,
             hintStyle: widget.ssnPageStyles.hintTextStyle,
-            validatorHandler: (input) => (input.length != 9) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "9") : null,
+            validatorHandler: (input) =>
+                (input.length != 9) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "9") : null,
             onSaveHandler: (input) => _documentModel.imagePath = input.trim(),
             onFieldSubmittedHandler: (input) {},
           ),

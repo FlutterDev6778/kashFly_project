@@ -254,7 +254,8 @@ class _MyBankViewState extends State<MyBankView> {
                 ),
                 Consumer<KeicyCardDetectProvider>(
                   builder: (context, keicyCardDetectProvider, _) {
-                    if (keicyCardDetectProvider.cardType == null || keicyCardDetectProvider.cardType == CreditCardType.unknown) return SizedBox();
+                    if (keicyCardDetectProvider.cardType == null ||
+                        keicyCardDetectProvider.cardType == CreditCardType.unknown) return SizedBox();
                     _creditCard.brand = keicyCardDetectProvider.typeString;
                     return Container(
                       height: widget.myBankPageStyles.formFieldHeight,
@@ -291,7 +292,7 @@ class _MyBankViewState extends State<MyBankView> {
                     keyboardType: TextInputType.number,
                     textInputAction: TextInputAction.next,
                     inputFormatters: [
-                      MaskTextInputFormatter(mask: '##/##', filter: {'#': RegExp(r'[0-9]')}),
+                      MaskTextInputFormatter(mask: '##/##', filter: {'0': RegExp(r'[0-9]')}),
                     ],
                     hintText: MyBankPageString.expHint,
                     hintStyle: widget.myBankPageStyles.formFieldHintStyle,
@@ -330,7 +331,7 @@ class _MyBankViewState extends State<MyBankView> {
                     keyboardType: TextInputType.number,
                     textInputAction: TextInputAction.next,
                     inputFormatters: [
-                      MaskTextInputFormatter(mask: '###', filter: {'#': RegExp(r'[0-9]')}),
+                      MaskTextInputFormatter(mask: '###', filter: {'0': RegExp(r'[0-9]')}),
                     ],
                     hintText: MyBankPageString.cvcHint,
                     hintStyle: widget.myBankPageStyles.formFieldHintStyle,

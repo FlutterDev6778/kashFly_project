@@ -68,7 +68,7 @@ class _MyInfoViewState extends State<MyInfoView> {
   TextEditingController _streetController = TextEditingController();
   TextEditingController _aptController = TextEditingController();
   TextEditingController _zipcodeController = TextEditingController();
-  TextEditingController _nationalityController = TextEditingController();
+  // TextEditingController _nationalityController = TextEditingController();
   // TextEditingController _occupationController = TextEditingController();
   // TextEditingController _placeOfBirthController = TextEditingController();
   TextEditingController _remarksController = TextEditingController();
@@ -92,7 +92,9 @@ class _MyInfoViewState extends State<MyInfoView> {
   int _gender;
   String _state;
   String _city;
+  String _nationality;
   bool validateStarted;
+  List<Map<String, dynamic>> countryList;
 
   KeicyProgressDialog _keicyProgressDialog;
 
@@ -106,8 +108,10 @@ class _MyInfoViewState extends State<MyInfoView> {
     _firstNameController.text = widget.userModel?.firstName ?? "";
     _middleNameController.text = widget.userModel?.middleName ?? "";
     _lastNameController.text = widget.userModel?.lastName ?? "";
-    _birthDayController =
-        TextEditingController(text: widget.userModel?.dobTs != 0 ? KeicyDateTime.convertMillisecondsToDateString(ms: widget.userModel?.dobTs) : "");
+    _birthDayController = TextEditingController(
+        text: widget.userModel?.dobTs != 0
+            ? KeicyDateTime.convertMillisecondsToDateString(ms: widget.userModel?.dobTs)
+            : "");
     _gender = widget.userModel?.gender;
     _emailController.text = widget.userModel?.email ?? "";
     _phoneNumberController.text = widget.userModel?.phoneNumber;
@@ -118,7 +122,8 @@ class _MyInfoViewState extends State<MyInfoView> {
     _streetController.text = widget.userModel?.street;
     _aptController.text = widget.userModel?.apt;
     _zipcodeController.text = widget.userModel?.zipCode;
-    _nationalityController.text = widget.userModel?.nationality;
+    // _nationalityController.text = widget.userModel?.nationality;
+    _nationality = widget.userModel?.nationality;
     _remarksController.text = widget.userModel?.remarks;
 
     _userProvider = UserProvider.of(context);
@@ -129,6 +134,13 @@ class _MyInfoViewState extends State<MyInfoView> {
     );
 
     validateStarted = false;
+    countryList = [];
+    for (var i = 0; i < Countries.countryList.length; i++) {
+      countryList.add({
+        "text": Countries.countryList[i]["nationality"],
+        "value": Countries.countryList[i]["nationality"],
+      });
+    }
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _userProvider.addListener(_userProviderListener);
@@ -311,7 +323,8 @@ class _MyInfoViewState extends State<MyInfoView> {
               ],
               hintText: MyInfoPageString.firstNameHint,
               hintStyle: widget.myInfoPageStyles.formFieldHintStyle,
-              validatorHandler: (input) => (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
+              validatorHandler: (input) =>
+                  (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
               onFieldSubmittedHandler: (input) {
                 FocusScope.of(context).requestFocus(_middleNameFocusNode);
               },
@@ -373,7 +386,8 @@ class _MyInfoViewState extends State<MyInfoView> {
               textInputAction: TextInputAction.next,
               hintText: MyInfoPageString.lastNameHint,
               hintStyle: widget.myInfoPageStyles.formFieldHintStyle,
-              validatorHandler: (input) => (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
+              validatorHandler: (input) =>
+                  (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
               onFieldSubmittedHandler: (input) {
                 FocusScope.of(context).requestFocus(_birthDayFocusNode);
               },
@@ -426,7 +440,8 @@ class _MyInfoViewState extends State<MyInfoView> {
                     return _buildBottomPicker(
                       CupertinoDatePicker(
                         mode: CupertinoDatePickerMode.date,
-                        initialDateTime: KeicyDateTime.convertDateStringToDateTime(dateString: _birthDayController.text.trim()),
+                        initialDateTime:
+                            KeicyDateTime.convertDateStringToDateTime(dateString: _birthDayController.text.trim()),
                         minimumYear: 1950,
                         maximumYear: DateTime.now().year,
                         onDateTimeChanged: (DateTime newDateTime) {
@@ -491,7 +506,8 @@ class _MyInfoViewState extends State<MyInfoView> {
               textInputAction: TextInputAction.next,
               hintText: MyInfoPageString.emailHint,
               hintStyle: widget.myInfoPageStyles.formFieldHintStyle,
-              validatorHandler: (input) => (input != "") && !KeicyValidators.isValidEmail(input) ? ValidateErrorString.emailErrorText : null,
+              validatorHandler: (input) =>
+                  (input != "") && !KeicyValidators.isValidEmail(input) ? ValidateErrorString.emailErrorText : null,
               onFieldSubmittedHandler: (input) {
                 FocusScope.of(context).requestFocus(FocusNode());
               },
@@ -513,7 +529,7 @@ class _MyInfoViewState extends State<MyInfoView> {
               contentHorizontalPadding: widget.myInfoPageStyles.widthDp * 13,
               readOnly: true,
               inputFormatters: [
-                MaskTextInputFormatter(mask: AppConstants.maskString, filter: {'#': RegExp(r'[0-9]')}),
+                MaskTextInputFormatter(mask: AppConstants.maskString, filter: {'0': RegExp(r'[0-9]')}),
               ],
               prefixIcons: [
                 Container(
@@ -529,9 +545,39 @@ class _MyInfoViewState extends State<MyInfoView> {
               textInputAction: TextInputAction.next,
               hintText: MyInfoPageString.phoneHint,
               hintStyle: widget.myInfoPageStyles.formFieldHintStyle,
-              validatorHandler: (input) => (input.length < 9) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "9") : null,
+              validatorHandler: (input) =>
+                  (input.length < 9) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "9") : null,
               onFieldSubmittedHandler: (input) {
                 FocusScope.of(context).requestFocus(_telephoneFocusNode);
+              },
+            ),
+
+            /// nationality
+            SizedBox(height: widget.myInfoPageStyles.widthDp * 5),
+            KeicyDropDownFormField(
+              width: null,
+              height: widget.myInfoPageStyles.widthDp * 55,
+              focusNode: _nationalityFocusNode,
+              menuItems: countryList,
+              border: Border.all(color: Colors.transparent),
+              errorBorder: Border.all(color: Colors.redAccent),
+              borderRadius: widget.myInfoPageStyles.borderRadius,
+              selectedItemStyle: widget.myInfoPageStyles.formFieldTextStyle,
+              hintText: MyInfoPageString.nationalityHint,
+              hintStyle: widget.myInfoPageStyles.formFieldHintStyle,
+              fillColor: Colors.white,
+              value: _nationality == "" ? null : _nationality,
+              prefixIcons: [
+                Icon(
+                  Icons.language,
+                  color: Color(0xFFF7A000),
+                  size: widget.myInfoPageStyles.iconSize,
+                )
+              ],
+              contentHorizontalPadding: widget.myInfoPageStyles.widthDp * 13,
+              onChangeHandler: (value) {
+                _nationality = value;
+                FocusScope.of(context).requestFocus(FocusNode());
               },
             ),
 
@@ -551,7 +597,7 @@ class _MyInfoViewState extends State<MyInfoView> {
             //   contentHorizontalPadding: widget.myInfoPageStyles.widthDp * 13,
             //   readOnly: false,
             //   // inputFormatters: [
-            //   //   MaskTextInputFormatter(mask: AppConstants.maskString, filter: {'#': RegExp(r'[0-9]')}),
+            //   //   MaskTextInputFormatter(mask: AppConstants.maskString, filter: {'0': RegExp(r'[0-9]')}),
             //   // ],
             //   prefixIcons: [
             //     Container(
@@ -641,7 +687,8 @@ class _MyInfoViewState extends State<MyInfoView> {
               },
               dialogBox: true,
               isExpanded: true,
-              validator: (value) => (validateStarted && value == null) ? ValidateErrorString.dropdownItemErrorText : null,
+              validator: (value) =>
+                  (validateStarted && value == null) ? ValidateErrorString.dropdownItemErrorText : null,
             ),
 
             /// city Name
@@ -678,7 +725,8 @@ class _MyInfoViewState extends State<MyInfoView> {
               },
               dialogBox: true,
               isExpanded: true,
-              validator: (value) => (validateStarted && value == null) ? ValidateErrorString.dropdownItemErrorText : null,
+              validator: (value) =>
+                  (validateStarted && value == null) ? ValidateErrorString.dropdownItemErrorText : null,
             ),
 
             /// Address
@@ -703,7 +751,8 @@ class _MyInfoViewState extends State<MyInfoView> {
               textInputAction: TextInputAction.next,
               hintText: MyInfoPageString.addressHint,
               hintStyle: widget.myInfoPageStyles.formFieldHintStyle,
-              validatorHandler: (input) => (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
+              validatorHandler: (input) =>
+                  (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
               onFieldSubmittedHandler: (input) {
                 FocusScope.of(context).requestFocus(_streetFocusNode);
               },
@@ -736,7 +785,8 @@ class _MyInfoViewState extends State<MyInfoView> {
               textInputAction: TextInputAction.next,
               hintText: MyInfoPageString.streetHint,
               hintStyle: widget.myInfoPageStyles.formFieldHintStyle,
-              validatorHandler: (input) => (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
+              // validatorHandler: (input) =>
+              //     (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
               onFieldSubmittedHandler: (input) {
                 FocusScope.of(context).requestFocus(_aptFocusNode);
               },
@@ -764,8 +814,9 @@ class _MyInfoViewState extends State<MyInfoView> {
               textInputAction: TextInputAction.next,
               hintText: MyInfoPageString.aptHint,
               hintStyle: widget.myInfoPageStyles.formFieldHintStyle,
-              validatorHandler: (input) =>
-                  (input != "" && input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
+              validatorHandler: (input) => (input != "" && input.length < 3)
+                  ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3")
+                  : null,
               onFieldSubmittedHandler: (input) {
                 FocusScope.of(context).requestFocus(_zipCodeFocusNode);
               },
@@ -793,41 +844,41 @@ class _MyInfoViewState extends State<MyInfoView> {
               textInputAction: TextInputAction.next,
               hintText: MyInfoPageString.zipCodeHint,
               hintStyle: widget.myInfoPageStyles.formFieldHintStyle,
-              validatorHandler: (input) =>
-                  (input != "" && input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
+              validatorHandler: (input) => (input != "" && input.length < 3)
+                  ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3")
+                  : null,
               onFieldSubmittedHandler: (input) {
                 FocusScope.of(context).requestFocus(_placeOfBirthFocusNode);
               },
             ),
 
-            /// nationality
-            SizedBox(height: widget.myInfoPageStyles.widthDp * 5),
-            KeicyTextFormField(
-              width: null,
-              height: widget.myInfoPageStyles.formFieldHeight,
-              widthDp: widget.myInfoPageStyles.widthDp,
-              controller: _nationalityController,
-              focusNode: _nationalityFocusNode,
-              labelSpacing: widget.myInfoPageStyles.widthDp * 14,
-              fillColor: Colors.white,
-              borderRadius: widget.myInfoPageStyles.borderRadius,
-              border: Border.all(color: Colors.transparent),
-              errorBorder: Border.all(color: Colors.redAccent),
-              contentHorizontalPadding: widget.myInfoPageStyles.widthDp * 13,
-              prefixIcons: [
-                Icon(Icons.code, color: Color(0xFFF7A000), size: widget.myInfoPageStyles.iconSize),
-              ],
-              textStyle: widget.myInfoPageStyles.formFieldTextStyle,
-              keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.next,
-              hintText: MyInfoPageString.nationalityHint,
-              hintStyle: widget.myInfoPageStyles.formFieldHintStyle,
-              validatorHandler: (input) =>
-                  (input != "" && input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
-              onFieldSubmittedHandler: (input) {
-                FocusScope.of(context).requestFocus(_remarksFocusNode);
-              },
-            ),
+            // KeicyTextFormField(
+            //   width: null,
+            //   height: widget.myInfoPageStyles.formFieldHeight,
+            //   widthDp: widget.myInfoPageStyles.widthDp,
+            //   controller: _nationalityController,
+            //   focusNode: _nationalityFocusNode,
+            //   labelSpacing: widget.myInfoPageStyles.widthDp * 14,
+            //   fillColor: Colors.white,
+            //   borderRadius: widget.myInfoPageStyles.borderRadius,
+            //   border: Border.all(color: Colors.transparent),
+            //   errorBorder: Border.all(color: Colors.redAccent),
+            //   contentHorizontalPadding: widget.myInfoPageStyles.widthDp * 13,
+            //   prefixIcons: [
+            //     Icon(Icons.code, color: Color(0xFFF7A000), size: widget.myInfoPageStyles.iconSize),
+            //   ],
+            //   textStyle: widget.myInfoPageStyles.formFieldTextStyle,
+            //   keyboardType: TextInputType.text,
+            //   textInputAction: TextInputAction.next,
+            //   hintText: MyInfoPageString.nationalityHint,
+            //   hintStyle: widget.myInfoPageStyles.formFieldHintStyle,
+            //   validatorHandler: (input) => (input != "" && input.length < 3)
+            //       ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3")
+            //       : null,
+            //   onFieldSubmittedHandler: (input) {
+            //     FocusScope.of(context).requestFocus(_remarksFocusNode);
+            //   },
+            // ),
 
             // /// placeOfBirth
             // SizedBox(height: widget.myInfoPageStyles.widthDp * 5),
@@ -909,8 +960,9 @@ class _MyInfoViewState extends State<MyInfoView> {
               textInputAction: TextInputAction.next,
               hintText: MyInfoPageString.remaksHint,
               hintStyle: widget.myInfoPageStyles.formFieldHintStyle,
-              validatorHandler: (input) =>
-                  (input != "" && input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
+              validatorHandler: (input) => (input != "" && input.length < 3)
+                  ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3")
+                  : null,
               onFieldSubmittedHandler: (input) {
                 FocusScope.of(context).requestFocus(FocusNode());
               },
@@ -990,7 +1042,8 @@ class _MyInfoViewState extends State<MyInfoView> {
     userModel.apt = _aptController.text.trim();
     userModel.zipCode = _zipcodeController.text.trim();
     userModel.street = _streetController.text.trim();
-    userModel.nationality = _nationalityController.text.trim();
+    userModel.nationality = _nationality;
+    // userModel.nationality = _nationalityController.text.trim();
     // userModel.placeofBirth = _placeOfBirthController.text.trim();
     // userModel.occupation = _occupationController.text.trim();
     userModel.remarks = _remarksController.text.trim();

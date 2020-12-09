@@ -52,8 +52,9 @@ class _ViewCardState extends State<ViewCard> {
 
     if (widget.creditCard == null) widget.creditCard = CreditCard();
 
-    _cardNumberController.text =
-        (widget.creditCard.last4 != "" && widget.creditCard.last4 != null) ? ("xxxx-xxxx-xxxx-" + widget.creditCard.last4) : "";
+    _cardNumberController.text = (widget.creditCard.last4 != "" && widget.creditCard.last4 != null)
+        ? ("xxxx-xxxx-xxxx-" + widget.creditCard.last4)
+        : "";
     _expDateController.text =
         "${widget.creditCard.expMonth ?? ''}${widget.creditCard.expYear != null ? '/' + widget.creditCard.expYear.toString() : ''}";
     _cvcController.text = widget.creditCard.cvc ?? "";
@@ -197,7 +198,8 @@ class _ViewCardState extends State<ViewCard> {
                     right: 0,
                     child: Consumer<KeicyCardDetectProvider>(builder: (context, keicyCardDetectProvider, _) {
                       widget.creditCard.brand = "";
-                      if (keicyCardDetectProvider.cardType == null || keicyCardDetectProvider.cardType == CreditCardType.unknown) return SizedBox();
+                      if (keicyCardDetectProvider.cardType == null ||
+                          keicyCardDetectProvider.cardType == CreditCardType.unknown) return SizedBox();
                       widget.creditCard.brand = keicyCardDetectProvider.typeString;
                       return Image.asset(
                         "lib/Assets/Images/Cards/${keicyCardDetectProvider.typeString}.png",
@@ -255,7 +257,7 @@ class _ViewCardState extends State<ViewCard> {
               keyboardType: TextInputType.number,
               textInputAction: TextInputAction.next,
               inputFormatters: [
-                MaskTextInputFormatter(mask: '##/####', filter: {'#': RegExp(r'[0-9]')}),
+                MaskTextInputFormatter(mask: '##/####', filter: {'0': RegExp(r'[0-9]')}),
               ],
               decoration: new InputDecoration(
                 hintText: 'MM/YYYY',
@@ -289,7 +291,7 @@ class _ViewCardState extends State<ViewCard> {
               style: widget.creditCardPageStyles.editCardTextStyle,
               keyboardType: TextInputType.number,
               inputFormatters: [
-                MaskTextInputFormatter(mask: '###', filter: {'#': RegExp(r'[0-9]')}),
+                MaskTextInputFormatter(mask: '###', filter: {'0': RegExp(r'[0-9]')}),
               ],
               textAlignVertical: TextAlignVertical.center,
               decoration: new InputDecoration(
@@ -323,7 +325,8 @@ class _ViewCardState extends State<ViewCard> {
                 onPressed: () {
                   _saveHandler(context);
                 },
-                child: Text((widget.isAddCard) ? CreditCardPageString.addCardTitle : '', style: widget.creditCardPageStyles.editCardButtonStyle),
+                child: Text((widget.isAddCard) ? CreditCardPageString.addCardTitle : '',
+                    style: widget.creditCardPageStyles.editCardButtonStyle),
               ),
             ),
             Consumer<PaymentMethodProvider>(

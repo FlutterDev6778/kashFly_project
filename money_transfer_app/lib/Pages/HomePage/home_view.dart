@@ -44,7 +44,7 @@ class _TransferViewState extends State<HomeView> {
         TransactionHistoryProvider.of(context)
             .getTotalTransactionAmountStream(UserProvider.of(context).userState.userModel.id);
       if (TransactionHistoryProvider.of(context).transactionHistoryState.transactionListStream == null)
-        TransactionHistoryProvider.of(context).getSuccessTransactioinListStream(
+        TransactionHistoryProvider.of(context).getTransactioinListStream(
           UserProvider.of(context).userState.userModel.id,
           UserProvider.of(context).userState.userModel.customerReferenceNo,
           5,

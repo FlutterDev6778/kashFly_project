@@ -92,7 +92,8 @@ class PersonalDetails extends StatelessWidget {
             hintText: PersonalDetailPageString.fistNameHint,
             hintStyle: personalDetailPageStyles.hintTextStyle,
           ),
-          validator: (input) => (input.isEmpty) ? ValidateErrorString.textEmptyErrorText.replaceAll("{}", "First Name") : null,
+          validator: (input) =>
+              (input.isEmpty) ? ValidateErrorString.textEmptyErrorText.replaceAll("{}", "First Name") : null,
           onFieldSubmitted: (input) {
             FocusScope.of(context).requestFocus(middleNameFocusNode);
           },
@@ -127,7 +128,8 @@ class PersonalDetails extends StatelessWidget {
             hintText: PersonalDetailPageString.middleNameHint,
             hintStyle: personalDetailPageStyles.hintTextStyle,
           ),
-          validator: (input) => (input.isEmpty) ? ValidateErrorString.textEmptyErrorText.replaceAll("{}", "Middle Name") : null,
+          validator: (input) =>
+              (input.isEmpty) ? ValidateErrorString.textEmptyErrorText.replaceAll("{}", "Middle Name") : null,
           onFieldSubmitted: (input) {
             FocusScope.of(context).requestFocus(lastNameFocusNode);
           },
@@ -162,7 +164,8 @@ class PersonalDetails extends StatelessWidget {
             hintText: PersonalDetailPageString.lastNameHint,
             hintStyle: personalDetailPageStyles.hintTextStyle,
           ),
-          validator: (input) => (input.isEmpty) ? ValidateErrorString.textEmptyErrorText.replaceAll("{}", "Last Name") : null,
+          validator: (input) =>
+              (input.isEmpty) ? ValidateErrorString.textEmptyErrorText.replaceAll("{}", "Last Name") : null,
           onFieldSubmitted: (input) {
             FocusScope.of(context).requestFocus(birthDayFocusNode);
           },
@@ -220,7 +223,8 @@ class PersonalDetails extends StatelessWidget {
                 return _buildBottomPicker(
                   CupertinoDatePicker(
                     mode: CupertinoDatePickerMode.date,
-                    initialDateTime: KeicyDateTime.convertDateStringToDateTime(dateString: birthDayController.text.trim()),
+                    initialDateTime:
+                        KeicyDateTime.convertDateStringToDateTime(dateString: birthDayController.text.trim()),
                     minimumYear: 1950,
                     maximumYear: DateTime.now().year,
                     onDateTimeChanged: (DateTime newDateTime) {
@@ -293,7 +297,8 @@ class PersonalDetails extends StatelessWidget {
             hintText: PersonalDetailPageString.emailHint,
             hintStyle: personalDetailPageStyles.hintTextStyle,
           ),
-          validator: (input) => (!KeicyValidators.isValidEmail(input.trim())) ? ValidateErrorString.emailErrorText : null,
+          validator: (input) =>
+              (!KeicyValidators.isValidEmail(input.trim())) ? ValidateErrorString.emailErrorText : null,
           onFieldSubmitted: (input) {
             FocusScope.of(context).requestFocus(phoneFocusNode);
           },
@@ -316,7 +321,7 @@ class PersonalDetails extends StatelessWidget {
           keyboardType: TextInputType.phone,
           textInputAction: TextInputAction.next,
           inputFormatters: [
-            MaskTextInputFormatter(mask: AppConstants.maskString, filter: {'#': RegExp(r'[0-9]')}),
+            MaskTextInputFormatter(mask: AppConstants.maskString, filter: {'0': RegExp(r'[0-9]')}),
           ],
           decoration: InputDecoration(
             errorStyle: TextStyle(height: 0.5),
@@ -332,7 +337,8 @@ class PersonalDetails extends StatelessWidget {
             hintText: PersonalDetailPageString.phoneHint,
             hintStyle: personalDetailPageStyles.hintTextStyle,
           ),
-          validator: (input) => (input.length < 9) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "9") : null,
+          validator: (input) =>
+              (input.length < 9) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "9") : null,
           onFieldSubmitted: (input) {
             FocusScope.of(context).requestFocus(FocusNode());
           },

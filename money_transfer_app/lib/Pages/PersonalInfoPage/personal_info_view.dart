@@ -101,7 +101,8 @@ class _TransferViewState extends State<PersonalInfoView> {
               } else {
                 Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (BuildContext context) => UploadDocumentPage(documentType: DocumentCategoryPageString.itemList[0]),
+                    builder: (BuildContext context) =>
+                        UploadDocumentPage(documentType: DocumentCategoryPageString.itemList[0]),
                   ),
                 );
               }
@@ -129,7 +130,9 @@ class _TransferViewState extends State<PersonalInfoView> {
                     ),
                     Icon(Icons.arrow_forward_ios,
                         size: widget.personalInfoPageStyles.iconSize,
-                        color: (PersonalInfoPageString.itemList[index] == "Sign Out") ? Colors.transparent : AppColors.blackColor),
+                        color: (PersonalInfoPageString.itemList[index] == "Sign Out")
+                            ? Colors.transparent
+                            : AppColors.blackColor),
                   ],
                 ),
                 SizedBox(height: widget.personalInfoPageStyles.widthDp * 20),

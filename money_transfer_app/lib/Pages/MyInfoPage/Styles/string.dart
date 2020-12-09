@@ -11,7 +11,7 @@ class MyInfoPageString {
   static String emailHint = "Email";
   static String phoneHint = "Phone Number";
   // static String telephoneHint = "Telephone Number";
-  static String detailLabel = "Address & Payment Detail";
+  static String detailLabel = "Address";
   static String countryHint = "Country";
   static String stateHint = "State";
   static String cityHint = "City";

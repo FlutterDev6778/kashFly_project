@@ -19,7 +19,8 @@ import 'package:money_transfer_framework/money_transfer_framework.dart';
 import 'index.dart';
 
 class UserProvider extends ChangeNotifier {
-  static UserProvider of(BuildContext context, {bool listen = false}) => Provider.of<UserProvider>(context, listen: listen);
+  static UserProvider of(BuildContext context, {bool listen = false}) =>
+      Provider.of<UserProvider>(context, listen: listen);
 
   UserState _userState = UserState.init();
   UserState get userState => _userState;
@@ -31,7 +32,11 @@ class UserProvider extends ChangeNotifier {
     }
   }
 
-  Future<void> saveUserData({@required String userID, @required UserModel userModel, bool isNotifiable = true, bool updateJuba = false}) async {
+  Future<void> saveUserData(
+      {@required String userID,
+      @required UserModel userModel,
+      bool isNotifiable = true,
+      bool updateJuba = false}) async {
     try {
       /// juba express register
 
@@ -105,6 +110,11 @@ class UserProvider extends ChangeNotifier {
       var result = await UserRepository.addUser(userModel);
 
       if (result["success"]) {
+        _userState = _userState.update(
+          progressState: 2,
+          userModel: UserModel.fromJson(result["data"][0]),
+          errorString: "",
+        );
       } else {
         _userState = _userState.update(
           progressState: -1,
@@ -154,13 +164,15 @@ class UserProvider extends ChangeNotifier {
             fileName: "${documentType}_1.jpg",
             file: imageFile1,
           );
-          if ((imageFile1 != null && documentData["imagePath1"] != "") || documentData["subCategory"] != "driverLicense") {
+          if ((imageFile1 != null && documentData["imagePath1"] != "") ||
+              documentData["subCategory"] != "driverLicense") {
             await KeicyStorageForMobile.instance.deleteFile(path: documentData["imagePath1"]);
           }
 
           documentData["imagePath1"] = url;
         } else {
-          if ((imageFile1 != null && documentData["imagePath1"] != "") || documentData["subCategory"] != "driverLicense") {
+          if ((imageFile1 != null && documentData["imagePath1"] != "") ||
+              documentData["subCategory"] != "driverLicense") {
             await KeicyStorageForMobile.instance.deleteFile(path: documentData["imagePath1"]);
           }
           documentData["imagePath1"] = "";

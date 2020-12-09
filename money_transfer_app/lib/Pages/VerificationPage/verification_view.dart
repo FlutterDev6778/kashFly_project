@@ -282,6 +282,22 @@ class _VerificationViewState extends State<VerificationView> {
               ),
             ],
           ),
+          SizedBox(height: widget.verificationPageStyles.heightDp * 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              new Text(
+                VerificationPageString.wrongDescription,
+                style: widget.verificationPageStyles.descriptionTextStyle,
+              ),
+              new InkWell(
+                onTap: () {
+                  Navigator.of(context).pop();
+                },
+                child: new Text(VerificationPageString.wrongLink, style: widget.verificationPageStyles.linkTextStyle),
+              ),
+            ],
+          ),
           // SizedBox(height: widget.verificationPageStyles.widthDp * 45),
           // KeicyRaisedButton(
           //   height: widget.verificationPageStyles.widthDp * 50,

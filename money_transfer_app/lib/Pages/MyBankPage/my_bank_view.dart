@@ -312,7 +312,8 @@ class _MyBankViewState extends State<MyBankView> {
                     borderRadius: widget.myBankPageStyles.borderRadius,
                     border: Border(
                       bottom: BorderSide(
-                        color: (_currentController == _cardNumberController) ? AppColors.primaryColor : Colors.transparent,
+                        color:
+                            (_currentController == _cardNumberController) ? AppColors.primaryColor : Colors.transparent,
                       ),
                     ),
                     errorBorder: Border(bottom: BorderSide(color: Colors.redAccent)),
@@ -354,7 +355,8 @@ class _MyBankViewState extends State<MyBankView> {
                 ),
                 Consumer<KeicyCardDetectProvider>(
                   builder: (context, keicyCardDetectProvider, _) {
-                    if (keicyCardDetectProvider.cardType == null || keicyCardDetectProvider.cardType == CreditCardType.unknown) return SizedBox();
+                    if (keicyCardDetectProvider.cardType == null ||
+                        keicyCardDetectProvider.cardType == CreditCardType.unknown) return SizedBox();
                     _creditCard.brand = keicyCardDetectProvider.typeString;
                     return Container(
                       height: widget.myBankPageStyles.widthDp * 30,
@@ -388,7 +390,9 @@ class _MyBankViewState extends State<MyBankView> {
                         borderRadius: widget.myBankPageStyles.borderRadius,
                         border: Border(
                           bottom: BorderSide(
-                            color: (_currentController == _expDateController) ? AppColors.primaryColor : Colors.transparent,
+                            color: (_currentController == _expDateController)
+                                ? AppColors.primaryColor
+                                : Colors.transparent,
                           ),
                         ),
                         errorBorder: Border(bottom: BorderSide(color: Colors.redAccent)),
@@ -397,7 +401,7 @@ class _MyBankViewState extends State<MyBankView> {
                         keyboardType: TextInputType.number,
                         textInputAction: TextInputAction.next,
                         inputFormatters: [
-                          MaskTextInputFormatter(mask: '##/##', filter: {'#': RegExp(r'[0-9]')}),
+                          MaskTextInputFormatter(mask: '##/##', filter: {'0': RegExp(r'[0-9]')}),
                         ],
                         readOnly: true,
                         errorStringFontSize: 0,
@@ -453,7 +457,7 @@ class _MyBankViewState extends State<MyBankView> {
                         keyboardType: TextInputType.number,
                         textInputAction: TextInputAction.next,
                         inputFormatters: [
-                          MaskTextInputFormatter(mask: '###', filter: {'#': RegExp(r'[0-9]')}),
+                          MaskTextInputFormatter(mask: '###', filter: {'0': RegExp(r'[0-9]')}),
                         ],
                         errorStringFontSize: 0,
                         readOnly: true,
@@ -550,10 +554,16 @@ class _MyBankViewState extends State<MyBankView> {
         } else if (str.length > 4 && str.length <= 8) {
           _currentController.text = str.substring(0, 4) + "-" + str.substring(4, str.length);
         } else if (str.length > 8 && str.length <= 12) {
-          _currentController.text = str.substring(0, 4) + "-" + str.substring(4, 8) + "-" + str.substring(8, str.length);
-        } else if (str.length > 12 && str.length <= 16) {
           _currentController.text =
-              str.substring(0, 4) + "-" + str.substring(4, 8) + "-" + str.substring(8, 12) + "-" + str.substring(12, str.length);
+              str.substring(0, 4) + "-" + str.substring(4, 8) + "-" + str.substring(8, str.length);
+        } else if (str.length > 12 && str.length <= 16) {
+          _currentController.text = str.substring(0, 4) +
+              "-" +
+              str.substring(4, 8) +
+              "-" +
+              str.substring(8, 12) +
+              "-" +
+              str.substring(12, str.length);
         }
       } else if (_currentController == _expDateController) {
         if (str.length <= 2) {

@@ -143,7 +143,9 @@ class _RegisterViewState extends State<RegisterView> {
                         hintText: RegisterPageString.fistNameHint,
                         hintStyle: widget.registerPageStyles.hintTextStyle,
                       ),
-                      validator: (input) => (input.isEmpty) ? ValidateErrorString.textEmptyErrorText.replaceAll("{}", "First Name") : null,
+                      validator: (input) => (input.isEmpty)
+                          ? ValidateErrorString.textEmptyErrorText.replaceAll("{}", "First Name")
+                          : null,
                       onFieldSubmitted: (input) {
                         FocusScope.of(context).requestFocus(_middleNameFocusNode);
                       },
@@ -168,7 +170,9 @@ class _RegisterViewState extends State<RegisterView> {
                         hintText: RegisterPageString.middleNameHint,
                         hintStyle: widget.registerPageStyles.hintTextStyle,
                       ),
-                      validator: (input) => (input.isEmpty) ? ValidateErrorString.textEmptyErrorText.replaceAll("{}", "Middle Name") : null,
+                      validator: (input) => (input.isEmpty)
+                          ? ValidateErrorString.textEmptyErrorText.replaceAll("{}", "Middle Name")
+                          : null,
                       onFieldSubmitted: (input) {
                         FocusScope.of(context).requestFocus(_lastNameFocusNode);
                       },
@@ -193,7 +197,8 @@ class _RegisterViewState extends State<RegisterView> {
                         hintText: RegisterPageString.lastNameHint,
                         hintStyle: widget.registerPageStyles.hintTextStyle,
                       ),
-                      validator: (input) => (input.isEmpty) ? ValidateErrorString.textEmptyErrorText.replaceAll("{}", "Last Name") : null,
+                      validator: (input) =>
+                          (input.isEmpty) ? ValidateErrorString.textEmptyErrorText.replaceAll("{}", "Last Name") : null,
                       onFieldSubmitted: (input) {
                         FocusScope.of(context).requestFocus(_phoneFocusNode);
                       },
@@ -205,7 +210,7 @@ class _RegisterViewState extends State<RegisterView> {
                       keyboardType: TextInputType.phone,
                       textInputAction: TextInputAction.done,
                       inputFormatters: [
-                        MaskTextInputFormatter(mask: AppConstants.maskString, filter: {'#': RegExp(r'[0-9]')}),
+                        MaskTextInputFormatter(mask: AppConstants.maskString, filter: {'0': RegExp(r'[0-9]')}),
                       ],
                       decoration: InputDecoration(
                         errorStyle: TextStyle(height: 0.5),
@@ -221,7 +226,9 @@ class _RegisterViewState extends State<RegisterView> {
                         hintText: RegisterPageString.phoneHint,
                         hintStyle: widget.registerPageStyles.hintTextStyle,
                       ),
-                      validator: (input) => (input.length < 9) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "9") : null,
+                      validator: (input) => (input.length < 9)
+                          ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "9")
+                          : null,
                       onFieldSubmitted: (input) {
                         FocusScope.of(context).requestFocus(FocusNode());
                         _registerHandler(context);
