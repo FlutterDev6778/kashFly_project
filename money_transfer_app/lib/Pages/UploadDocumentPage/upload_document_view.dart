@@ -71,13 +71,15 @@ class _UploadDocumentViewState extends State<UploadDocumentView> {
       isNotifiable: false,
     );
 
-    _documentModel = DocumentModel.fromJson(_userProvider.userState.userModel.documents[widget.documentType["category"]]);
+    _documentModel =
+        DocumentModel.fromJson(_userProvider.userState.userModel.documents[widget.documentType["category"]]);
     _imagePath = _documentModel.imagePath;
     _imagePath1 = _documentModel.imagePath1;
 
     _numberController.text = _documentModel.documentNumber;
-    _expireDateController.text =
-        _documentModel.expireDateTs != 0 ? KeicyDateTime.convertMillisecondsToDateString(ms: _documentModel.expireDateTs) : "";
+    _expireDateController.text = _documentModel.expireDateTs != 0
+        ? KeicyDateTime.convertMillisecondsToDateString(ms: _documentModel.expireDateTs)
+        : "";
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _userProvider.addListener(_userProviderListener);
@@ -174,7 +176,9 @@ class _UploadDocumentViewState extends State<UploadDocumentView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        height: widget.fullScreen ? widget.uploadDocumentPageStyles.deviceHeight : widget.uploadDocumentPageStyles.mainHeight,
+        height: widget.fullScreen
+            ? widget.uploadDocumentPageStyles.deviceHeight
+            : widget.uploadDocumentPageStyles.mainHeight,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -277,8 +281,6 @@ class _UploadDocumentViewState extends State<UploadDocumentView> {
               : KeicyTextFormField(
                   width: null,
                   height: widget.uploadDocumentPageStyles.widthDp * 50,
-                  widthDp: widget.uploadDocumentPageStyles.widthDp,
-                  controller: _numberController,
                   // labelSpacing: widget.uploadDocumentPageStyles.widthDp * 14,
                   // label: LoginPageString.phoneLabel,
                   // labelStyle: widget.uploadDocumentPageStyles.labelStyle,
@@ -299,7 +301,8 @@ class _UploadDocumentViewState extends State<UploadDocumentView> {
                     color: Colors.grey,
                     fontStyle: FontStyle.italic,
                   ),
-                  validatorHandler: (input) => (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
+                  validatorHandler: (input) =>
+                      (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
                   onSaveHandler: (input) => _documentModel.documentNumber = input.trim(),
                   onFieldSubmittedHandler: (input) {},
                 ),
@@ -308,7 +311,6 @@ class _UploadDocumentViewState extends State<UploadDocumentView> {
               : KeicyTextFormField(
                   width: null,
                   height: widget.uploadDocumentPageStyles.widthDp * 50,
-                  widthDp: widget.uploadDocumentPageStyles.widthDp,
                   controller: _expireDateController,
                   borderRadius: 0,
                   border: Border.all(color: Colors.grey),
@@ -344,11 +346,13 @@ class _UploadDocumentViewState extends State<UploadDocumentView> {
                         return _buildBottomPicker(
                           CupertinoDatePicker(
                             mode: CupertinoDatePickerMode.date,
-                            initialDateTime: KeicyDateTime.convertDateStringToDateTime(dateString: _expireDateController.text.trim()),
+                            initialDateTime: KeicyDateTime.convertDateStringToDateTime(
+                                dateString: _expireDateController.text.trim()),
                             minimumYear: DateTime.now().year,
                             maximumYear: DateTime.now().year + 100,
                             onDateTimeChanged: (DateTime newDateTime) {
-                              _expireDateController.text = KeicyDateTime.convertDateTimeToDateString(dateTime: newDateTime);
+                              _expireDateController.text =
+                                  KeicyDateTime.convertDateTimeToDateString(dateTime: newDateTime);
                             },
                           ),
                         );
@@ -392,7 +396,8 @@ class _UploadDocumentViewState extends State<UploadDocumentView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            UploadDocumentPageString.descriptionList[widget.documentType["category"]][_documentModel.subCategory]["desc1"],
+            UploadDocumentPageString.descriptionList[widget.documentType["category"]][_documentModel.subCategory]
+                ["desc1"],
             style: widget.uploadDocumentPageStyles.textStyle,
           ),
           SizedBox(height: widget.uploadDocumentPageStyles.widthDp * 15),
@@ -468,7 +473,8 @@ class _UploadDocumentViewState extends State<UploadDocumentView> {
                 )
               : SizedBox(height: widget.uploadDocumentPageStyles.widthDp * 15),
           Text(
-            UploadDocumentPageString.descriptionList[widget.documentType["category"]][_documentModel.subCategory]["desc2"],
+            UploadDocumentPageString.descriptionList[widget.documentType["category"]][_documentModel.subCategory]
+                ["desc2"],
             style: widget.uploadDocumentPageStyles.textStyle,
           ),
         ],
@@ -482,7 +488,8 @@ class _UploadDocumentViewState extends State<UploadDocumentView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            UploadDocumentPageString.descriptionList[widget.documentType["category"]][_documentModel.subCategory]["desc3"],
+            UploadDocumentPageString.descriptionList[widget.documentType["category"]][_documentModel.subCategory]
+                ["desc3"],
             style: widget.uploadDocumentPageStyles.textStyle,
           ),
           SizedBox(height: widget.uploadDocumentPageStyles.widthDp * 15),

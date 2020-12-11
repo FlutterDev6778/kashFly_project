@@ -1,12 +1,11 @@
-import 'package:keicy_firestore_0_14_data_provider/keicy_firestore_0_14_data_provider.dart';
-
-import 'package:money_transfer_framework/Models/index.dart';
+import 'package:money_transfer_framework/money_transfer_framework.dart';
 
 class RecipientRepository {
   static String _collectionName = "/Recipients";
 
   static Future<Map<String, dynamic>> addRecipient(RecipientModel recipientModel) async {
-    Map<String, dynamic> result = await KeicyFireStoreDataProvider.instance.addDocument(path: _collectionName, data: recipientModel.toJson());
+    Map<String, dynamic> result =
+        await KeicyFireStoreDataProvider.instance.addDocument(path: _collectionName, data: recipientModel.toJson());
     return result;
   }
 

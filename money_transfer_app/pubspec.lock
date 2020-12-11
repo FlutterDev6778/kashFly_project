@@ -70,21 +70,21 @@ packages:
       name: cloud_firestore
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.14.2"
+    version: "0.14.4"
   cloud_firestore_platform_interface:
     dependency: transitive
     description:
       name: cloud_firestore_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.3"
+    version: "2.2.1"
   cloud_firestore_web:
     dependency: transitive
     description:
       name: cloud_firestore_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.0+5"
+    version: "0.2.1+2"
   collection:
     dependency: transitive
     description:
@@ -140,7 +140,7 @@ packages:
       name: dotted_line
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.2"
+    version: "2.0.1"
   equatable:
     dependency: transitive
     description:
@@ -169,55 +169,48 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "5.2.1"
-  firebase:
-    dependency: transitive
-    description:
-      name: firebase
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "7.3.2"
   firebase_auth:
     dependency: transitive
     description:
       name: firebase_auth
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.18.2"
+    version: "0.18.4+1"
   firebase_auth_platform_interface:
     dependency: transitive
     description:
       name: firebase_auth_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.2"
+    version: "2.1.4"
   firebase_auth_web:
     dependency: transitive
     description:
       name: firebase_auth_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.3.1+2"
+    version: "0.3.2+3"
   firebase_core:
     dependency: "direct main"
     description:
       name: firebase_core
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.5.1"
+    version: "0.5.3"
   firebase_core_platform_interface:
     dependency: transitive
     description:
       name: firebase_core_platform_interface
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.0.0"
+    version: "2.1.0"
   firebase_core_web:
     dependency: transitive
     description:
       name: firebase_core_web
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.2.0"
+    version: "0.2.1+1"
   firebase_messaging:
     dependency: transitive
     description:
@@ -231,7 +224,21 @@ packages:
       name: firebase_storage
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "4.0.1"
+    version: "5.2.0"
+  firebase_storage_platform_interface:
+    dependency: transitive
+    description:
+      name: firebase_storage_platform_interface
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "1.0.2"
+  firebase_storage_web:
+    dependency: transitive
+    description:
+      name: firebase_storage_web
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.1.1+1"
   fixnum:
     dependency: transitive
     description:
@@ -266,7 +273,7 @@ packages:
       name: fluro
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.7.7"
+    version: "1.6.3"
   flutter:
     dependency: "direct main"
     description: flutter
@@ -320,7 +327,7 @@ packages:
       name: flutter_svg
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.19.1"
+    version: "0.19.0"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -337,14 +344,14 @@ packages:
       name: fluttertoast
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "7.1.4"
+    version: "7.1.0"
   font_awesome_flutter:
     dependency: "direct main"
     description:
       name: font_awesome_flutter
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "8.10.0"
+    version: "8.8.1"
   google_sign_in:
     dependency: transitive
     description:
@@ -393,7 +400,7 @@ packages:
       name: image_picker
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "0.6.7+12"
+    version: "0.6.7+11"
   image_picker_platform_interface:
     dependency: transitive
     description:
@@ -467,24 +474,6 @@ packages:
       url: "https://github.com/FlutterDev6778/keicy_fcm_for_mobile_7_0.git"
     source: git
     version: "0.0.1"
-  keicy_firebase_auth_0_18:
-    dependency: transitive
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "26093bdaa5d46dca85625e45052d4f1070a91095"
-      url: "https://github.com/FlutterDev6778/keicy_firebase_auth_0_18.git"
-    source: git
-    version: "0.0.1"
-  keicy_firestore_0_14_data_provider:
-    dependency: transitive
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: d30e44c33513d685dd3beaf5dd639b36919d88d7
-      url: "https://github.com/FlutterDev6778/keicy_firestore_0_14_data_provider.git"
-    source: git
-    version: "0.0.1"
   keicy_inkwell:
     dependency: "direct main"
     description:
@@ -526,17 +515,8 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "502a149df076678e8529beb0bc756592adeecf9f"
+      resolved-ref: "6ff70e18450f88e0b5f6a4c73e42f67c3b12bfa8"
       url: "https://github.com/FlutterDev6778/keicy_raised_button.git"
-    source: git
-    version: "0.0.1"
-  keicy_storage_for_mobile_4_0:
-    dependency: transitive
-    description:
-      path: "."
-      ref: HEAD
-      resolved-ref: "58436f88d82d8f06e48e8d999c32b81adc0c8e73"
-      url: "https://github.com/FlutterDev6778/keicy_storage_for_mobile_4_0.git"
     source: git
     version: "0.0.1"
   keicy_stripe_payment:
@@ -553,7 +533,7 @@ packages:
     description:
       path: "."
       ref: HEAD
-      resolved-ref: "43a1ee72c75bebc31e5118535b6e98ebe56fe40f"
+      resolved-ref: "90299710381d51247ee0a4ec1062eaa2d8e6b011"
       url: "https://github.com/FlutterDev6778/keicy_text_form_field.git"
     source: git
     version: "0.0.1"
@@ -677,7 +657,7 @@ packages:
       name: persistent_bottom_nav_bar
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.0"
+    version: "2.0.5"
   petitparser:
     dependency: transitive
     description:
@@ -733,7 +713,7 @@ packages:
       name: quiver
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "2.1.4+1"
+    version: "2.1.5"
   rflutter_alert:
     dependency: "direct main"
     description:
@@ -829,7 +809,7 @@ packages:
       name: stripe_payment
       url: "https://pub.dartlang.org"
     source: hosted
-    version: "1.0.8"
+    version: "1.0.9"
   term_glyph:
     dependency: transitive
     description:

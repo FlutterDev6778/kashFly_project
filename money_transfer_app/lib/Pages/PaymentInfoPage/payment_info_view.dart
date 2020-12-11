@@ -4,7 +4,6 @@ import 'package:money_transfer_app/Pages/ChangePinCodePage/change_pin_code_page.
 import 'package:money_transfer_app/Pages/DocumentCategoryPage/index.dart';
 import 'package:money_transfer_app/Pages/HomePage/index.dart';
 import 'package:money_transfer_app/Pages/NotificationPage/index.dart';
-import 'package:money_transfer_app/Pages/PersonalDetailPage/index.dart';
 import 'package:money_transfer_app/Pages/SupportPage/index.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
@@ -91,8 +90,10 @@ class _TransferViewState extends State<PaymentInfoView> {
           RichText(
             text: TextSpan(
               children: <TextSpan>[
-                TextSpan(text: PaymentInfoPageString.title.substring(0, 1), style: widget.paymentInfoPageStyles.title1Style),
-                TextSpan(text: PaymentInfoPageString.title.substring(1), style: widget.paymentInfoPageStyles.title2Style),
+                TextSpan(
+                    text: PaymentInfoPageString.title.substring(0, 1), style: widget.paymentInfoPageStyles.title1Style),
+                TextSpan(
+                    text: PaymentInfoPageString.title.substring(1), style: widget.paymentInfoPageStyles.title2Style),
               ],
             ),
           ),
@@ -145,7 +146,9 @@ class _TransferViewState extends State<PaymentInfoView> {
                     ),
                     Icon(Icons.arrow_forward_ios,
                         size: widget.paymentInfoPageStyles.iconSize,
-                        color: (PaymentInfoPageString.itemList[index] == "Sign Out") ? Colors.transparent : AppColors.blackColor),
+                        color: (PaymentInfoPageString.itemList[index] == "Sign Out")
+                            ? Colors.transparent
+                            : AppColors.blackColor),
                   ],
                 ),
                 SizedBox(height: widget.paymentInfoPageStyles.widthDp * 20),

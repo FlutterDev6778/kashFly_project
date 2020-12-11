@@ -70,7 +70,8 @@ class _TransferViewState extends State<TransferView> {
   @override
   Widget build(BuildContext context) {
     for (var i = 0; i < _userProvider.userState.userModel.paymentMethodList.length; i++) {
-      if (_userProvider.userState.userModel.paymentMethodList[i]["id"] == _userProvider.userState.userModel.seledtedPaymentMethod) {
+      if (_userProvider.userState.userModel.paymentMethodList[i]["id"] ==
+          _userProvider.userState.userModel.seledtedPaymentMethod) {
         // _selectedPayment = _userProvider.userState.userModel.paymentMethodList[i];
         _transferProvider.setTransferState(
           _transferProvider.transferState.update(
@@ -229,18 +230,21 @@ class _TransferViewState extends State<TransferView> {
         child: Container(
           width: widget.transferPageStyles.widthDp * 114,
           height: widget.transferPageStyles.widthDp * 32,
-          decoration: BoxDecoration(border: Border.all(color: Colors.grey)),
+          decoration: BoxDecoration(
+            color: AppColors.secondaryColor,
+            borderRadius: BorderRadius.circular(widget.transferPageStyles.heightDp*8),
+          ),
           alignment: Alignment.center,
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(Icons.person_add, size: widget.transferPageStyles.widthDp * 20, color: AppColors.blackColor),
+              Icon(Icons.person_add, size: widget.transferPageStyles.widthDp * 20, color: Colors.white),
               SizedBox(width: widget.transferPageStyles.widthDp * 5),
               Text(
                 TransferPageString.newRecipient,
                 style: TextStyle(
                   fontSize: widget.transferPageStyles.fontSp * 12,
-                  color: AppColors.blackColor,
+                  color: Colors.white,
                   fontFamily: "Exo-SemiBold",
                 ),
               )
@@ -255,7 +259,6 @@ class _TransferViewState extends State<TransferView> {
     return KeicyTextFormField(
       width: null,
       height: widget.transferPageStyles.widthDp * 50,
-      widthDp: widget.transferPageStyles.widthDp,
       controller: _searchController,
       fixedHeightState: false,
       border: Border.all(color: Colors.transparent),
@@ -310,7 +313,8 @@ class _TransferViewState extends State<TransferView> {
               SizedBox(width: widget.transferPageStyles.widthDp * 10),
               (transferProvider.transferState.purpose == 0)
                   ? Text(TransferPageString.commentHintLabel, style: widget.transferPageStyles.commentHintTextStyle)
-                  : Text(AppConstants.reasonList[transferProvider.transferState.purpose - 1], style: widget.transferPageStyles.textStyle),
+                  : Text(AppConstants.reasonList[transferProvider.transferState.purpose - 1],
+                      style: widget.transferPageStyles.textStyle),
             ],
           ),
         ),
@@ -345,7 +349,9 @@ class _TransferViewState extends State<TransferView> {
                       width: widget.transferPageStyles.deliveryOptionWidth,
                       height: widget.transferPageStyles.deliveryOptionHeight,
                       decoration: BoxDecoration(
-                        color: (transferProvider.transferState.deliveryOption == 0) ? AppColors.deliveryOptionBackColor : AppColors.whiteColor,
+                        color: (transferProvider.transferState.deliveryOption == 0)
+                            ? AppColors.deliveryOptionBackColor
+                            : AppColors.whiteColor,
                         borderRadius: BorderRadius.circular(widget.transferPageStyles.widthDp * 15),
                         boxShadow: [
                           BoxShadow(
@@ -379,7 +385,9 @@ class _TransferViewState extends State<TransferView> {
                       width: widget.transferPageStyles.deliveryOptionWidth,
                       height: widget.transferPageStyles.deliveryOptionHeight,
                       decoration: BoxDecoration(
-                        color: (transferProvider.transferState.deliveryOption == 1) ? AppColors.deliveryOptionBackColor : AppColors.whiteColor,
+                        color: (transferProvider.transferState.deliveryOption == 1)
+                            ? AppColors.deliveryOptionBackColor
+                            : AppColors.whiteColor,
                         borderRadius: BorderRadius.circular(widget.transferPageStyles.widthDp * 15),
                         boxShadow: [
                           BoxShadow(
@@ -413,7 +421,9 @@ class _TransferViewState extends State<TransferView> {
                       width: widget.transferPageStyles.deliveryOptionWidth,
                       height: widget.transferPageStyles.deliveryOptionHeight,
                       decoration: BoxDecoration(
-                        color: (transferProvider.transferState.deliveryOption == 2) ? AppColors.deliveryOptionBackColor : AppColors.whiteColor,
+                        color: (transferProvider.transferState.deliveryOption == 2)
+                            ? AppColors.deliveryOptionBackColor
+                            : AppColors.whiteColor,
                         borderRadius: BorderRadius.circular(widget.transferPageStyles.widthDp * 15),
                         boxShadow: [
                           BoxShadow(
@@ -533,8 +543,10 @@ class _TransferViewState extends State<TransferView> {
                                     userName: _recipientModel.firstName,
                                     width: widget.transferPageStyles.widthDp * 45,
                                     height: widget.transferPageStyles.widthDp * 45,
-                                    backColor: AppColors.recipientColor[index % AppColors.recipientColor.length]["backColor"],
-                                    textColor: AppColors.recipientColor[index % AppColors.recipientColor.length]["textColor"],
+                                    backColor: AppColors.recipientColor[index % AppColors.recipientColor.length]
+                                        ["backColor"],
+                                    textColor: AppColors.recipientColor[index % AppColors.recipientColor.length]
+                                        ["textColor"],
                                   ),
                                   SizedBox(width: widget.transferPageStyles.widthDp * 15),
                                   Column(
@@ -655,7 +667,8 @@ class _TransferViewState extends State<TransferView> {
   }
 
   Widget _containerNextButton(BuildContext context) {
-    int monthlyAvailableAmount = _settingsDataProvider.settingsDataState.cashLimits['monthly'] - _userProvider.userState.userModel.monthlyCount;
+    int monthlyAvailableAmount =
+        _settingsDataProvider.settingsDataState.cashLimits['monthly'] - _userProvider.userState.userModel.monthlyCount;
 
     int dailyAvailableAmount = (monthlyAvailableAmount < 5)
         ? monthlyAvailableAmount - _userProvider.userState.userModel.dailyCount
@@ -756,7 +769,8 @@ class _TransferViewState extends State<TransferView> {
   }
 
   void onSendHandler(BuildContext context) async {
-    int monthlyAvailableAmount = _settingsDataProvider.settingsDataState.cashLimits['monthly'] - _userProvider.userState.userModel.monthlyCount;
+    int monthlyAvailableAmount =
+        _settingsDataProvider.settingsDataState.cashLimits['monthly'] - _userProvider.userState.userModel.monthlyCount;
 
     int dailyAvailableAmount = (monthlyAvailableAmount < 5)
         ? monthlyAvailableAmount - _userProvider.userState.userModel.dailyCount

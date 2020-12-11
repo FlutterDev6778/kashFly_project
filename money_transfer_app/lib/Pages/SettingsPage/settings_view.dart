@@ -21,7 +21,6 @@ import 'package:money_transfer_app/Pages/ChangePinCodePage/change_pin_code_page.
 import 'package:money_transfer_app/Pages/DocumentCategoryPage/index.dart';
 import 'package:money_transfer_app/Pages/HomePage/index.dart';
 import 'package:money_transfer_app/Pages/NotificationPage/index.dart';
-import 'package:money_transfer_app/Pages/PersonalDetailPage/index.dart';
 import 'package:money_transfer_app/Pages/SupportPage/index.dart';
 import 'package:money_transfer_app/Pages/PaymentInfoPage/payment_info_page.dart';
 import 'package:money_transfer_app/Pages/PersonalInfoPage/index.dart';
@@ -143,7 +142,8 @@ class _TransferViewState extends State<SettingsView> {
 
         switch (index) {
           case 0:
-            icon = FaIcon(FontAwesomeIcons.userEdit, size: widget.settingsPageStyles.widthDp * 25, color: AppColors.secondaryColor);
+            icon = FaIcon(FontAwesomeIcons.userEdit,
+                size: widget.settingsPageStyles.widthDp * 25, color: AppColors.secondaryColor);
             _onTapHandler = () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (BuildContext context) => PersonalInfoPage()),
@@ -151,7 +151,8 @@ class _TransferViewState extends State<SettingsView> {
             };
             break;
           case 1:
-            icon = Icon(Icons.credit_card, size: widget.settingsPageStyles.widthDp * 30, color: AppColors.secondaryColor);
+            icon =
+                Icon(Icons.credit_card, size: widget.settingsPageStyles.widthDp * 30, color: AppColors.secondaryColor);
             _onTapHandler = () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (BuildContext context) => CreditCardPage()),
@@ -159,7 +160,8 @@ class _TransferViewState extends State<SettingsView> {
             };
             break;
           case 2:
-            icon = Icon(Icons.notifications, size: widget.settingsPageStyles.widthDp * 30, color: AppColors.secondaryColor);
+            icon = Icon(Icons.notifications,
+                size: widget.settingsPageStyles.widthDp * 30, color: AppColors.secondaryColor);
             _onTapHandler = () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (BuildContext context) => NotificationPage()),
@@ -169,7 +171,8 @@ class _TransferViewState extends State<SettingsView> {
           case 3:
             icon = Container(
               padding: EdgeInsets.symmetric(horizontal: widget.settingsPageStyles.widthDp * 5),
-              child: FaIcon(FontAwesomeIcons.fileAlt, size: widget.settingsPageStyles.widthDp * 25, color: AppColors.secondaryColor),
+              child: FaIcon(FontAwesomeIcons.fileAlt,
+                  size: widget.settingsPageStyles.widthDp * 25, color: AppColors.secondaryColor),
             );
             _onTapHandler = () {
               Navigator.of(context).push(
@@ -178,7 +181,8 @@ class _TransferViewState extends State<SettingsView> {
             };
             break;
           case 4:
-            icon = Icon(Icons.help_outline, size: widget.settingsPageStyles.widthDp * 30, color: AppColors.secondaryColor);
+            icon =
+                Icon(Icons.help_outline, size: widget.settingsPageStyles.widthDp * 30, color: AppColors.secondaryColor);
             _onTapHandler = () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (BuildContext context) => SupportPage()),
@@ -186,7 +190,8 @@ class _TransferViewState extends State<SettingsView> {
             };
             break;
           case 5:
-            icon = FaIcon(FontAwesomeIcons.signOutAlt, size: widget.settingsPageStyles.widthDp * 25, color: AppColors.secondaryColor);
+            icon = FaIcon(FontAwesomeIcons.signOutAlt,
+                size: widget.settingsPageStyles.widthDp * 25, color: AppColors.secondaryColor);
             _onTapHandler = () {
               Alert(
                 context: context,
@@ -241,7 +246,8 @@ class _TransferViewState extends State<SettingsView> {
                       ],
                     ),
                     Icon(Icons.arrow_forward_ios,
-                        size: widget.settingsPageStyles.iconSize, color: (index == 5) ? Colors.transparent : AppColors.blackColor),
+                        size: widget.settingsPageStyles.iconSize,
+                        color: (index == 5) ? Colors.transparent : AppColors.blackColor),
                   ],
                 ),
                 SizedBox(height: widget.settingsPageStyles.widthDp * 20),

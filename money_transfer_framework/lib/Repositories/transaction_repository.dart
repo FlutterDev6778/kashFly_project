@@ -1,4 +1,4 @@
-import 'package:keicy_firestore_0_14_data_provider/keicy_firestore_0_14_data_provider.dart';
+import 'package:money_transfer_framework/money_transfer_framework.dart';
 
 import 'package:money_transfer_framework/Models/index.dart';
 

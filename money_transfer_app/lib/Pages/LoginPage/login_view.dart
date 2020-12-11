@@ -154,7 +154,6 @@ class _LoginViewState extends State<LoginView> {
             KeicyTextFormField(
               width: null,
               height: widget.loginPageStyles.formFieldHeight,
-              widthDp: widget.loginPageStyles.widthDp,
               controller: _phoneForLoginController,
               focusNode: _phoneForLoginFocusNode,
               labelSpacing: widget.loginPageStyles.widthDp * 14,
@@ -264,7 +263,6 @@ class _LoginViewState extends State<LoginView> {
             KeicyTextFormField(
               width: null,
               height: widget.loginPageStyles.formFieldHeight,
-              widthDp: widget.loginPageStyles.widthDp,
               controller: _firstNameForSignupController,
               focusNode: _firstNameForSignupFocusNode,
               fillColor: Color(0xFFF2F5FA),
@@ -308,7 +306,6 @@ class _LoginViewState extends State<LoginView> {
             KeicyTextFormField(
               width: null,
               height: widget.loginPageStyles.formFieldHeight,
-              widthDp: widget.loginPageStyles.widthDp,
               controller: _middleNameForSignupController,
               focusNode: _middleNameForSignupFocusNode,
               fillColor: Color(0xFFF2F5FA),
@@ -352,7 +349,6 @@ class _LoginViewState extends State<LoginView> {
             KeicyTextFormField(
               width: null,
               height: widget.loginPageStyles.formFieldHeight,
-              widthDp: widget.loginPageStyles.widthDp,
               controller: _lastNameForSignupController,
               focusNode: _lastNameForSignupFocusNode,
               fillColor: Color(0xFFF2F5FA),
@@ -396,7 +392,6 @@ class _LoginViewState extends State<LoginView> {
             KeicyTextFormField(
               width: null,
               height: widget.loginPageStyles.formFieldHeight,
-              widthDp: widget.loginPageStyles.widthDp,
               controller: _phoneForSignupController,
               focusNode: _phoneForSignupFocusNode,
               fillColor: Color(0xFFF2F5FA),

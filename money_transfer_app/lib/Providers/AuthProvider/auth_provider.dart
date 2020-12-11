@@ -6,8 +6,6 @@ import 'package:flutter/services.dart';
 import 'package:money_transfer_app/Providers/index.dart';
 import 'package:provider/provider.dart';
 
-import 'package:keicy_fcm_for_mobile_7_0/keicy_fcm_for_mobile_7_0.dart';
-import 'package:keicy_firebase_auth_0_18/keicy_firebase_auth_0_18.dart';
 import 'package:keicy_utils/local_storage.dart';
 import 'package:keicy_stripe_payment/keicy_stripe_payment.dart';
 
@@ -16,7 +14,8 @@ import 'package:money_transfer_framework/money_transfer_framework.dart';
 import 'index.dart';
 
 class AuthProvider extends ChangeNotifier {
-  static AuthProvider of(BuildContext context, {bool listen = false}) => Provider.of<AuthProvider>(context, listen: listen);
+  static AuthProvider of(BuildContext context, {bool listen = false}) =>
+      Provider.of<AuthProvider>(context, listen: listen);
 
   AuthState _authState = AuthState.init();
   AuthState get authState => _authState;
@@ -82,6 +81,7 @@ class AuthProvider extends ChangeNotifier {
       codeSent: codeSent,
       codeAutoRetrievalTimeout: codeAutoRetrievalTimeout,
       forceResendingToken: forceResendingToken,
+      timeout: Duration(seconds: 60),
     );
   }
 

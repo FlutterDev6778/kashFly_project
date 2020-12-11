@@ -23,7 +23,7 @@ class BottomNavbarString {
     },
     {
       "icon": AppAssets.settingIcon,
-      "title": "Setting",
+      "title": "Account",
       "activeColor": AppColors.primaryColor,
       "inactiveColor": Colors.grey,
     },

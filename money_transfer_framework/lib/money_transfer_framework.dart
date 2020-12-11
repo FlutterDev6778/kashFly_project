@@ -6,3 +6,4 @@ export './Helpers/index.dart';
 export './Models/index.dart';
 export './Repositories/index.dart';
 export './Widgets/index.dart';
+export './Services/index.dart';

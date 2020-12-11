@@ -214,7 +214,6 @@ class _SSNViewState extends State<SSNView> {
             width: null,
             controller: _textEditingController,
             height: widget.ssnPageStyles.formFieldHeight,
-            widthDp: widget.ssnPageStyles.widthDp,
             fillColor: Colors.white,
             borderRadius: widget.ssnPageStyles.textFieldBorderRadius,
             border: Border.all(color: Colors.transparent),

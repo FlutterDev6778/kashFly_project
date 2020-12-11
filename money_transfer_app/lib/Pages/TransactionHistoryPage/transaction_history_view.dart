@@ -199,14 +199,6 @@ class _TransferViewState extends State<TransactionHistoryView> with TickerProvid
                                 decoration: BoxDecoration(
                                   color: AppColors.whiteColor,
                                   borderRadius: BorderRadius.circular(widget.transactionHistoryPageStyles.widthDp * 15),
-                                  // boxShadow: [
-                                  //   BoxShadow(
-                                  //     color: Colors.grey.withOpacity(0.5),
-                                  //     spreadRadius: 0,
-                                  //     blurRadius: widget.transactionHistoryPageStyles.widthDp * 5,
-                                  //     offset: Offset(0, 0), // changes position of shadow
-                                  //   ),
-                                  // ],
                                 ),
                                 alignment: Alignment.center,
                                 child: Row(
@@ -221,6 +213,10 @@ class _TransferViewState extends State<TransactionHistoryView> with TickerProvid
                                           width: widget.transactionHistoryPageStyles.widthDp * 49,
                                           height: widget.transactionHistoryPageStyles.widthDp * 49,
                                           borderRadius: widget.transactionHistoryPageStyles.widthDp * 10,
+                                          backColor: AppColors.recipientColor[index % AppColors.recipientColor.length]
+                                              ["backColor"],
+                                          textColor: AppColors.recipientColor[index % AppColors.recipientColor.length]
+                                              ["textColor"],
                                         ),
                                         SizedBox(width: widget.transactionHistoryPageStyles.widthDp * 15),
                                         Column(
@@ -272,10 +268,9 @@ class _TransferViewState extends State<TransactionHistoryView> with TickerProvid
                                                   ),
                                                   builder: (context, snapshot) {
                                                     if (!snapshot.hasData) {
-                                                      return Container(
-                                                        height: widget.transactionHistoryPageStyles.historyCardHeight,
-                                                        child: Center(child: KeicyCupertinoIndicator()),
-                                                      );
+                                                      if (!snapshot.hasData) {
+                                                        return SizedBox();
+                                                      }
                                                     }
 
                                                     if (snapshot.data == null) {

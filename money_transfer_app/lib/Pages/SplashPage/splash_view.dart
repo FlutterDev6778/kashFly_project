@@ -3,10 +3,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:keicy_raised_button/keicy_raised_button.dart';
+import 'package:money_transfer_framework/money_transfer_framework.dart';
 import 'package:provider/provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-
-import 'package:keicy_firebase_auth_0_18/keicy_firebase_auth_0_18.dart';
 
 import 'package:money_transfer_app/Pages/App/index.dart';
 import 'package:money_transfer_app/Providers/index.dart';

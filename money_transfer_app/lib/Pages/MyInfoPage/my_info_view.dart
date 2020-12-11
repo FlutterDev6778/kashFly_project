@@ -65,13 +65,13 @@ class _MyInfoViewState extends State<MyInfoView> {
   TextEditingController _phoneNumberController = TextEditingController();
   // TextEditingController _telephoneController = TextEditingController();
   TextEditingController _addressController = TextEditingController();
-  TextEditingController _streetController = TextEditingController();
+  // TextEditingController _streetController = TextEditingController();
   TextEditingController _aptController = TextEditingController();
   TextEditingController _zipcodeController = TextEditingController();
   // TextEditingController _nationalityController = TextEditingController();
   // TextEditingController _occupationController = TextEditingController();
   // TextEditingController _placeOfBirthController = TextEditingController();
-  TextEditingController _remarksController = TextEditingController();
+  // TextEditingController _remarksController = TextEditingController();
   FocusNode _firstNameFocusNode = FocusNode();
   FocusNode _middleNameFocusNode = FocusNode();
   FocusNode _lastNameFocusNode = FocusNode();
@@ -81,13 +81,13 @@ class _MyInfoViewState extends State<MyInfoView> {
   FocusNode _phoneNumberFocusNode = FocusNode();
   FocusNode _telephoneFocusNode = FocusNode();
   FocusNode _addressFocusNode = FocusNode();
-  FocusNode _streetFocusNode = FocusNode();
+  // FocusNode _streetFocusNode = FocusNode();
   FocusNode _aptFocusNode = FocusNode();
   FocusNode _zipCodeFocusNode = FocusNode();
   FocusNode _placeOfBirthFocusNode = FocusNode();
-  FocusNode _nationalityFocusNode = FocusNode();
+  // FocusNode _nationalityFocusNode = FocusNode();
   FocusNode _occupationFocusNode = FocusNode();
-  FocusNode _remarksFocusNode = FocusNode();
+  // FocusNode _remarksFocusNode = FocusNode();
 
   int _gender;
   String _state;
@@ -119,12 +119,12 @@ class _MyInfoViewState extends State<MyInfoView> {
     _state = widget.userModel?.state;
     _city = widget.userModel?.city;
     _addressController.text = widget.userModel?.address;
-    _streetController.text = widget.userModel?.street;
+    // _streetController.text = widget.userModel?.street;
     _aptController.text = widget.userModel?.apt;
     _zipcodeController.text = widget.userModel?.zipCode;
     // _nationalityController.text = widget.userModel?.nationality;
-    _nationality = widget.userModel?.nationality;
-    _remarksController.text = widget.userModel?.remarks;
+    // _nationality = widget.userModel?.nationality;
+    // _remarksController.text = widget.userModel?.remarks;
 
     _userProvider = UserProvider.of(context);
     _authProvider = AuthProvider.of(context);
@@ -303,7 +303,6 @@ class _MyInfoViewState extends State<MyInfoView> {
             KeicyTextFormField(
               width: null,
               height: widget.myInfoPageStyles.formFieldHeight,
-              widthDp: widget.myInfoPageStyles.widthDp,
               controller: _firstNameController,
               focusNode: _firstNameFocusNode,
               labelSpacing: widget.myInfoPageStyles.widthDp * 14,
@@ -335,7 +334,7 @@ class _MyInfoViewState extends State<MyInfoView> {
             KeicyTextFormField(
               width: null,
               height: widget.myInfoPageStyles.formFieldHeight,
-              widthDp: widget.myInfoPageStyles.widthDp,
+
               controller: _middleNameController,
               focusNode: _middleNameFocusNode,
               labelSpacing: widget.myInfoPageStyles.widthDp * 14,
@@ -366,7 +365,6 @@ class _MyInfoViewState extends State<MyInfoView> {
             KeicyTextFormField(
               width: null,
               height: widget.myInfoPageStyles.formFieldHeight,
-              widthDp: widget.myInfoPageStyles.widthDp,
               controller: _lastNameController,
               focusNode: _lastNameFocusNode,
               labelSpacing: widget.myInfoPageStyles.widthDp * 14,
@@ -398,7 +396,6 @@ class _MyInfoViewState extends State<MyInfoView> {
             KeicyTextFormField(
               width: null,
               height: widget.myInfoPageStyles.formFieldHeight,
-              widthDp: widget.myInfoPageStyles.widthDp,
               controller: _birthDayController,
               focusNode: _birthDayFocusNode,
               labelSpacing: widget.myInfoPageStyles.widthDp * 14,
@@ -489,7 +486,6 @@ class _MyInfoViewState extends State<MyInfoView> {
             KeicyTextFormField(
               width: null,
               height: widget.myInfoPageStyles.formFieldHeight,
-              widthDp: widget.myInfoPageStyles.widthDp,
               controller: _emailController,
               focusNode: _emailFocusNode,
               labelSpacing: widget.myInfoPageStyles.widthDp * 14,
@@ -518,7 +514,6 @@ class _MyInfoViewState extends State<MyInfoView> {
             KeicyTextFormField(
               width: null,
               height: widget.myInfoPageStyles.formFieldHeight,
-              widthDp: widget.myInfoPageStyles.widthDp,
               controller: _phoneNumberController,
               focusNode: _phoneNumberFocusNode,
               labelSpacing: widget.myInfoPageStyles.widthDp * 14,
@@ -552,41 +547,41 @@ class _MyInfoViewState extends State<MyInfoView> {
               },
             ),
 
-            /// nationality
-            SizedBox(height: widget.myInfoPageStyles.widthDp * 5),
-            KeicyDropDownFormField(
-              width: null,
-              height: widget.myInfoPageStyles.widthDp * 55,
-              focusNode: _nationalityFocusNode,
-              menuItems: countryList,
-              border: Border.all(color: Colors.transparent),
-              errorBorder: Border.all(color: Colors.redAccent),
-              borderRadius: widget.myInfoPageStyles.borderRadius,
-              selectedItemStyle: widget.myInfoPageStyles.formFieldTextStyle,
-              hintText: MyInfoPageString.nationalityHint,
-              hintStyle: widget.myInfoPageStyles.formFieldHintStyle,
-              fillColor: Colors.white,
-              value: _nationality == "" ? null : _nationality,
-              prefixIcons: [
-                Icon(
-                  Icons.language,
-                  color: Color(0xFFF7A000),
-                  size: widget.myInfoPageStyles.iconSize,
-                )
-              ],
-              contentHorizontalPadding: widget.myInfoPageStyles.widthDp * 13,
-              onChangeHandler: (value) {
-                _nationality = value;
-                FocusScope.of(context).requestFocus(FocusNode());
-              },
-            ),
+            // /// nationality
+            // SizedBox(height: widget.myInfoPageStyles.widthDp * 5),
+            // KeicyDropDownFormField(
+            //   width: null,
+            //   height: widget.myInfoPageStyles.widthDp * 55,
+            //   focusNode: _nationalityFocusNode,
+            //   menuItems: countryList,
+            //   border: Border.all(color: Colors.transparent),
+            //   errorBorder: Border.all(color: Colors.redAccent),
+            //   borderRadius: widget.myInfoPageStyles.borderRadius,
+            //   selectedItemStyle: widget.myInfoPageStyles.formFieldTextStyle,
+            //   hintText: MyInfoPageString.nationalityHint,
+            //   hintStyle: widget.myInfoPageStyles.formFieldHintStyle,
+            //   fillColor: Colors.white,
+            //   value: _nationality == "" ? null : _nationality,
+            //   prefixIcons: [
+            //     Icon(
+            //       Icons.language,
+            //       color: Color(0xFFF7A000),
+            //       size: widget.myInfoPageStyles.iconSize,
+            //     )
+            //   ],
+            //   contentHorizontalPadding: widget.myInfoPageStyles.widthDp * 13,
+            //   onChangeHandler: (value) {
+            //     _nationality = value;
+            //     FocusScope.of(context).requestFocus(FocusNode());
+            //   },
+            // ),
 
             // /// telephone Number
             // SizedBox(height: widget.myInfoPageStyles.widthDp * 5),
             // KeicyTextFormField(
             //   width: null,
             //   height: widget.myInfoPageStyles.formFieldHeight,
-            //   widthDp: widget.myInfoPageStyles.widthDp,
+            //
             //   controller: _telephoneController,
             //   focusNode: _telephoneFocusNode,
             //   labelSpacing: widget.myInfoPageStyles.widthDp * 14,
@@ -631,7 +626,6 @@ class _MyInfoViewState extends State<MyInfoView> {
               initialValue: AppConstants.countryList[0]['text'],
               width: null,
               height: widget.myInfoPageStyles.formFieldHeight,
-              widthDp: widget.myInfoPageStyles.widthDp,
               labelSpacing: widget.myInfoPageStyles.widthDp * 14,
               fillColor: Colors.white,
               borderRadius: widget.myInfoPageStyles.borderRadius,
@@ -734,7 +728,6 @@ class _MyInfoViewState extends State<MyInfoView> {
             KeicyTextFormField(
               width: null,
               height: widget.myInfoPageStyles.formFieldHeight,
-              widthDp: widget.myInfoPageStyles.widthDp,
               controller: _addressController,
               focusNode: _addressFocusNode,
               labelSpacing: widget.myInfoPageStyles.widthDp * 14,
@@ -754,50 +747,49 @@ class _MyInfoViewState extends State<MyInfoView> {
               validatorHandler: (input) =>
                   (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
               onFieldSubmittedHandler: (input) {
-                FocusScope.of(context).requestFocus(_streetFocusNode);
-              },
-            ),
-
-            /// Street
-            SizedBox(height: widget.myInfoPageStyles.widthDp * 5),
-            KeicyTextFormField(
-              width: null,
-              height: widget.myInfoPageStyles.formFieldHeight,
-              widthDp: widget.myInfoPageStyles.widthDp,
-              controller: _streetController,
-              focusNode: _streetFocusNode,
-              labelSpacing: widget.myInfoPageStyles.widthDp * 14,
-              fillColor: Colors.white,
-              borderRadius: widget.myInfoPageStyles.borderRadius,
-              border: Border.all(color: Colors.transparent),
-              errorBorder: Border.all(color: Colors.redAccent),
-              contentHorizontalPadding: widget.myInfoPageStyles.widthDp * 13,
-              prefixIcons: [
-                SvgPicture.asset(
-                  AppAssets.streetIcon,
-                  width: widget.myInfoPageStyles.iconSize,
-                  height: widget.myInfoPageStyles.iconSize,
-                  fit: BoxFit.fill,
-                )
-              ],
-              textStyle: widget.myInfoPageStyles.formFieldTextStyle,
-              keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.next,
-              hintText: MyInfoPageString.streetHint,
-              hintStyle: widget.myInfoPageStyles.formFieldHintStyle,
-              // validatorHandler: (input) =>
-              //     (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
-              onFieldSubmittedHandler: (input) {
                 FocusScope.of(context).requestFocus(_aptFocusNode);
               },
             ),
+
+            // /// Street
+            // SizedBox(height: widget.myInfoPageStyles.widthDp * 5),
+            // KeicyTextFormField(
+            //   width: null,
+            //   height: widget.myInfoPageStyles.formFieldHeight,
+
+            //   controller: _streetController,
+            //   focusNode: _streetFocusNode,
+            //   labelSpacing: widget.myInfoPageStyles.widthDp * 14,
+            //   fillColor: Colors.white,
+            //   borderRadius: widget.myInfoPageStyles.borderRadius,
+            //   border: Border.all(color: Colors.transparent),
+            //   errorBorder: Border.all(color: Colors.redAccent),
+            //   contentHorizontalPadding: widget.myInfoPageStyles.widthDp * 13,
+            //   prefixIcons: [
+            //     SvgPicture.asset(
+            //       AppAssets.streetIcon,
+            //       width: widget.myInfoPageStyles.iconSize,
+            //       height: widget.myInfoPageStyles.iconSize,
+            //       fit: BoxFit.fill,
+            //     )
+            //   ],
+            //   textStyle: widget.myInfoPageStyles.formFieldTextStyle,
+            //   keyboardType: TextInputType.text,
+            //   textInputAction: TextInputAction.next,
+            //   hintText: MyInfoPageString.streetHint,
+            //   hintStyle: widget.myInfoPageStyles.formFieldHintStyle,
+            //   // validatorHandler: (input) =>
+            //   //     (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
+            //   onFieldSubmittedHandler: (input) {
+            //     FocusScope.of(context).requestFocus(_aptFocusNode);
+            //   },
+            // ),
 
             /// Apt
             SizedBox(height: widget.myInfoPageStyles.widthDp * 5),
             KeicyTextFormField(
               width: null,
               height: widget.myInfoPageStyles.formFieldHeight,
-              widthDp: widget.myInfoPageStyles.widthDp,
               controller: _aptController,
               focusNode: _aptFocusNode,
               labelSpacing: widget.myInfoPageStyles.widthDp * 14,
@@ -827,7 +819,6 @@ class _MyInfoViewState extends State<MyInfoView> {
             KeicyTextFormField(
               width: null,
               height: widget.myInfoPageStyles.formFieldHeight,
-              widthDp: widget.myInfoPageStyles.widthDp,
               controller: _zipcodeController,
               focusNode: _zipCodeFocusNode,
               labelSpacing: widget.myInfoPageStyles.widthDp * 14,
@@ -848,14 +839,14 @@ class _MyInfoViewState extends State<MyInfoView> {
                   ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3")
                   : null,
               onFieldSubmittedHandler: (input) {
-                FocusScope.of(context).requestFocus(_placeOfBirthFocusNode);
+                FocusScope.of(context).requestFocus(FocusNode());
               },
             ),
 
             // KeicyTextFormField(
             //   width: null,
             //   height: widget.myInfoPageStyles.formFieldHeight,
-            //   widthDp: widget.myInfoPageStyles.widthDp,
+            //
             //   controller: _nationalityController,
             //   focusNode: _nationalityFocusNode,
             //   labelSpacing: widget.myInfoPageStyles.widthDp * 14,
@@ -885,7 +876,7 @@ class _MyInfoViewState extends State<MyInfoView> {
             // KeicyTextFormField(
             //   width: null,
             //   height: widget.myInfoPageStyles.formFieldHeight,
-            //   widthDp: widget.myInfoPageStyles.widthDp,
+            //
             //   controller: _placeOfBirthController,
             //   focusNode: _placeOfBirthFocusNode,
             //   labelSpacing: widget.myInfoPageStyles.widthDp * 14,
@@ -914,7 +905,7 @@ class _MyInfoViewState extends State<MyInfoView> {
             // KeicyTextFormField(
             //   width: null,
             //   height: widget.myInfoPageStyles.formFieldHeight,
-            //   widthDp: widget.myInfoPageStyles.widthDp,
+            //
             //   controller: _occupationController,
             //   focusNode: _occupationFocusNode,
             //   labelSpacing: widget.myInfoPageStyles.widthDp * 14,
@@ -939,34 +930,33 @@ class _MyInfoViewState extends State<MyInfoView> {
             // ),
 
             /// remarks
-            SizedBox(height: widget.myInfoPageStyles.widthDp * 5),
-            KeicyTextFormField(
-              width: null,
-              height: widget.myInfoPageStyles.formFieldHeight,
-              widthDp: widget.myInfoPageStyles.widthDp,
-              controller: _remarksController,
-              focusNode: _remarksFocusNode,
-              labelSpacing: widget.myInfoPageStyles.widthDp * 14,
-              fillColor: Colors.white,
-              borderRadius: widget.myInfoPageStyles.borderRadius,
-              border: Border.all(color: Colors.transparent),
-              errorBorder: Border.all(color: Colors.redAccent),
-              contentHorizontalPadding: widget.myInfoPageStyles.widthDp * 13,
-              prefixIcons: [
-                Icon(Icons.code, color: Color(0xFFF7A000), size: widget.myInfoPageStyles.iconSize),
-              ],
-              textStyle: widget.myInfoPageStyles.formFieldTextStyle,
-              keyboardType: TextInputType.text,
-              textInputAction: TextInputAction.next,
-              hintText: MyInfoPageString.remaksHint,
-              hintStyle: widget.myInfoPageStyles.formFieldHintStyle,
-              validatorHandler: (input) => (input != "" && input.length < 3)
-                  ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3")
-                  : null,
-              onFieldSubmittedHandler: (input) {
-                FocusScope.of(context).requestFocus(FocusNode());
-              },
-            ),
+            // SizedBox(height: widget.myInfoPageStyles.widthDp * 5),
+            // KeicyTextFormField(
+            //   width: null,
+            //   height: widget.myInfoPageStyles.formFieldHeight,
+            //   controller: _remarksController,
+            //   focusNode: _remarksFocusNode,
+            //   labelSpacing: widget.myInfoPageStyles.widthDp * 14,
+            //   fillColor: Colors.white,
+            //   borderRadius: widget.myInfoPageStyles.borderRadius,
+            //   border: Border.all(color: Colors.transparent),
+            //   errorBorder: Border.all(color: Colors.redAccent),
+            //   contentHorizontalPadding: widget.myInfoPageStyles.widthDp * 13,
+            //   prefixIcons: [
+            //     Icon(Icons.code, color: Color(0xFFF7A000), size: widget.myInfoPageStyles.iconSize),
+            //   ],
+            //   textStyle: widget.myInfoPageStyles.formFieldTextStyle,
+            //   keyboardType: TextInputType.text,
+            //   textInputAction: TextInputAction.next,
+            //   hintText: MyInfoPageString.remaksHint,
+            //   hintStyle: widget.myInfoPageStyles.formFieldHintStyle,
+            //   validatorHandler: (input) => (input != "" && input.length < 3)
+            //       ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3")
+            //       : null,
+            //   onFieldSubmittedHandler: (input) {
+            //     FocusScope.of(context).requestFocus(FocusNode());
+            //   },
+            // ),
 
             SizedBox(height: widget.myInfoPageStyles.widthDp * 20),
             KeicyRaisedButton(
@@ -1012,6 +1002,24 @@ class _MyInfoViewState extends State<MyInfoView> {
 
   void _savePersonalHandler(BuildContext context) async {
     if (!_formKey.currentState.validate()) {
+      StatusAlert.show(
+        context,
+        duration: Duration(seconds: 2),
+        title: "Sorry, there was a problem. please complete all your information",
+        titleOptions: StatusAlertTextConfiguration(
+          style: TextStyle(fontSize: widget.myInfoPageStyles.fontSp * 16, color: AppColors.blackColor),
+        ),
+        margin: EdgeInsets.all(widget.myInfoPageStyles.widthDp * 80),
+        padding: EdgeInsets.all(widget.myInfoPageStyles.widthDp * 20),
+        configuration: IconConfiguration(
+          icon: Icons.error_outline,
+          color: Colors.redAccent,
+          size: widget.myInfoPageStyles.widthDp * 80,
+        ),
+        blurPower: 3,
+        backgroundColor: Colors.white,
+      );
+
       setState(() {
         validateStarted = true;
       });
@@ -1041,12 +1049,12 @@ class _MyInfoViewState extends State<MyInfoView> {
     userModel.address = _addressController.text.trim();
     userModel.apt = _aptController.text.trim();
     userModel.zipCode = _zipcodeController.text.trim();
-    userModel.street = _streetController.text.trim();
-    userModel.nationality = _nationality;
+    // userModel.street = _streetController.text.trim();
+    // userModel.nationality = _nationality;
     // userModel.nationality = _nationalityController.text.trim();
     // userModel.placeofBirth = _placeOfBirthController.text.trim();
     // userModel.occupation = _occupationController.text.trim();
-    userModel.remarks = _remarksController.text.trim();
+    // userModel.remarks = _remarksController.text.trim();
     userModel.isBeneficiary = false;
     userModel.pinCode = widget.userModel.pinCode;
     userModel.ts = DateTime.now().millisecondsSinceEpoch;

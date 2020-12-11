@@ -7,17 +7,13 @@ import 'package:keicy_stripe_payment/keicy_stripe_payment.dart';
 import 'package:money_transfer_app/Providers/index.dart';
 import 'package:provider/provider.dart';
 
-import 'package:keicy_firebase_auth_0_18/keicy_firebase_auth_0_18.dart';
-import 'package:keicy_fcm_for_mobile_7_0/keicy_fcm_for_mobile_7_0.dart';
-import 'package:keicy_storage_for_mobile_4_0/keicy_storage_for_mobile_4_0.dart';
-import 'package:keicy_utils/local_storage.dart';
-
 import 'package:money_transfer_framework/money_transfer_framework.dart';
 
 import 'index.dart';
 
 class PinCodeProvider extends ChangeNotifier {
-  static PinCodeProvider of(BuildContext context, {bool listen = false}) => Provider.of<PinCodeProvider>(context, listen: listen);
+  static PinCodeProvider of(BuildContext context, {bool listen = false}) =>
+      Provider.of<PinCodeProvider>(context, listen: listen);
 
   PinCodeState _pinCodeState = PinCodeState.init();
   PinCodeState get pinCodeState => _pinCodeState;

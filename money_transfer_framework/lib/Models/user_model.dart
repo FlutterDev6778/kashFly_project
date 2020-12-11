@@ -17,14 +17,14 @@ class UserModel extends Equatable {
   String address;
   String zipCode;
   String apt;
-  String street;
+  // String street;
   String city;
   String state;
   String country;
-  String nationality;
+  // String nationality;
   // String placeofBirth;
   // String occupation;
-  String remarks;
+  // String remarks;
   String customerReferenceNo;
   bool isBeneficiary;
   List<dynamic> tokenIDList;
@@ -57,14 +57,14 @@ class UserModel extends Equatable {
     this.address = "",
     this.zipCode = "",
     this.apt = "",
-    this.street = "",
+    // this.street = "",
     this.city = "",
     this.state = "",
     this.country = "",
-    this.nationality = "",
+    // this.nationality = "",
     // this.placeofBirth = "",
     // this.occupation = "",
-    this.remarks = "",
+    // this.remarks = "",
     this.customerReferenceNo = "",
     this.isBeneficiary = false,
     this.tokenIDList = const [],
@@ -99,28 +99,33 @@ class UserModel extends Equatable {
       address: (map["House"] != null) ? map["House"] : "",
       zipCode: (map["PostalCode"] != null) ? map["PostalCode"] : "",
       apt: (map['apt'] != null) ? map['apt'] : "",
-      street: (map["StreetNo"] != null) ? map["StreetNo"] : "",
+      // street: (map["StreetNo"] != null) ? map["StreetNo"] : "",
       city: (map["City"] != null) ? map["City"] : "",
       state: (map["Province"] != null) ? map["Province"] : "",
       country: (map['State'] != null) ? map['State'] : "",
-      nationality: (map["Nationality"] != null) ? map["Nationality"] : "",
+      // nationality: (map["Nationality"] != null) ? map["Nationality"] : "",
       // placeofBirth: (map["PlaceOfBirth"] != null) ? map["PlaceOfBirth"] : "",
       // occupation: (map["Occupation"] != null) ? map["Occupation"] : "",
-      remarks: (map["Remarks"] != null) ? map["Remarks"] : "",
+      // remarks: (map["Remarks"] != null) ? map["Remarks"] : "",
       customerReferenceNo: (map["CustomerReferenceNo"] != null) ? map["CustomerReferenceNo"] : "",
       isBeneficiary: (map["IsBeneficiary"] != null) ? map["IsBeneficiary"] : false,
       tokenIDList: map['tokenIDList'] ?? [],
       paymentMethodList: map['paymentMethodList'] ?? [],
       seledtedPaymentMethod: map['seledtedPaymentMethod'] ?? "",
       pinCode: map['pinCode'] ?? "",
-      emailPermission: (map['permissions'] != null && map['permissions']['emailPermission'] != null) ? map['permissions']['emailPermission'] : true,
-      notificaitonPermission:
-          (map['permissions'] != null && map['permissions']['notificaitonPermission'] != null) ? map['permissions']['notificaitonPermission'] : true,
+      emailPermission: (map['permissions'] != null && map['permissions']['emailPermission'] != null)
+          ? map['permissions']['emailPermission']
+          : true,
+      notificaitonPermission: (map['permissions'] != null && map['permissions']['notificaitonPermission'] != null)
+          ? map['permissions']['notificaitonPermission']
+          : true,
       documents: map['documents'] ?? Map<String, dynamic>(),
       day: (map['cashLimit'] != null && map['cashLimit']['day'] != null) ? map['cashLimit']['day'] : 0,
       month: (map['cashLimit'] != null && map['cashLimit']['month'] != null) ? map['cashLimit']['month'] : 0,
-      dailyCount: (map['cashLimit'] != null && map['cashLimit']['dailyCount'] != null) ? map['cashLimit']['dailyCount'] : 0,
-      monthlyCount: (map['cashLimit'] != null && map['cashLimit']['monthlyCount'] != null) ? map['cashLimit']['monthlyCount'] : 0,
+      dailyCount:
+          (map['cashLimit'] != null && map['cashLimit']['dailyCount'] != null) ? map['cashLimit']['dailyCount'] : 0,
+      monthlyCount:
+          (map['cashLimit'] != null && map['cashLimit']['monthlyCount'] != null) ? map['cashLimit']['monthlyCount'] : 0,
       totalAmount: double.parse(map['totalAmount'].toString()) ?? 0.0,
       createdDateTs: map['createdDateTs'] ?? 0,
       ts: map['ts'] ?? 0,
@@ -143,15 +148,16 @@ class UserModel extends Equatable {
       address: (map['House'] != null) ? map['House'] : address ?? "",
       zipCode: (map["PostalCode"] != null) ? map["PostalCode"] : zipCode ?? "",
       apt: (map['apt'] != null) ? map['apt'] : apt ?? "",
-      street: (map["StreetNo"] != null) ? map["StreetNo"] : street ?? "",
+      // street: (map["StreetNo"] != null) ? map["StreetNo"] : street ?? "",
       city: (map["City"] != null) ? map["City"] : city ?? "",
       state: (map["Province"] != null) ? map["Province"] : state ?? "",
       country: (map['State'] != null) ? map['State'] : country ?? "",
-      nationality: (map["Nationality"] != null) ? map["Nationality"] : nationality ?? "",
+      // nationality: (map["Nationality"] != null) ? map["Nationality"] : nationality ?? "",
       // placeofBirth: (map["PlaceOfBirth"] != null) ? map["PlaceOfBirth"] : placeofBirth ?? "",
       // occupation: (map["Occupation"] != null) ? map["Occupation"] : occupation ?? "",
-      remarks: (map["Remarks"] != null) ? map["Remarks"] : remarks ?? "",
-      customerReferenceNo: (map["CustomerReferenceNo"] != null) ? map["CustomerReferenceNo"] : customerReferenceNo ?? "",
+      // remarks: (map["Remarks"] != null) ? map["Remarks"] : remarks ?? "",
+      customerReferenceNo:
+          (map["CustomerReferenceNo"] != null) ? map["CustomerReferenceNo"] : customerReferenceNo ?? "",
       isBeneficiary: (map["IsBeneficiary"] != null) ? map["IsBeneficiary"] : isBeneficiary ?? false,
       tokenIDList: map['tokenIDList'] ?? tokenIDList ?? [],
       paymentMethodList: map['paymentMethodList'] ?? paymentMethodList ?? [],
@@ -166,8 +172,12 @@ class UserModel extends Equatable {
       documents: map['documents'] ?? documents ?? Map<String, dynamic>(),
       day: (map['cashLimit'] != null && map['cashLimit']['day'] != null) ? map['cashLimit']['day'] : day ?? 0,
       month: (map['cashLimit'] != null && map['cashLimit']['month'] != null) ? map['cashLimit']['month'] : month ?? 0,
-      dailyCount: (map['cashLimit'] != null && map['cashLimit']['dailyCount'] != null) ? map['cashLimit']['dailyCount'] : dailyCount ?? 0,
-      monthlyCount: (map['cashLimit'] != null && map['cashLimit']['monthlyCount'] != null) ? map['cashLimit']['monthlyCount'] : monthlyCount ?? 0,
+      dailyCount: (map['cashLimit'] != null && map['cashLimit']['dailyCount'] != null)
+          ? map['cashLimit']['dailyCount']
+          : dailyCount ?? 0,
+      monthlyCount: (map['cashLimit'] != null && map['cashLimit']['monthlyCount'] != null)
+          ? map['cashLimit']['monthlyCount']
+          : monthlyCount ?? 0,
       totalAmount: map['totalAmount'] ?? totalAmount ?? 0.0,
       createdDateTs: map['createdDateTs'] ?? createdDateTs ?? 0,
       ts: map['ts'] ?? ts ?? 0,
@@ -190,14 +200,14 @@ class UserModel extends Equatable {
       "House": address ?? "",
       "PostalCode": zipCode ?? "",
       "apt": apt ?? "",
-      "StreetNo": street ?? "",
+      // "StreetNo": street ?? "",
       "City": city ?? "",
       "Province": state ?? "",
       "State": country ?? "",
-      "Nationality": nationality ?? "",
+      // "Nationality": nationality ?? "",
       // "PlaceOfBirth": placeofBirth ?? "",
       // "Occupation": occupation ?? "",
-      "Remarks": remarks ?? "",
+      // "Remarks": remarks ?? "",
       "CustomerReferenceNo": customerReferenceNo ?? "",
       "IsBeneficiary": isBeneficiary ?? false,
       "tokenIDList": tokenIDList ?? [],
@@ -237,14 +247,14 @@ class UserModel extends Equatable {
         address,
         zipCode,
         apt,
-        street,
+        // street,
         city,
         state,
         country,
-        nationality,
+        // nationality,
         // placeofBirth,
         // occupation,
-        remarks,
+        // remarks,
         customerReferenceNo,
         isBeneficiary,
         tokenIDList,

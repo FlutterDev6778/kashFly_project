@@ -304,7 +304,6 @@ class _MyBankViewState extends State<MyBankView> {
                   child: KeicyTextFormField(
                     width: null,
                     height: widget.myBankPageStyles.formFieldHeight,
-                    widthDp: widget.myBankPageStyles.widthDp,
                     controller: _cardNumberController,
                     focusNode: _cardNumberFocusNode,
                     labelSpacing: widget.myBankPageStyles.widthDp * 14,
@@ -382,7 +381,6 @@ class _MyBankViewState extends State<MyBankView> {
                       KeicyTextFormField(
                         width: null,
                         height: widget.myBankPageStyles.formFieldHeight,
-                        widthDp: widget.myBankPageStyles.widthDp,
                         controller: _expDateController,
                         focusNode: _expDateFocusNode,
                         labelSpacing: widget.myBankPageStyles.widthDp * 14,
@@ -440,7 +438,6 @@ class _MyBankViewState extends State<MyBankView> {
                       KeicyTextFormField(
                         width: null,
                         height: widget.myBankPageStyles.formFieldHeight,
-                        widthDp: widget.myBankPageStyles.widthDp,
                         controller: _cvcController,
                         focusNode: _cvcFocusNode,
                         labelSpacing: widget.myBankPageStyles.widthDp * 14,
@@ -495,7 +492,6 @@ class _MyBankViewState extends State<MyBankView> {
                       KeicyTextFormField(
                         width: null,
                         height: widget.myBankPageStyles.formFieldHeight,
-                        widthDp: widget.myBankPageStyles.widthDp,
                         controller: _zipController,
                         focusNode: _zipFocusNode,
                         labelSpacing: widget.myBankPageStyles.widthDp * 14,
