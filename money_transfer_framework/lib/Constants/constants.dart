@@ -8,8 +8,8 @@ class AppConstants {
     {"text": "United Sate of America", "value": 0},
   ];
 
-  // static String maskString = '+242(00)000-0000';
-  static String maskString = '+1(000)000-0000';
+  static String maskString = '+242(00)000-0000';
+  // static String maskString = '+1(000)000-0000';
 
   static List<String> reasonList = [
     "Medical",

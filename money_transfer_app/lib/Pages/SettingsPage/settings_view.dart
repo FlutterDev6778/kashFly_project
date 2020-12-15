@@ -145,27 +145,42 @@ class _TransferViewState extends State<SettingsView> {
             icon = FaIcon(FontAwesomeIcons.userEdit,
                 size: widget.settingsPageStyles.widthDp * 25, color: AppColors.secondaryColor);
             _onTapHandler = () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (BuildContext context) => PersonalInfoPage()),
+              pushNewScreen(
+                context,
+                screen: PersonalInfoPage(),
+                withNavBar: false,
               );
+              // Navigator.of(context).push(
+              //   MaterialPageRoute(builder: (BuildContext context) => PersonalInfoPage()),
+              // );
             };
             break;
           case 1:
             icon =
                 Icon(Icons.credit_card, size: widget.settingsPageStyles.widthDp * 30, color: AppColors.secondaryColor);
             _onTapHandler = () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (BuildContext context) => CreditCardPage()),
+              pushNewScreen(
+                context,
+                screen: CreditCardPage(),
+                withNavBar: false,
               );
+              // Navigator.of(context).push(
+              //   MaterialPageRoute(builder: (BuildContext context) => CreditCardPage()),
+              // );
             };
             break;
           case 2:
             icon = Icon(Icons.notifications,
                 size: widget.settingsPageStyles.widthDp * 30, color: AppColors.secondaryColor);
             _onTapHandler = () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (BuildContext context) => NotificationPage()),
+              pushNewScreen(
+                context,
+                screen: NotificationPage(),
+                withNavBar: false,
               );
+              // Navigator.of(context).push(
+              //   MaterialPageRoute(builder: (BuildContext context) => NotificationPage()),
+              // );
             };
             break;
           case 3:
@@ -175,18 +190,28 @@ class _TransferViewState extends State<SettingsView> {
                   size: widget.settingsPageStyles.widthDp * 25, color: AppColors.secondaryColor),
             );
             _onTapHandler = () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (BuildContext context) => AboutPage()),
+              pushNewScreen(
+                context,
+                screen: AboutPage(),
+                withNavBar: false,
               );
+              // Navigator.of(context).push(
+              //   MaterialPageRoute(builder: (BuildContext context) => AboutPage()),
+              // );
             };
             break;
           case 4:
             icon =
                 Icon(Icons.help_outline, size: widget.settingsPageStyles.widthDp * 30, color: AppColors.secondaryColor);
             _onTapHandler = () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (BuildContext context) => SupportPage()),
+              pushNewScreen(
+                context,
+                screen: SupportPage(),
+                withNavBar: false,
               );
+              // Navigator.of(context).push(
+              //   MaterialPageRoute(builder: (BuildContext context) => SupportPage()),
+              // );
             };
             break;
           case 5:

@@ -176,9 +176,7 @@ class _UploadDocumentViewState extends State<UploadDocumentView> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        height: widget.fullScreen
-            ? widget.uploadDocumentPageStyles.deviceHeight
-            : widget.uploadDocumentPageStyles.mainHeight,
+        height: widget.uploadDocumentPageStyles.deviceHeight,
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

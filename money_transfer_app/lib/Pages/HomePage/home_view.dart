@@ -500,7 +500,7 @@ class _TransferViewState extends State<HomeView> {
 
                             return GestureDetector(
                               onTap: () {
-                                if (widget.onNavItemPressHandler != null) widget.onNavItemPressHandler(2);
+                                // if (widget.onNavItemPressHandler != null) widget.onNavItemPressHandler(2);
                               },
                               child: Container(
                                 // height: widget.homePageStyles.historyCardHeight,

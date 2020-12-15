@@ -130,13 +130,16 @@ class _AmountViewState extends State<AmountView> {
 
   Widget _containerNextButton(BuildContext context) {
     return Consumer<UserProvider>(builder: (context, userProvider, _) {
-      int monthlyAvailableAmount = _settingsDataProvider.settingsDataState.cashLimits['monthly'] - userProvider.userState.userModel.monthlyCount;
+      int monthlyAvailableAmount =
+          _settingsDataProvider.settingsDataState.cashLimits['monthly'] - userProvider.userState.userModel.monthlyCount;
 
       int dailyAvailableAmount = (monthlyAvailableAmount < 5)
           ? monthlyAvailableAmount - userProvider.userState.userModel.dailyCount
           : _settingsDataProvider.settingsDataState.cashLimits['daily'] - userProvider.userState.userModel.dailyCount;
 
-      String str = (monthlyAvailableAmount <= 0) ? "Montly  Limit is over" : (dailyAvailableAmount <= 0) ? "Daily Limit is over" : "";
+      String str = (monthlyAvailableAmount <= 0)
+          ? "Montly  Limit is over"
+          : (dailyAvailableAmount <= 0) ? "Daily Limit is over" : "";
 
       return Column(
         children: [
@@ -181,7 +184,8 @@ class _AmountViewState extends State<AmountView> {
       StatusAlert.show(
         context,
         duration: Duration(seconds: 2),
-        title: AmountPageString.amountValidateString + SettingsDataProvider.of(context).settingsDataState.minAmount.toString(),
+        title: AmountPageString.amountValidateString +
+            SettingsDataProvider.of(context).settingsDataState.minAmount.toString(),
         titleOptions: StatusAlertTextConfiguration(
           style: TextStyle(fontSize: widget.amountPageStyles.fontSp * 16, color: AppColors.blackColor),
         ),
@@ -205,25 +209,38 @@ class _AmountViewState extends State<AmountView> {
     ////  Check document validation
     ///
 
-    if (_userProvider.userState.userModel.documents.length == 0) {
-      pushNewScreen(
+    if (_userProvider.userState.userModel.totalAmount + amount < 3000 &&
+        (_userProvider.userState.userModel.documents == null ||
+            _userProvider.userState.userModel.documents.length == 0 ||
+            _userProvider.userState.userModel.documents["category1"] == null)) {
+      await pushNewScreen(
         context,
         screen: UploadDocumentPage(documentType: DocumentCategoryPageString.itemList[0], fullScreen: true),
         withNavBar: false,
       );
+      setState(() {
+        FocusScope.of(context).requestFocus(_amountFocusNode);
+      });
       return;
-    } else if (_userProvider.userState.userModel.totalAmount >= 3000 && _userProvider.userState.userModel.documents["category2"] == null) {
-      pushNewScreen(
+    } else if (_userProvider.userState.userModel.totalAmount + amount >= 3000 &&
+        (_userProvider.userState.userModel.documents == null ||
+            _userProvider.userState.userModel.documents.length == 0 ||
+            _userProvider.userState.userModel.documents["category2"] == null)) {
+      await pushNewScreen(
         context,
         screen: SSNPage(documentType: DocumentCategoryPageString.itemList[1]),
         withNavBar: false,
       );
+      setState(() {
+        FocusScope.of(context).requestFocus(_amountFocusNode);
+      });
       return;
     }
 
     ///   --------------------------------------------
 
-    BottomNavbarProvider.of(context).setBottomNavbarState(BottomNavbarProvider.of(context).bottomNavbarState.update(type: 0));
+    BottomNavbarProvider.of(context)
+        .setBottomNavbarState(BottomNavbarProvider.of(context).bottomNavbarState.update(type: 0));
     await pushNewScreen(
       context,
       screen: TransferPage(amount: amount),
@@ -234,6 +251,7 @@ class _AmountViewState extends State<AmountView> {
       _amountController.clear();
       _amountController.text = "0.00";
     });
-    BottomNavbarProvider.of(context).setBottomNavbarState(BottomNavbarProvider.of(context).bottomNavbarState.update(type: 1));
+    BottomNavbarProvider.of(context)
+        .setBottomNavbarState(BottomNavbarProvider.of(context).bottomNavbarState.update(type: 1));
   }
 }

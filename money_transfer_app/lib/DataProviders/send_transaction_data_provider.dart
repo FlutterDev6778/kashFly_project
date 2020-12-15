@@ -10,6 +10,10 @@ import 'apis.dart';
 
 class SendTransactionDataProvider {
   static Future<Map<String, dynamic>> sendTransaction({@required JubaTransactionModel jubaTransactionModel}) async {
+    print(JubaConfig.baseUrl + JubaApis.sendTransaction);
+
+    print(jubaTransactionModel.toJson());
+
     try {
       var response = await http.post(
         JubaConfig.baseUrl + JubaApis.sendTransaction,

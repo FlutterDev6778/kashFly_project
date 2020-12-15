@@ -242,7 +242,7 @@ class _MyInfoViewState extends State<MyInfoView> {
       key: _scaffoldKey,
       backgroundColor: AppColors.scaffoldBackColor2,
       body: Container(
-        height: widget.myInfoPageStyles.mainHeight - (widget.haveNavbar ? 93 : 0),
+        height: widget.myInfoPageStyles.mainHeight ,
         child: KeicyInkWell(
           onTap: () {},
           child: Column(
@@ -307,6 +307,7 @@ class _MyInfoViewState extends State<MyInfoView> {
               focusNode: _firstNameFocusNode,
               labelSpacing: widget.myInfoPageStyles.widthDp * 14,
               fillColor: Colors.white,
+              fixedHeightState: true,
               borderRadius: widget.myInfoPageStyles.borderRadius,
               border: Border.all(color: Colors.transparent),
               errorBorder: Border.all(color: Colors.redAccent),
@@ -334,6 +335,7 @@ class _MyInfoViewState extends State<MyInfoView> {
             KeicyTextFormField(
               width: null,
               height: widget.myInfoPageStyles.formFieldHeight,
+              fixedHeightState: true,
 
               controller: _middleNameController,
               focusNode: _middleNameFocusNode,
@@ -365,6 +367,7 @@ class _MyInfoViewState extends State<MyInfoView> {
             KeicyTextFormField(
               width: null,
               height: widget.myInfoPageStyles.formFieldHeight,
+              fixedHeightState: true,
               controller: _lastNameController,
               focusNode: _lastNameFocusNode,
               labelSpacing: widget.myInfoPageStyles.widthDp * 14,
@@ -396,6 +399,7 @@ class _MyInfoViewState extends State<MyInfoView> {
             KeicyTextFormField(
               width: null,
               height: widget.myInfoPageStyles.formFieldHeight,
+              fixedHeightState: true,
               controller: _birthDayController,
               focusNode: _birthDayFocusNode,
               labelSpacing: widget.myInfoPageStyles.widthDp * 14,
@@ -456,6 +460,7 @@ class _MyInfoViewState extends State<MyInfoView> {
             KeicyDropDownFormField(
               width: null,
               height: widget.myInfoPageStyles.widthDp * 55,
+              fixedHeightState: true,
               focusNode: _genderFocusNode,
               menuItems: AppConstants.genderList,
               border: Border.all(color: Colors.transparent),
@@ -486,6 +491,7 @@ class _MyInfoViewState extends State<MyInfoView> {
             KeicyTextFormField(
               width: null,
               height: widget.myInfoPageStyles.formFieldHeight,
+              fixedHeightState: true,
               controller: _emailController,
               focusNode: _emailFocusNode,
               labelSpacing: widget.myInfoPageStyles.widthDp * 14,
@@ -514,6 +520,7 @@ class _MyInfoViewState extends State<MyInfoView> {
             KeicyTextFormField(
               width: null,
               height: widget.myInfoPageStyles.formFieldHeight,
+              fixedHeightState: true,
               controller: _phoneNumberController,
               focusNode: _phoneNumberFocusNode,
               labelSpacing: widget.myInfoPageStyles.widthDp * 14,
@@ -626,6 +633,7 @@ class _MyInfoViewState extends State<MyInfoView> {
               initialValue: AppConstants.countryList[0]['text'],
               width: null,
               height: widget.myInfoPageStyles.formFieldHeight,
+              fixedHeightState: true,
               labelSpacing: widget.myInfoPageStyles.widthDp * 14,
               fillColor: Colors.white,
               borderRadius: widget.myInfoPageStyles.borderRadius,
@@ -728,6 +736,7 @@ class _MyInfoViewState extends State<MyInfoView> {
             KeicyTextFormField(
               width: null,
               height: widget.myInfoPageStyles.formFieldHeight,
+              fixedHeightState: true,
               controller: _addressController,
               focusNode: _addressFocusNode,
               labelSpacing: widget.myInfoPageStyles.widthDp * 14,
@@ -791,6 +800,7 @@ class _MyInfoViewState extends State<MyInfoView> {
               width: null,
               height: widget.myInfoPageStyles.formFieldHeight,
               controller: _aptController,
+              fixedHeightState: true,
               focusNode: _aptFocusNode,
               labelSpacing: widget.myInfoPageStyles.widthDp * 14,
               fillColor: Colors.white,
@@ -821,6 +831,7 @@ class _MyInfoViewState extends State<MyInfoView> {
               height: widget.myInfoPageStyles.formFieldHeight,
               controller: _zipcodeController,
               focusNode: _zipCodeFocusNode,
+              fixedHeightState: true,
               labelSpacing: widget.myInfoPageStyles.widthDp * 14,
               fillColor: Colors.white,
               borderRadius: widget.myInfoPageStyles.borderRadius,
