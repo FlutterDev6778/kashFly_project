@@ -108,10 +108,8 @@ class _MyInfoViewState extends State<MyInfoView> {
     _firstNameController.text = widget.userModel?.firstName ?? "";
     _middleNameController.text = widget.userModel?.middleName ?? "";
     _lastNameController.text = widget.userModel?.lastName ?? "";
-    _birthDayController = TextEditingController(
-        text: widget.userModel?.dobTs != 0
-            ? KeicyDateTime.convertMillisecondsToDateString(ms: widget.userModel?.dobTs)
-            : "");
+    _birthDayController =
+        TextEditingController(text: widget.userModel?.dobTs != 0 ? KeicyDateTime.convertMillisecondsToDateString(ms: widget.userModel?.dobTs) : "");
     _gender = widget.userModel?.gender;
     _emailController.text = widget.userModel?.email ?? "";
     _phoneNumberController.text = widget.userModel?.phoneNumber;
@@ -242,7 +240,7 @@ class _MyInfoViewState extends State<MyInfoView> {
       key: _scaffoldKey,
       backgroundColor: AppColors.scaffoldBackColor2,
       body: Container(
-        height: widget.myInfoPageStyles.mainHeight ,
+        height: widget.myInfoPageStyles.mainHeight,
         child: KeicyInkWell(
           onTap: () {},
           child: Column(
@@ -323,8 +321,7 @@ class _MyInfoViewState extends State<MyInfoView> {
               ],
               hintText: MyInfoPageString.firstNameHint,
               hintStyle: widget.myInfoPageStyles.formFieldHintStyle,
-              validatorHandler: (input) =>
-                  (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
+              validatorHandler: (input) => (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
               onFieldSubmittedHandler: (input) {
                 FocusScope.of(context).requestFocus(_middleNameFocusNode);
               },
@@ -387,8 +384,7 @@ class _MyInfoViewState extends State<MyInfoView> {
               textInputAction: TextInputAction.next,
               hintText: MyInfoPageString.lastNameHint,
               hintStyle: widget.myInfoPageStyles.formFieldHintStyle,
-              validatorHandler: (input) =>
-                  (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
+              validatorHandler: (input) => (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
               onFieldSubmittedHandler: (input) {
                 FocusScope.of(context).requestFocus(_birthDayFocusNode);
               },
@@ -441,8 +437,7 @@ class _MyInfoViewState extends State<MyInfoView> {
                     return _buildBottomPicker(
                       CupertinoDatePicker(
                         mode: CupertinoDatePickerMode.date,
-                        initialDateTime:
-                            KeicyDateTime.convertDateStringToDateTime(dateString: _birthDayController.text.trim()),
+                        initialDateTime: KeicyDateTime.convertDateStringToDateTime(dateString: _birthDayController.text.trim()),
                         minimumYear: 1950,
                         maximumYear: DateTime.now().year,
                         onDateTimeChanged: (DateTime newDateTime) {
@@ -508,8 +503,7 @@ class _MyInfoViewState extends State<MyInfoView> {
               textInputAction: TextInputAction.next,
               hintText: MyInfoPageString.emailHint,
               hintStyle: widget.myInfoPageStyles.formFieldHintStyle,
-              validatorHandler: (input) =>
-                  (input != "") && !KeicyValidators.isValidEmail(input) ? ValidateErrorString.emailErrorText : null,
+              validatorHandler: (input) => (input != "") && !KeicyValidators.isValidEmail(input) ? ValidateErrorString.emailErrorText : null,
               onFieldSubmittedHandler: (input) {
                 FocusScope.of(context).requestFocus(FocusNode());
               },
@@ -547,8 +541,7 @@ class _MyInfoViewState extends State<MyInfoView> {
               textInputAction: TextInputAction.next,
               hintText: MyInfoPageString.phoneHint,
               hintStyle: widget.myInfoPageStyles.formFieldHintStyle,
-              validatorHandler: (input) =>
-                  (input.length < 9) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "9") : null,
+              validatorHandler: (input) => (input.length < 9) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "9") : null,
               onFieldSubmittedHandler: (input) {
                 FocusScope.of(context).requestFocus(_telephoneFocusNode);
               },
@@ -689,8 +682,7 @@ class _MyInfoViewState extends State<MyInfoView> {
               },
               dialogBox: true,
               isExpanded: true,
-              validator: (value) =>
-                  (validateStarted && value == null) ? ValidateErrorString.dropdownItemErrorText : null,
+              validator: (value) => (validateStarted && value == null) ? ValidateErrorString.dropdownItemErrorText : null,
             ),
 
             /// city Name
@@ -727,8 +719,7 @@ class _MyInfoViewState extends State<MyInfoView> {
               },
               dialogBox: true,
               isExpanded: true,
-              validator: (value) =>
-                  (validateStarted && value == null) ? ValidateErrorString.dropdownItemErrorText : null,
+              validator: (value) => (validateStarted && value == null) ? ValidateErrorString.dropdownItemErrorText : null,
             ),
 
             /// Address
@@ -753,8 +744,7 @@ class _MyInfoViewState extends State<MyInfoView> {
               textInputAction: TextInputAction.next,
               hintText: MyInfoPageString.addressHint,
               hintStyle: widget.myInfoPageStyles.formFieldHintStyle,
-              validatorHandler: (input) =>
-                  (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
+              validatorHandler: (input) => (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
               onFieldSubmittedHandler: (input) {
                 FocusScope.of(context).requestFocus(_aptFocusNode);
               },
@@ -816,9 +806,9 @@ class _MyInfoViewState extends State<MyInfoView> {
               textInputAction: TextInputAction.next,
               hintText: MyInfoPageString.aptHint,
               hintStyle: widget.myInfoPageStyles.formFieldHintStyle,
-              validatorHandler: (input) => (input != "" && input.length < 3)
-                  ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3")
-                  : null,
+              // validatorHandler: (input) => (input != "" && input.length < 3)
+              //     ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3")
+              //     : null,
               onFieldSubmittedHandler: (input) {
                 FocusScope.of(context).requestFocus(_zipCodeFocusNode);
               },
@@ -846,9 +836,8 @@ class _MyInfoViewState extends State<MyInfoView> {
               textInputAction: TextInputAction.next,
               hintText: MyInfoPageString.zipCodeHint,
               hintStyle: widget.myInfoPageStyles.formFieldHintStyle,
-              validatorHandler: (input) => (input != "" && input.length < 3)
-                  ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3")
-                  : null,
+              validatorHandler: (input) =>
+                  (input != "" && input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
               onFieldSubmittedHandler: (input) {
                 FocusScope.of(context).requestFocus(FocusNode());
               },

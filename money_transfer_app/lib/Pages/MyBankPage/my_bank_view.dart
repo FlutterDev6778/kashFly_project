@@ -177,7 +177,7 @@ class _MyBankViewState extends State<MyBankView> {
       key: _scaffoldKey,
       backgroundColor: AppColors.scaffoldBackColor2,
       body: Container(
-        height: widget.myBankPageStyles.mainHeight - (widget.isNewInfo ? 0 : 93),
+        height: widget.myBankPageStyles.mainHeight,
         child: KeicyInkWell(
           onTap: () {},
           child: Column(
@@ -189,96 +189,102 @@ class _MyBankViewState extends State<MyBankView> {
                 haveBackIcon: true,
               ),
               Expanded(
-                child: _containerForm(context),
-              ),
-              CustomNumberKeyboard(
-                backColor: Colors.transparent,
-                foreColor: AppColors.blackColor,
-                fontSize: widget.myBankPageStyles.fontSp * 24,
-                iconSize: widget.myBankPageStyles.widthDp * 24,
-                keyHorizontalPadding: widget.myBankPageStyles.widthDp * 45,
-                keyVerticalPadding: widget.myBankPageStyles.widthDp * 20,
-                type: -1,
-                onBackspacePress: () {
-                  String str;
-                  if (_currentController == _cardNumberController) {
-                    str = _currentController.text.replaceAll("-", "");
-                    str = str.substring(0, str.length - 1);
-                  } else if (_currentController == _expDateController) {
-                    str = _currentController.text.replaceAll("/", "");
-                    str = str.substring(0, str.length - 1);
-                  } else if (_currentController == _cvcController) {
-                    str = _currentController.text;
-                    str = str.substring(0, str.length - 1);
-                  } else if (_currentController == _zipController) {
-                    str = _currentController.text;
-                    str = str.substring(0, str.length - 1);
-                  }
-                  _editingHandler(str);
-                },
-                onPress: (value) {
-                  String str;
-                  if (_currentController == _cardNumberController) {
-                    str = (_currentController.text.trim() + value.trim()).replaceAll("-", "");
-                  } else if (_currentController == _expDateController) {
-                    str = (_currentController.text.trim() + value.trim()).replaceAll("/", "");
-                  } else if (_currentController == _cvcController) {
-                    str = _currentController.text.trim() + value.trim();
-                  } else if (_currentController == _zipController) {
-                    str = _currentController.text.trim() + value.trim();
-                  }
-                  _editingHandler(str);
-                },
-              ),
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: widget.myBankPageStyles.widthDp * 20),
-                child: Row(
-                  children: [
-                    (widget.isNewInfo)
-                        ? Expanded(
-                            child: KeicyRaisedButton(
-                              height: widget.myBankPageStyles.widthDp * 50,
-                              color: Colors.transparent,
-                              elevation: 0,
-                              borderRadius: widget.myBankPageStyles.borderRadius,
-                              child: Text(
-                                MyBankPageString.skipLink,
-                                style: widget.myBankPageStyles.buttonTextStyle.copyWith(color: AppColors.blackColor),
-                              ),
-                              onPressed: () {
-                                _authProvider.setAuthState(
-                                  _authProvider.authState.update(authStatement: AuthStatement.IsLogin, errorString: ""),
-                                  isNotifiable: false,
-                                );
-
-                                Navigator.of(context).pushNamedAndRemoveUntil(
-                                  AppRoutes.BottomNavbar,
-                                  (route) => false,
-                                );
-                              },
-                            ),
-                          )
-                        : SizedBox(),
-                    (widget.isNewInfo) ? SizedBox(width: widget.myBankPageStyles.widthDp * 15) : SizedBox(),
-                    Expanded(
-                      child: KeicyRaisedButton(
-                        height: widget.myBankPageStyles.widthDp * 50,
-                        color: AppColors.primaryColor,
-                        elevation: 0,
-                        borderRadius: widget.myBankPageStyles.borderRadius,
-                        child: Text(
-                          MyBankPageString.saveButton,
-                          style: widget.myBankPageStyles.buttonTextStyle,
-                        ),
-                        onPressed: () {
-                          _saveHandler(context);
+                child: SingleChildScrollView(
+                  child: Column(
+                    children: [
+                      _containerForm(context),
+                      CustomNumberKeyboard(
+                        backColor: Colors.transparent,
+                        foreColor: AppColors.blackColor,
+                        fontSize: widget.myBankPageStyles.fontSp * 24,
+                        iconSize: widget.myBankPageStyles.widthDp * 24,
+                        keyHorizontalPadding: widget.myBankPageStyles.widthDp * 45,
+                        keyVerticalPadding: widget.myBankPageStyles.widthDp * 20,
+                        type: -1,
+                        onBackspacePress: () {
+                          String str;
+                          if (_currentController == _cardNumberController) {
+                            str = _currentController.text.replaceAll("-", "");
+                            str = str.substring(0, str.length - 1);
+                          } else if (_currentController == _expDateController) {
+                            str = _currentController.text.replaceAll("/", "");
+                            str = str.substring(0, str.length - 1);
+                          } else if (_currentController == _cvcController) {
+                            str = _currentController.text;
+                            str = str.substring(0, str.length - 1);
+                          } else if (_currentController == _zipController) {
+                            str = _currentController.text;
+                            str = str.substring(0, str.length - 1);
+                          }
+                          _editingHandler(str);
+                        },
+                        onPress: (value) {
+                          String str;
+                          if (_currentController == _cardNumberController) {
+                            str = (_currentController.text.trim() + value.trim()).replaceAll("-", "");
+                          } else if (_currentController == _expDateController) {
+                            str = (_currentController.text.trim() + value.trim()).replaceAll("/", "");
+                          } else if (_currentController == _cvcController) {
+                            str = _currentController.text.trim() + value.trim();
+                          } else if (_currentController == _zipController) {
+                            str = _currentController.text.trim() + value.trim();
+                          }
+                          _editingHandler(str);
                         },
                       ),
-                    ),
-                  ],
+                      Container(
+                        padding: EdgeInsets.symmetric(horizontal: widget.myBankPageStyles.widthDp * 20),
+                        child: Row(
+                          children: [
+                            (widget.isNewInfo)
+                                ? Expanded(
+                                    child: KeicyRaisedButton(
+                                      height: widget.myBankPageStyles.widthDp * 50,
+                                      color: Colors.transparent,
+                                      elevation: 0,
+                                      borderRadius: widget.myBankPageStyles.borderRadius,
+                                      child: Text(
+                                        MyBankPageString.skipLink,
+                                        style: widget.myBankPageStyles.buttonTextStyle.copyWith(color: AppColors.blackColor),
+                                      ),
+                                      onPressed: () {
+                                        _authProvider.setAuthState(
+                                          _authProvider.authState.update(authStatement: AuthStatement.IsLogin, errorString: ""),
+                                          isNotifiable: false,
+                                        );
+
+                                        Navigator.of(context).pushNamedAndRemoveUntil(
+                                          AppRoutes.BottomNavbar,
+                                          (route) => false,
+                                        );
+                                      },
+                                    ),
+                                  )
+                                : SizedBox(),
+                            (widget.isNewInfo) ? SizedBox(width: widget.myBankPageStyles.widthDp * 15) : SizedBox(),
+                            Expanded(
+                              child: KeicyRaisedButton(
+                                height: widget.myBankPageStyles.widthDp * 50,
+                                color: AppColors.primaryColor,
+                                elevation: 0,
+                                borderRadius: widget.myBankPageStyles.borderRadius,
+                                child: Text(
+                                  MyBankPageString.saveButton,
+                                  style: widget.myBankPageStyles.buttonTextStyle,
+                                ),
+                                onPressed: () {
+                                  _saveHandler(context);
+                                },
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: widget.myBankPageStyles.widthDp * 20),
+                    ],
+                  ),
                 ),
               ),
-              SizedBox(height: widget.myBankPageStyles.widthDp * 20),
             ],
           ),
         ),
@@ -289,6 +295,7 @@ class _MyBankViewState extends State<MyBankView> {
   Widget _containerForm(BuildContext context) {
     return Container(
       padding: EdgeInsets.symmetric(
+        vertical: widget.myBankPageStyles.widthDp * 30,
         horizontal: widget.myBankPageStyles.widthDp * 20,
       ),
       child: Form(
@@ -311,8 +318,7 @@ class _MyBankViewState extends State<MyBankView> {
                     borderRadius: widget.myBankPageStyles.borderRadius,
                     border: Border(
                       bottom: BorderSide(
-                        color:
-                            (_currentController == _cardNumberController) ? AppColors.primaryColor : Colors.transparent,
+                        color: (_currentController == _cardNumberController) ? AppColors.primaryColor : Colors.transparent,
                       ),
                     ),
                     errorBorder: Border(bottom: BorderSide(color: Colors.redAccent)),
@@ -354,8 +360,7 @@ class _MyBankViewState extends State<MyBankView> {
                 ),
                 Consumer<KeicyCardDetectProvider>(
                   builder: (context, keicyCardDetectProvider, _) {
-                    if (keicyCardDetectProvider.cardType == null ||
-                        keicyCardDetectProvider.cardType == CreditCardType.unknown) return SizedBox();
+                    if (keicyCardDetectProvider.cardType == null || keicyCardDetectProvider.cardType == CreditCardType.unknown) return SizedBox();
                     _creditCard.brand = keicyCardDetectProvider.typeString;
                     return Container(
                       height: widget.myBankPageStyles.widthDp * 30,
@@ -388,9 +393,7 @@ class _MyBankViewState extends State<MyBankView> {
                         borderRadius: widget.myBankPageStyles.borderRadius,
                         border: Border(
                           bottom: BorderSide(
-                            color: (_currentController == _expDateController)
-                                ? AppColors.primaryColor
-                                : Colors.transparent,
+                            color: (_currentController == _expDateController) ? AppColors.primaryColor : Colors.transparent,
                           ),
                         ),
                         errorBorder: Border(bottom: BorderSide(color: Colors.redAccent)),
@@ -550,16 +553,10 @@ class _MyBankViewState extends State<MyBankView> {
         } else if (str.length > 4 && str.length <= 8) {
           _currentController.text = str.substring(0, 4) + "-" + str.substring(4, str.length);
         } else if (str.length > 8 && str.length <= 12) {
-          _currentController.text =
-              str.substring(0, 4) + "-" + str.substring(4, 8) + "-" + str.substring(8, str.length);
+          _currentController.text = str.substring(0, 4) + "-" + str.substring(4, 8) + "-" + str.substring(8, str.length);
         } else if (str.length > 12 && str.length <= 16) {
-          _currentController.text = str.substring(0, 4) +
-              "-" +
-              str.substring(4, 8) +
-              "-" +
-              str.substring(8, 12) +
-              "-" +
-              str.substring(12, str.length);
+          _currentController.text =
+              str.substring(0, 4) + "-" + str.substring(4, 8) + "-" + str.substring(8, 12) + "-" + str.substring(12, str.length);
         }
       } else if (_currentController == _expDateController) {
         if (str.length <= 2) {

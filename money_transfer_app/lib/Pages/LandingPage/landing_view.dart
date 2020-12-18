@@ -82,6 +82,7 @@ class _LandingViewState extends State<LandingView> {
                             "Log in",
                             style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w700),
                           ),
+                          padding: EdgeInsets.symmetric(horizontal: widget.landingPageStyles.widthDp * 10),
                           elevation: 0,
                           onPressed: () {
                             Navigator.of(context).pushReplacement(
@@ -98,6 +99,7 @@ class _LandingViewState extends State<LandingView> {
                             "New Account",
                             style: TextStyle(fontSize: 18, color: Colors.white, fontWeight: FontWeight.w700),
                           ),
+                          padding: EdgeInsets.symmetric(horizontal: widget.landingPageStyles.widthDp * 10),
                           elevation: 0,
                           gradient: AppColors.mainGradient,
                           onPressed: () {

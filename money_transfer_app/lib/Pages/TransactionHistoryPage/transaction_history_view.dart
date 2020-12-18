@@ -205,93 +205,93 @@ class _TransferViewState extends State<TransactionHistoryView> with TickerProvid
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    Row(
-                                      children: [
-                                        KeicyAvatarImage(
-                                          url: recipientModel.avatarUrl,
-                                          userName: recipientModel.firstName,
-                                          width: widget.transactionHistoryPageStyles.widthDp * 49,
-                                          height: widget.transactionHistoryPageStyles.widthDp * 49,
-                                          borderRadius: widget.transactionHistoryPageStyles.widthDp * 10,
-                                          backColor: AppColors.recipientColor[index % AppColors.recipientColor.length]
-                                              ["backColor"],
-                                          textColor: AppColors.recipientColor[index % AppColors.recipientColor.length]
-                                              ["textColor"],
-                                        ),
-                                        SizedBox(width: widget.transactionHistoryPageStyles.widthDp * 15),
-                                        Column(
-                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Text(
-                                              recipientModel.firstName,
-                                              style: widget.transactionHistoryPageStyles.textStyle,
-                                              overflow: TextOverflow.ellipsis,
-                                              textAlign: TextAlign.center,
-                                            ),
-                                            SizedBox(height: widget.transactionHistoryPageStyles.widthDp * 5),
-                                            Text(
-                                              "${KeicyDateTime.convertMillisecondsToDateString(ms: transactionModel.ts)}",
-                                              style: widget.transactionHistoryPageStyles.birthDayStyle,
-                                              overflow: TextOverflow.ellipsis,
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
                                     Expanded(
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                      child: Row(
                                         children: [
-                                          Text(
-                                            "\$${transactionModel.amount}",
-                                            style: widget.transactionHistoryPageStyles.amountStyle,
-                                            overflow: TextOverflow.ellipsis,
-                                            textAlign: TextAlign.center,
+                                          KeicyAvatarImage(
+                                            url: recipientModel.avatarUrl,
+                                            userName: recipientModel.firstName,
+                                            width: widget.transactionHistoryPageStyles.widthDp * 49,
+                                            height: widget.transactionHistoryPageStyles.widthDp * 49,
+                                            borderRadius: widget.transactionHistoryPageStyles.widthDp * 10,
+                                            backColor: AppColors.recipientColor[index % AppColors.recipientColor.length]["backColor"],
+                                            textColor: AppColors.recipientColor[index % AppColors.recipientColor.length]["textColor"],
                                           ),
-                                          transactionModel.jubaReferenceNum == ""
-                                              ? Text(
-                                                  transactionModel.transactioinErrorString,
-                                                  style: transactionModel.state == 0
-                                                      ? widget.transactionHistoryPageStyles.pendingStyle
-                                                      : widget.transactionHistoryPageStyles.sentStyle,
+                                          SizedBox(width: widget.transactionHistoryPageStyles.widthDp * 15),
+                                          Expanded(
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  recipientModel.firstName + " " + recipientModel.lastName,
+                                                  style: widget.transactionHistoryPageStyles.textStyle,
                                                   overflow: TextOverflow.ellipsis,
-                                                  textAlign: TextAlign.right,
-                                                  maxLines: 3,
-                                                )
-                                              : StreamBuilder<Map<String, dynamic>>(
-                                                  stream: Stream.fromFuture(
-                                                    SendRemittanceStatusDataProvider.getSendRemittanceStatus(
-                                                      referenceNum: transactionModel.jubaReferenceNum,
-                                                    ),
-                                                  ),
-                                                  builder: (context, snapshot) {
-                                                    if (!snapshot.hasData) {
-                                                      if (!snapshot.hasData) {
-                                                        return SizedBox();
-                                                      }
-                                                    }
-
-                                                    if (snapshot.data == null) {
-                                                      return SizedBox();
-                                                    }
-
-                                                    Map<String, dynamic> jubaTransactionState = snapshot.data;
-
-                                                    return Text(
-                                                      AppConstants.jubaTransactionState[jubaTransactionState["Data"][0]
-                                                          ["Status"]],
-                                                      style: transactionModel.state == 0
-                                                          ? widget.transactionHistoryPageStyles.pendingStyle
-                                                          : widget.transactionHistoryPageStyles.sentStyle,
-                                                      overflow: TextOverflow.ellipsis,
-                                                      textAlign: TextAlign.center,
-                                                    );
-                                                  },
+                                                  textAlign: TextAlign.start,
                                                 ),
+                                                SizedBox(height: widget.transactionHistoryPageStyles.widthDp * 5),
+                                                Text(
+                                                  "${KeicyDateTime.convertMillisecondsToDateString(ms: transactionModel.ts)}",
+                                                  style: widget.transactionHistoryPageStyles.birthDayStyle,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  textAlign: TextAlign.center,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ],
                                       ),
+                                    ),
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          "\$${transactionModel.amount}",
+                                          style: widget.transactionHistoryPageStyles.amountStyle,
+                                          overflow: TextOverflow.ellipsis,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        transactionModel.jubaReferenceNum == ""
+                                            ? Text(
+                                                transactionModel.transactioinErrorString,
+                                                style: transactionModel.state == 0
+                                                    ? widget.transactionHistoryPageStyles.pendingStyle
+                                                    : widget.transactionHistoryPageStyles.sentStyle,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.right,
+                                                maxLines: 3,
+                                              )
+                                            : StreamBuilder<Map<String, dynamic>>(
+                                                stream: Stream.fromFuture(
+                                                  SendRemittanceStatusDataProvider.getSendRemittanceStatus(
+                                                    referenceNum: transactionModel.jubaReferenceNum,
+                                                  ),
+                                                ),
+                                                builder: (context, snapshot) {
+                                                  if (!snapshot.hasData) {
+                                                    if (!snapshot.hasData) {
+                                                      return SizedBox();
+                                                    }
+                                                  }
+
+                                                  if (snapshot.data == null) {
+                                                    return SizedBox();
+                                                  }
+
+                                                  Map<String, dynamic> jubaTransactionState = snapshot.data;
+
+                                                  return Text(
+                                                    AppConstants.jubaTransactionState[jubaTransactionState["Data"][0]["Status"]],
+                                                    style: transactionModel.state == 0
+                                                        ? widget.transactionHistoryPageStyles.pendingStyle
+                                                        : widget.transactionHistoryPageStyles.sentStyle,
+                                                    overflow: TextOverflow.ellipsis,
+                                                    textAlign: TextAlign.center,
+                                                  );
+                                                },
+                                              ),
+                                      ],
                                     ),
                                   ],
                                 ),

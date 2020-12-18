@@ -54,6 +54,8 @@ class _UploadDocumentViewState extends State<UploadDocumentView> {
 
   TextEditingController _numberController = TextEditingController();
   TextEditingController _expireDateController = TextEditingController();
+  FocusNode _numberFocusNode = FocusNode();
+  FocusNode _expireDateFocusNode = FocusNode();
 
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
@@ -71,15 +73,13 @@ class _UploadDocumentViewState extends State<UploadDocumentView> {
       isNotifiable: false,
     );
 
-    _documentModel =
-        DocumentModel.fromJson(_userProvider.userState.userModel.documents[widget.documentType["category"]]);
+    _documentModel = DocumentModel.fromJson(_userProvider.userState.userModel.documents[widget.documentType["category"]]);
     _imagePath = _documentModel.imagePath;
     _imagePath1 = _documentModel.imagePath1;
 
     _numberController.text = _documentModel.documentNumber;
-    _expireDateController.text = _documentModel.expireDateTs != 0
-        ? KeicyDateTime.convertMillisecondsToDateString(ms: _documentModel.expireDateTs)
-        : "";
+    _expireDateController.text =
+        _documentModel.expireDateTs != 0 ? KeicyDateTime.convertMillisecondsToDateString(ms: _documentModel.expireDateTs) : "";
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       _userProvider.addListener(_userProviderListener);
@@ -175,50 +175,56 @@ class _UploadDocumentViewState extends State<UploadDocumentView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Container(
-        height: widget.uploadDocumentPageStyles.deviceHeight,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            HeaderWidget(
-              title: UploadDocumentPageString.title,
-              widthDp: widget.uploadDocumentPageStyles.widthDp,
-              fontSp: widget.uploadDocumentPageStyles.fontSp,
-              haveBackIcon: true,
-            ),
-            Expanded(
-              child: Container(
-                padding: EdgeInsets.symmetric(
-                  horizontal: widget.uploadDocumentPageStyles.primaryHorizontalPadding,
-                ),
-                child: SingleChildScrollView(
-                  child: Column(
-                    children: [
-                      SizedBox(height: widget.uploadDocumentPageStyles.primaryVerticalPadding),
-                      _containerDocumentType(context),
-                      _documentModel.subCategory == "driverLicense" ? _containerDocument1Content(context) : SizedBox(),
-                      _containerDocumentContent(context),
-                      SizedBox(height: widget.uploadDocumentPageStyles.widthDp * 30),
-                      KeicyRaisedButton(
-                        height: widget.uploadDocumentPageStyles.widthDp * 50,
-                        color: AppColors.secondaryColor,
-                        borderRadius: widget.uploadDocumentPageStyles.widthDp * 25,
-                        child: Text(
-                          UploadDocumentPageString.buttonText,
-                          style: widget.uploadDocumentPageStyles.buttonStyle,
+      body: GestureDetector(
+        onTap: () {
+          FocusScope.of(context).requestFocus(FocusNode());
+        },
+        child: Container(
+          height: widget.uploadDocumentPageStyles.deviceHeight,
+          color: Colors.transparent,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              HeaderWidget(
+                title: UploadDocumentPageString.title,
+                widthDp: widget.uploadDocumentPageStyles.widthDp,
+                fontSp: widget.uploadDocumentPageStyles.fontSp,
+                haveBackIcon: true,
+              ),
+              Expanded(
+                child: Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: widget.uploadDocumentPageStyles.primaryHorizontalPadding,
+                  ),
+                  child: SingleChildScrollView(
+                    child: Column(
+                      children: [
+                        SizedBox(height: widget.uploadDocumentPageStyles.primaryVerticalPadding),
+                        _containerDocumentType(context),
+                        _documentModel.subCategory == "driverLicense" ? _containerDocument1Content(context) : SizedBox(),
+                        _containerDocumentContent(context),
+                        SizedBox(height: widget.uploadDocumentPageStyles.widthDp * 30),
+                        KeicyRaisedButton(
+                          height: widget.uploadDocumentPageStyles.widthDp * 50,
+                          color: AppColors.secondaryColor,
+                          borderRadius: widget.uploadDocumentPageStyles.widthDp * 25,
+                          child: Text(
+                            UploadDocumentPageString.buttonText,
+                            style: widget.uploadDocumentPageStyles.buttonStyle,
+                          ),
+                          elevation: 0,
+                          onPressed: () {
+                            _saveHandler(context);
+                          },
                         ),
-                        elevation: 0,
-                        onPressed: () {
-                          _saveHandler(context);
-                        },
-                      ),
-                      SizedBox(height: widget.uploadDocumentPageStyles.primaryVerticalPadding),
-                    ],
+                        SizedBox(height: widget.uploadDocumentPageStyles.primaryVerticalPadding),
+                      ],
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -279,6 +285,8 @@ class _UploadDocumentViewState extends State<UploadDocumentView> {
               : KeicyTextFormField(
                   width: null,
                   height: widget.uploadDocumentPageStyles.widthDp * 50,
+                  controller: _numberController,
+                  focusNode: _numberFocusNode,
                   // labelSpacing: widget.uploadDocumentPageStyles.widthDp * 14,
                   // label: LoginPageString.phoneLabel,
                   // labelStyle: widget.uploadDocumentPageStyles.labelStyle,
@@ -299,10 +307,12 @@ class _UploadDocumentViewState extends State<UploadDocumentView> {
                     color: Colors.grey,
                     fontStyle: FontStyle.italic,
                   ),
-                  validatorHandler: (input) =>
-                      (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
+                  validatorHandler: (input) => (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
                   onSaveHandler: (input) => _documentModel.documentNumber = input.trim(),
-                  onFieldSubmittedHandler: (input) {},
+                  onFieldSubmittedHandler: (input) {
+                    FocusScope.of(context).unfocus();
+                    // FocusScope.of(context).requestFocus(FocusNode());
+                  },
                 ),
           (widget.documentType["category"] != "category1")
               ? SizedBox()
@@ -310,6 +320,7 @@ class _UploadDocumentViewState extends State<UploadDocumentView> {
                   width: null,
                   height: widget.uploadDocumentPageStyles.widthDp * 50,
                   controller: _expireDateController,
+                  focusNode: _expireDateFocusNode,
                   borderRadius: 0,
                   border: Border.all(color: Colors.grey),
                   errorBorder: Border.all(color: Colors.redAccent),
@@ -336,21 +347,22 @@ class _UploadDocumentViewState extends State<UploadDocumentView> {
 
                     return null;
                   },
-                  onFieldSubmittedHandler: (input) {},
+                  onFieldSubmittedHandler: (input) {
+                    FocusScope.of(context).requestFocus(FocusNode());
+                  },
                   onTapHandler: () {
+                    FocusScope.of(context).requestFocus(FocusNode());
                     showCupertinoModalPopup<void>(
                       context: context,
                       builder: (BuildContext context) {
                         return _buildBottomPicker(
                           CupertinoDatePicker(
                             mode: CupertinoDatePickerMode.date,
-                            initialDateTime: KeicyDateTime.convertDateStringToDateTime(
-                                dateString: _expireDateController.text.trim()),
+                            initialDateTime: KeicyDateTime.convertDateStringToDateTime(dateString: _expireDateController.text.trim()),
                             minimumYear: DateTime.now().year,
                             maximumYear: DateTime.now().year + 100,
                             onDateTimeChanged: (DateTime newDateTime) {
-                              _expireDateController.text =
-                                  KeicyDateTime.convertDateTimeToDateString(dateTime: newDateTime);
+                              _expireDateController.text = KeicyDateTime.convertDateTimeToDateString(dateTime: newDateTime);
                             },
                           ),
                         );
@@ -394,8 +406,7 @@ class _UploadDocumentViewState extends State<UploadDocumentView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            UploadDocumentPageString.descriptionList[widget.documentType["category"]][_documentModel.subCategory]
-                ["desc1"],
+            UploadDocumentPageString.descriptionList[widget.documentType["category"]][_documentModel.subCategory]["desc1"],
             style: widget.uploadDocumentPageStyles.textStyle,
           ),
           SizedBox(height: widget.uploadDocumentPageStyles.widthDp * 15),
@@ -471,8 +482,7 @@ class _UploadDocumentViewState extends State<UploadDocumentView> {
                 )
               : SizedBox(height: widget.uploadDocumentPageStyles.widthDp * 15),
           Text(
-            UploadDocumentPageString.descriptionList[widget.documentType["category"]][_documentModel.subCategory]
-                ["desc2"],
+            UploadDocumentPageString.descriptionList[widget.documentType["category"]][_documentModel.subCategory]["desc2"],
             style: widget.uploadDocumentPageStyles.textStyle,
           ),
         ],
@@ -486,8 +496,7 @@ class _UploadDocumentViewState extends State<UploadDocumentView> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(
-            UploadDocumentPageString.descriptionList[widget.documentType["category"]][_documentModel.subCategory]
-                ["desc3"],
+            UploadDocumentPageString.descriptionList[widget.documentType["category"]][_documentModel.subCategory]["desc3"],
             style: widget.uploadDocumentPageStyles.textStyle,
           ),
           SizedBox(height: widget.uploadDocumentPageStyles.widthDp * 15),

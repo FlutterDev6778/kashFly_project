@@ -42,8 +42,7 @@ class _TransferViewState extends State<HomeView> {
     _settingsDataProvider = SettingsDataProvider.of(context);
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
       if (TransactionHistoryProvider.of(context).transactionHistoryState.totalTransactionAmountStream == null)
-        TransactionHistoryProvider.of(context)
-            .getTotalTransactionAmountStream(UserProvider.of(context).userState.userModel.id);
+        TransactionHistoryProvider.of(context).getTotalTransactionAmountStream(UserProvider.of(context).userState.userModel.id);
       if (TransactionHistoryProvider.of(context).transactionHistoryState.transactionListStream == null)
         TransactionHistoryProvider.of(context).getTransactioinListStream(
           UserProvider.of(context).userState.userModel.id,
@@ -256,8 +255,8 @@ class _TransferViewState extends State<HomeView> {
             // Divider(height: 1, thickness: 1, color: Colors.grey.withAlpha(150)),
             // SizedBox(height: widget.homePageStyles.widthDp * 10),
             Consumer<UserProvider>(builder: (context, userProvider, _) {
-              int monthlyAvailableAmount = _settingsDataProvider.settingsDataState.cashLimits['monthly'] -
-                  userProvider.userState.userModel.monthlyCount;
+              int monthlyAvailableAmount =
+                  _settingsDataProvider.settingsDataState.cashLimits['monthly'] - userProvider.userState.userModel.monthlyCount;
               int currentAmount = userProvider.userState.userModel.monthlyCount;
 
               return Container(
@@ -320,8 +319,7 @@ class _TransferViewState extends State<HomeView> {
                         PieChartData(
                           pieTouchData: PieTouchData(touchCallback: (pieTouchResponse) {
                             setState(() {
-                              if (pieTouchResponse.touchInput is FlLongPressEnd ||
-                                  pieTouchResponse.touchInput is FlPanEnd) {
+                              if (pieTouchResponse.touchInput is FlLongPressEnd || pieTouchResponse.touchInput is FlPanEnd) {
                                 touchedIndex = -1;
                               } else {
                                 touchedIndex = pieTouchResponse.touchedSectionIndex;
@@ -332,32 +330,26 @@ class _TransferViewState extends State<HomeView> {
                           borderData: FlBorderData(
                             show: false,
                           ),
-                          sectionsSpace: (currentAmount == 0 ||
-                                  currentAmount == _settingsDataProvider.settingsDataState.cashLimits['monthly'])
+                          sectionsSpace: (currentAmount == 0 || currentAmount == _settingsDataProvider.settingsDataState.cashLimits['monthly'])
                               ? 0
                               : widget.homePageStyles.widthDp * 4,
                           centerSpaceRadius: 0,
                           sections: [
                             PieChartSectionData(
                               color: AppColors.secondaryColor,
-                              value:
-                                  100 * currentAmount / _settingsDataProvider.settingsDataState.cashLimits['monthly'],
+                              value: 100 * currentAmount / _settingsDataProvider.settingsDataState.cashLimits['monthly'],
                               title: '',
                               radius: widget.homePageStyles.widthDp * 45,
-                              titleStyle:
-                                  TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: const Color(0xff044d7c)),
+                              titleStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: const Color(0xff044d7c)),
                               titlePositionPercentageOffset: 0.55,
                               showTitle: false,
                             ),
                             PieChartSectionData(
                               color: AppColors.primaryColor,
-                              value: 100 *
-                                  monthlyAvailableAmount /
-                                  _settingsDataProvider.settingsDataState.cashLimits['monthly'],
+                              value: 100 * monthlyAvailableAmount / _settingsDataProvider.settingsDataState.cashLimits['monthly'],
                               title: '',
                               radius: widget.homePageStyles.widthDp * 40,
-                              titleStyle:
-                                  TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: const Color(0xff90672d)),
+                              titleStyle: TextStyle(fontSize: 18, fontWeight: FontWeight.bold, color: const Color(0xff90672d)),
                               titlePositionPercentageOffset: 0.55,
                               showTitle: false,
                             )
@@ -478,9 +470,8 @@ class _TransferViewState extends State<HomeView> {
                   ),
                   SizedBox(height: widget.homePageStyles.widthDp * 5),
                   Column(
-                    children: List<int>.generate(
-                            transactionSnapshot.data.length < 2 ? transactionSnapshot.data.length : 2, (index) => index)
-                        .map((index) {
+                    children:
+                        List<int>.generate(transactionSnapshot.data.length < 2 ? transactionSnapshot.data.length : 2, (index) => index).map((index) {
                       return StreamBuilder<Map<String, dynamic>>(
                           stream: transactionSnapshot.data[index],
                           builder: (context, snapshot) {
@@ -518,91 +509,103 @@ class _TransferViewState extends State<HomeView> {
                                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: <Widget>[
-                                    Row(
-                                      children: [
-                                        KeicyAvatarImage(
-                                          url: recipientModel.avatarUrl,
-                                          userName: recipientModel.firstName,
-                                          width: widget.homePageStyles.widthDp * 49,
-                                          height: widget.homePageStyles.widthDp * 49,
-                                          borderRadius: widget.homePageStyles.widthDp * 10,
-                                          backColor: AppColors.recipientColor[index % AppColors.recipientColor.length]
-                                              ["backColor"],
-                                          textColor: AppColors.recipientColor[index % AppColors.recipientColor.length]
-                                              ["textColor"],
-                                        ),
-                                        SizedBox(width: widget.homePageStyles.widthDp * 15),
-                                        Column(
-                                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                          children: [
-                                            Text(
-                                              recipientModel.firstName,
-                                              style: widget.homePageStyles.textStyle,
-                                              overflow: TextOverflow.ellipsis,
-                                              textAlign: TextAlign.center,
-                                            ),
-                                            SizedBox(height: widget.homePageStyles.widthDp * 5),
-                                            Text(
-                                              "${KeicyDateTime.convertMillisecondsToDateString(ms: transactionModel.ts)}",
-                                              style: widget.homePageStyles.birthDayStyle,
-                                              overflow: TextOverflow.ellipsis,
-                                              textAlign: TextAlign.center,
-                                            ),
-                                          ],
-                                        ),
-                                      ],
-                                    ),
                                     Expanded(
-                                      child: Column(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        crossAxisAlignment: CrossAxisAlignment.end,
+                                      child: Row(
                                         children: [
-                                          Text(
-                                            "\$${transactionModel.amount}",
-                                            style: widget.homePageStyles.amountStyle,
-                                            overflow: TextOverflow.ellipsis,
-                                            textAlign: TextAlign.center,
+                                          KeicyAvatarImage(
+                                            url: recipientModel.avatarUrl,
+                                            userName: recipientModel.firstName,
+                                            width: widget.homePageStyles.widthDp * 49,
+                                            height: widget.homePageStyles.widthDp * 49,
+                                            borderRadius: widget.homePageStyles.widthDp * 10,
+                                            backColor: AppColors.recipientColor[index % AppColors.recipientColor.length]["backColor"],
+                                            textColor: AppColors.recipientColor[index % AppColors.recipientColor.length]["textColor"],
                                           ),
-                                          transactionModel.jubaReferenceNum == ""
-                                              ? Text(
-                                                  transactionModel.transactioinErrorString,
-                                                  style: transactionModel.state == 0
-                                                      ? widget.homePageStyles.pendingStyle
-                                                      : widget.homePageStyles.sentStyle,
+                                          SizedBox(width: widget.homePageStyles.widthDp * 15),
+                                          Expanded(
+                                            child: Column(
+                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                              crossAxisAlignment: CrossAxisAlignment.start,
+                                              children: [
+                                                Text(
+                                                  recipientModel.firstName +
+                                                      " " +
+                                                      recipientModel.lastName +
+                                                      " " +
+                                                      recipientModel.lastName +
+                                                      " " +
+                                                      recipientModel.lastName +
+                                                      " " +
+                                                      recipientModel.lastName +
+                                                      " " +
+                                                      recipientModel.lastName +
+                                                      " " +
+                                                      recipientModel.lastName,
+                                                  style: widget.homePageStyles.textStyle,
                                                   overflow: TextOverflow.ellipsis,
-                                                  textAlign: TextAlign.right,
-                                                  maxLines: 3,
-                                                )
-                                              : StreamBuilder<Map<String, dynamic>>(
-                                                  stream: Stream.fromFuture(
-                                                    SendRemittanceStatusDataProvider.getSendRemittanceStatus(
-                                                      referenceNum: transactionModel.jubaReferenceNum,
-                                                    ),
-                                                  ),
-                                                  builder: (context, snapshot) {
-                                                    if (!snapshot.hasData) {
-                                                      return SizedBox();
-                                                    }
-
-                                                    if (snapshot.data == null) {
-                                                      return SizedBox();
-                                                    }
-
-                                                    Map<String, dynamic> jubaTransactionState = snapshot.data;
-
-                                                    return Text(
-                                                      AppConstants.jubaTransactionState[jubaTransactionState["Data"][0]
-                                                          ["Status"]],
-                                                      style: transactionModel.state == 0
-                                                          ? widget.homePageStyles.pendingStyle
-                                                          : widget.homePageStyles.sentStyle,
-                                                      overflow: TextOverflow.ellipsis,
-                                                      textAlign: TextAlign.center,
-                                                    );
-                                                  },
+                                                  textAlign: TextAlign.center,
                                                 ),
+                                                SizedBox(height: widget.homePageStyles.widthDp * 5),
+                                                Text(
+                                                  "${KeicyDateTime.convertMillisecondsToDateString(ms: transactionModel.ts)}",
+                                                  style: widget.homePageStyles.birthDayStyle,
+                                                  overflow: TextOverflow.ellipsis,
+                                                  textAlign: TextAlign.start,
+                                                ),
+                                              ],
+                                            ),
+                                          ),
                                         ],
                                       ),
+                                    ),
+                                    Column(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      children: [
+                                        Text(
+                                          "\$${transactionModel.amount}",
+                                          style: widget.homePageStyles.amountStyle,
+                                          overflow: TextOverflow.ellipsis,
+                                          textAlign: TextAlign.center,
+                                        ),
+                                        transactionModel.jubaReferenceNum == ""
+                                            ? Text(
+                                                transactionModel.transactioinErrorString,
+                                                style: transactionModel.state == 0
+                                                    ? widget.homePageStyles.pendingStyle
+                                                    : widget.homePageStyles.sentStyle,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.right,
+                                                maxLines: 3,
+                                              )
+                                            : StreamBuilder<Map<String, dynamic>>(
+                                                stream: Stream.fromFuture(
+                                                  SendRemittanceStatusDataProvider.getSendRemittanceStatus(
+                                                    referenceNum: transactionModel.jubaReferenceNum,
+                                                  ),
+                                                ),
+                                                builder: (context, snapshot) {
+                                                  if (!snapshot.hasData) {
+                                                    return SizedBox();
+                                                  }
+
+                                                  if (snapshot.data == null) {
+                                                    return SizedBox();
+                                                  }
+
+                                                  Map<String, dynamic> jubaTransactionState = snapshot.data;
+
+                                                  return Text(
+                                                    AppConstants.jubaTransactionState[jubaTransactionState["Data"][0]["Status"]],
+                                                    style: transactionModel.state == 0
+                                                        ? widget.homePageStyles.pendingStyle
+                                                        : widget.homePageStyles.sentStyle,
+                                                    overflow: TextOverflow.ellipsis,
+                                                    textAlign: TextAlign.center,
+                                                  );
+                                                },
+                                              ),
+                                      ],
                                     ),
                                   ],
                                 ),
