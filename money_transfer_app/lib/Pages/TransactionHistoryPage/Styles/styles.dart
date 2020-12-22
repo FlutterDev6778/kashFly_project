@@ -62,7 +62,7 @@ class TransactionHistoryPageMobileStyles extends TransactionHistoryPageStyles {
     primaryVerticalPadding = widthDp * 30;
 
     historyCardHeight = widthDp * 100;
-    historyCardHorizontalPadding = widthDp * 20;
+    historyCardHorizontalPadding = widthDp * 10;
 
     title1Style = TextStyle(fontSize: fontSp * 25, color: AppColors.primaryColor, fontWeight: FontWeight.bold);
     title2Style = TextStyle(fontSize: fontSp * 25, color: AppColors.whiteColor, fontWeight: FontWeight.bold);

@@ -63,8 +63,7 @@ class _SSNViewState extends State<SSNView> {
       isNotifiable: false,
     );
 
-    _documentModel =
-        DocumentModel.fromJson(_userProvider.userState.userModel.documents[widget.documentType["category"]]);
+    _documentModel = DocumentModel.fromJson(_userProvider.userState.userModel.documents[widget.documentType["category"]]);
     _documentModel.subCategory = "ssn";
     _documentModel.title = "SSN";
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
@@ -124,7 +123,7 @@ class _SSNViewState extends State<SSNView> {
           titleOptions: StatusAlertTextConfiguration(
             style: TextStyle(fontSize: widget.ssnPageStyles.fontSp * 16, color: AppColors.blackColor),
           ),
-          margin: EdgeInsets.all(widget.ssnPageStyles.widthDp * 80),
+          margin: EdgeInsets.all(widget.ssnPageStyles.widthDp * 60),
           padding: EdgeInsets.all(widget.ssnPageStyles.widthDp * 20),
           configuration: IconConfiguration(
             icon: Icons.check_circle_outline,
@@ -144,7 +143,7 @@ class _SSNViewState extends State<SSNView> {
           titleOptions: StatusAlertTextConfiguration(
             style: TextStyle(fontSize: widget.ssnPageStyles.fontSp * 16, color: AppColors.blackColor),
           ),
-          margin: EdgeInsets.all(widget.ssnPageStyles.widthDp * 80),
+          margin: EdgeInsets.all(widget.ssnPageStyles.widthDp * 60),
           padding: EdgeInsets.all(widget.ssnPageStyles.widthDp * 20),
           configuration: IconConfiguration(
             icon: Icons.error_outline,
@@ -229,8 +228,7 @@ class _SSNViewState extends State<SSNView> {
             readOnly: true,
             hintText: SSNPageString.ssnHint,
             hintStyle: widget.ssnPageStyles.hintTextStyle,
-            validatorHandler: (input) =>
-                (input.length != 9) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "9") : null,
+            validatorHandler: (input) => (input.length != 9) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "9") : null,
             onSaveHandler: (input) => _documentModel.imagePath = input.trim(),
             onFieldSubmittedHandler: (input) {},
           ),

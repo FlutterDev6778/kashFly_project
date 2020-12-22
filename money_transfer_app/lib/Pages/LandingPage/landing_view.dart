@@ -37,37 +37,96 @@ class _LandingViewState extends State<LandingView> {
           height: widget.landingPageStyles.mainHeight,
           child: Stack(
             children: [
-              Container(
-                child: Image.asset(
-                  AppAssets.backImg,
+              Stack(
+                children: [
+                  Image.asset(
+                    AppAssets.backImg,
+                    width: widget.landingPageStyles.deviceWidth,
+                    height: widget.landingPageStyles.heightDp * 375,
+                    fit: BoxFit.fill,
+                  ),
+                  Positioned(
+                    top: widget.landingPageStyles.heightDp * 68,
+                    child: Container(
+                      width: widget.landingPageStyles.deviceWidth,
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Container(
+                            width: widget.landingPageStyles.heightDp * 293,
+                            height: widget.landingPageStyles.heightDp * 293,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(color: Color(0xFFF8FBFF).withOpacity(0.1), width: 2),
+                            ),
+                            child: Center(
+                              child: Container(
+                                width: widget.landingPageStyles.heightDp * 259,
+                                height: widget.landingPageStyles.heightDp * 259,
+                                decoration: BoxDecoration(
+                                  shape: BoxShape.circle,
+                                  border: Border.all(color: Color(0xFFF8FBFF).withOpacity(0.1), width: 2),
+                                ),
+                                child: Center(
+                                  child: Container(
+                                    width: widget.landingPageStyles.heightDp * 222,
+                                    height: widget.landingPageStyles.heightDp * 222,
+                                    decoration: BoxDecoration(shape: BoxShape.circle, color: AppColors.scaffoldBackColor),
+                                    child: Center(
+                                      child: Image.asset(
+                                        AppAssets.logoImage,
+                                        width: widget.landingPageStyles.heightDp * 150,
+                                        height: widget.landingPageStyles.heightDp * 150,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+              Positioned(
+                top: widget.landingPageStyles.heightDp * 312,
+                child: Container(
                   width: widget.landingPageStyles.deviceWidth,
-                  fit: BoxFit.fitWidth,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(
+                        AppAssets.bannerTextImg,
+                        height: widget.landingPageStyles.heightDp * 70,
+                        fit: BoxFit.fitHeight,
+                        allowDrawingOutsideViewBox: true,
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+              Positioned(
+                top: widget.landingPageStyles.heightDp * 380,
+                child: Container(
+                  width: widget.landingPageStyles.deviceWidth,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      SvgPicture.asset(
+                        AppAssets.landingBackImg,
+                        height: widget.landingPageStyles.heightDp * 346,
+                        fit: BoxFit.fitHeight,
+                        allowDrawingOutsideViewBox: true,
+                      ),
+                    ],
+                  ),
                 ),
               ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  SizedBox(height: widget.landingPageStyles.widthDp * 300),
-                  SvgPicture.asset(
-                    AppAssets.bannerTextImg,
-                    height: widget.landingPageStyles.widthDp * 70,
-                    fit: BoxFit.fitHeight,
-                    allowDrawingOutsideViewBox: true,
-                  ),
-                  Expanded(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.end,
-                      children: [
-                        SvgPicture.asset(
-                          AppAssets.landingBackImg,
-                          fit: BoxFit.fill,
-                          width: widget.landingPageStyles.deviceWidth - widget.landingPageStyles.widthDp * 20,
-                          // fit: BoxFit.fitWidth,
-                          allowDrawingOutsideViewBox: true,
-                        ),
-                      ],
-                    ),
-                  ),
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: widget.landingPageStyles.widthDp * 19),
                     child: Row(

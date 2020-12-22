@@ -70,7 +70,59 @@ class _LoginViewState extends State<LoginView> {
             onTap: () {},
             child: Stack(
               children: [
-                Image.asset(AppAssets.backImg, width: widget.loginPageStyles.deviceWidth, fit: BoxFit.fitWidth),
+                Stack(
+                  children: [
+                    Image.asset(
+                      AppAssets.backImg,
+                      width: widget.loginPageStyles.deviceWidth,
+                      height: widget.loginPageStyles.heightDp * 375,
+                      fit: BoxFit.fill,
+                    ),
+                    Positioned(
+                      top: widget.loginPageStyles.heightDp * 68,
+                      child: Container(
+                        width: widget.loginPageStyles.deviceWidth,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Container(
+                              width: widget.loginPageStyles.heightDp * 293,
+                              height: widget.loginPageStyles.heightDp * 293,
+                              decoration: BoxDecoration(
+                                shape: BoxShape.circle,
+                                border: Border.all(color: Color(0xFFF8FBFF).withOpacity(0.1), width: 2),
+                              ),
+                              child: Center(
+                                child: Container(
+                                  width: widget.loginPageStyles.heightDp * 259,
+                                  height: widget.loginPageStyles.heightDp * 259,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    border: Border.all(color: Color(0xFFF8FBFF).withOpacity(0.1), width: 2),
+                                  ),
+                                  child: Center(
+                                    child: Container(
+                                      width: widget.loginPageStyles.heightDp * 222,
+                                      height: widget.loginPageStyles.heightDp * 222,
+                                      decoration: BoxDecoration(shape: BoxShape.circle, color: AppColors.scaffoldBackColor),
+                                      child: Center(
+                                        child: Image.asset(
+                                          AppAssets.logoImage,
+                                          width: widget.loginPageStyles.heightDp * 150,
+                                          height: widget.loginPageStyles.heightDp * 150,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
                 Column(
                   children: [
                     SizedBox(height: widget.loginPageStyles.widthDp * 300),
@@ -88,7 +140,7 @@ class _LoginViewState extends State<LoginView> {
 
   Widget _containerTab(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(horizontal: widget.loginPageStyles.widthDp * 80),
+      padding: EdgeInsets.symmetric(horizontal: widget.loginPageStyles.widthDp * 60),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -108,9 +160,7 @@ class _LoginViewState extends State<LoginView> {
                 SizedBox(height: widget.loginPageStyles.widthDp * 10),
                 Text(
                   LoginPageString.loginTab,
-                  style: widget.selectedTap == 0
-                      ? widget.loginPageStyles.selectedTapStyle
-                      : widget.loginPageStyles.unSelectedTapStyle,
+                  style: widget.selectedTap == 0 ? widget.loginPageStyles.selectedTapStyle : widget.loginPageStyles.unSelectedTapStyle,
                 ),
               ],
             ),
@@ -131,9 +181,7 @@ class _LoginViewState extends State<LoginView> {
                 SizedBox(height: widget.loginPageStyles.widthDp * 10),
                 Text(
                   LoginPageString.registerTab,
-                  style: widget.selectedTap == 1
-                      ? widget.loginPageStyles.selectedTapStyle
-                      : widget.loginPageStyles.unSelectedTapStyle,
+                  style: widget.selectedTap == 1 ? widget.loginPageStyles.selectedTapStyle : widget.loginPageStyles.unSelectedTapStyle,
                 ),
               ],
             ),
@@ -170,10 +218,7 @@ class _LoginViewState extends State<LoginView> {
                     children: [
                       Icon(Icons.phone, color: AppColors.secondaryColor, size: widget.loginPageStyles.iconSize),
                       SizedBox(width: widget.loginPageStyles.widthDp * 20),
-                      Container(
-                          width: widget.loginPageStyles.widthDp,
-                          height: widget.loginPageStyles.widthDp * 37,
-                          color: Color(0xFFE5E5E5)),
+                      Container(width: widget.loginPageStyles.widthDp, height: widget.loginPageStyles.widthDp * 37, color: Color(0xFFE5E5E5)),
                       SizedBox(width: widget.loginPageStyles.widthDp * 20),
                     ],
                   ),
@@ -187,8 +232,7 @@ class _LoginViewState extends State<LoginView> {
               ],
               hintText: LoginPageString.phoneHint,
               hintStyle: widget.loginPageStyles.hintTextStyle,
-              validatorHandler: (input) =>
-                  (input.length < 9) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "9") : null,
+              validatorHandler: (input) => (input.length < 9) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "9") : null,
               onFieldSubmittedHandler: (input) {
                 _loginHandler(context);
               },
@@ -274,13 +318,9 @@ class _LoginViewState extends State<LoginView> {
                 Container(
                   child: Row(
                     children: [
-                      Icon(Icons.person_outline,
-                          color: AppColors.secondaryColor, size: widget.loginPageStyles.iconSize),
+                      Icon(Icons.person_outline, color: AppColors.secondaryColor, size: widget.loginPageStyles.iconSize),
                       SizedBox(width: widget.loginPageStyles.widthDp * 20),
-                      Container(
-                          width: widget.loginPageStyles.widthDp,
-                          height: widget.loginPageStyles.widthDp * 37,
-                          color: Color(0xFFE5E5E5)),
+                      Container(width: widget.loginPageStyles.widthDp, height: widget.loginPageStyles.widthDp * 37, color: Color(0xFFE5E5E5)),
                       SizedBox(width: widget.loginPageStyles.widthDp * 20),
                     ],
                   ),
@@ -294,8 +334,7 @@ class _LoginViewState extends State<LoginView> {
               ],
               hintText: LoginPageString.firstNameHint,
               hintStyle: widget.loginPageStyles.hintTextStyle,
-              validatorHandler: (input) =>
-                  (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
+              validatorHandler: (input) => (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
               onFieldSubmittedHandler: (input) {
                 FocusScope.of(context).requestFocus(_middleNameForSignupFocusNode);
               },
@@ -317,13 +356,9 @@ class _LoginViewState extends State<LoginView> {
                 Container(
                   child: Row(
                     children: [
-                      Icon(Icons.person_outline,
-                          color: AppColors.secondaryColor, size: widget.loginPageStyles.iconSize),
+                      Icon(Icons.person_outline, color: AppColors.secondaryColor, size: widget.loginPageStyles.iconSize),
                       SizedBox(width: widget.loginPageStyles.widthDp * 20),
-                      Container(
-                          width: widget.loginPageStyles.widthDp,
-                          height: widget.loginPageStyles.widthDp * 37,
-                          color: Color(0xFFE5E5E5)),
+                      Container(width: widget.loginPageStyles.widthDp, height: widget.loginPageStyles.widthDp * 37, color: Color(0xFFE5E5E5)),
                       SizedBox(width: widget.loginPageStyles.widthDp * 20),
                     ],
                   ),
@@ -337,8 +372,7 @@ class _LoginViewState extends State<LoginView> {
               ],
               hintText: LoginPageString.middleNameHint,
               hintStyle: widget.loginPageStyles.hintTextStyle,
-              validatorHandler: (input) =>
-                  (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
+              validatorHandler: (input) => (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
               onFieldSubmittedHandler: (input) {
                 FocusScope.of(context).requestFocus(_lastNameForSignupFocusNode);
               },
@@ -360,13 +394,9 @@ class _LoginViewState extends State<LoginView> {
                 Container(
                   child: Row(
                     children: [
-                      Icon(Icons.person_outline,
-                          color: AppColors.secondaryColor, size: widget.loginPageStyles.iconSize),
+                      Icon(Icons.person_outline, color: AppColors.secondaryColor, size: widget.loginPageStyles.iconSize),
                       SizedBox(width: widget.loginPageStyles.widthDp * 20),
-                      Container(
-                          width: widget.loginPageStyles.widthDp,
-                          height: widget.loginPageStyles.widthDp * 37,
-                          color: Color(0xFFE5E5E5)),
+                      Container(width: widget.loginPageStyles.widthDp, height: widget.loginPageStyles.widthDp * 37, color: Color(0xFFE5E5E5)),
                       SizedBox(width: widget.loginPageStyles.widthDp * 20),
                     ],
                   ),
@@ -380,8 +410,7 @@ class _LoginViewState extends State<LoginView> {
               textInputAction: TextInputAction.next,
               hintText: LoginPageString.lastNameHint,
               hintStyle: widget.loginPageStyles.hintTextStyle,
-              validatorHandler: (input) =>
-                  (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
+              validatorHandler: (input) => (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
               onFieldSubmittedHandler: (input) {
                 FocusScope.of(context).requestFocus(_phoneForSignupFocusNode);
               },
@@ -405,10 +434,7 @@ class _LoginViewState extends State<LoginView> {
                     children: [
                       Icon(Icons.phone, color: AppColors.secondaryColor, size: widget.loginPageStyles.iconSize),
                       SizedBox(width: widget.loginPageStyles.widthDp * 20),
-                      Container(
-                          width: widget.loginPageStyles.widthDp,
-                          height: widget.loginPageStyles.widthDp * 37,
-                          color: Color(0xFFE5E5E5)),
+                      Container(width: widget.loginPageStyles.widthDp, height: widget.loginPageStyles.widthDp * 37, color: Color(0xFFE5E5E5)),
                       SizedBox(width: widget.loginPageStyles.widthDp * 20),
                     ],
                   ),
@@ -422,8 +448,7 @@ class _LoginViewState extends State<LoginView> {
               ],
               hintText: LoginPageString.phoneHint,
               hintStyle: widget.loginPageStyles.hintTextStyle,
-              validatorHandler: (input) =>
-                  (input.length < 9) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "9") : null,
+              validatorHandler: (input) => (input.length < 9) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "9") : null,
               onFieldSubmittedHandler: (input) {
                 FocusScope.of(context).requestFocus(FocusNode());
               },

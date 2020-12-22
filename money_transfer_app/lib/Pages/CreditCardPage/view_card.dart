@@ -52,9 +52,8 @@ class _ViewCardState extends State<ViewCard> {
 
     if (widget.creditCard == null) widget.creditCard = CreditCard();
 
-    _cardNumberController.text = (widget.creditCard.last4 != "" && widget.creditCard.last4 != null)
-        ? ("xxxx-xxxx-xxxx-" + widget.creditCard.last4)
-        : "";
+    _cardNumberController.text =
+        (widget.creditCard.last4 != "" && widget.creditCard.last4 != null) ? ("xxxx-xxxx-xxxx-" + widget.creditCard.last4) : "";
     _expDateController.text =
         "${widget.creditCard.expMonth ?? ''}${widget.creditCard.expYear != null ? '/' + widget.creditCard.expYear.toString() : ''}";
     _cvcController.text = widget.creditCard.cvc ?? "";
@@ -106,7 +105,7 @@ class _ViewCardState extends State<ViewCard> {
           titleOptions: StatusAlertTextConfiguration(
             style: TextStyle(fontSize: widget.creditCardPageStyles.fontSp * 16, color: AppColors.blackColor),
           ),
-          margin: EdgeInsets.all(widget.creditCardPageStyles.widthDp * 80),
+          margin: EdgeInsets.all(widget.creditCardPageStyles.widthDp * 60),
           padding: EdgeInsets.all(widget.creditCardPageStyles.widthDp * 20),
           configuration: IconConfiguration(
             icon: Icons.check_circle_outline,
@@ -128,7 +127,7 @@ class _ViewCardState extends State<ViewCard> {
           titleOptions: StatusAlertTextConfiguration(
             style: TextStyle(fontSize: widget.creditCardPageStyles.fontSp * 16, color: AppColors.blackColor),
           ),
-          margin: EdgeInsets.all(widget.creditCardPageStyles.widthDp * 80),
+          margin: EdgeInsets.all(widget.creditCardPageStyles.widthDp * 60),
           padding: EdgeInsets.all(widget.creditCardPageStyles.widthDp * 20),
           configuration: IconConfiguration(
             icon: Icons.error_outline,
@@ -198,8 +197,7 @@ class _ViewCardState extends State<ViewCard> {
                     right: 0,
                     child: Consumer<KeicyCardDetectProvider>(builder: (context, keicyCardDetectProvider, _) {
                       widget.creditCard.brand = "";
-                      if (keicyCardDetectProvider.cardType == null ||
-                          keicyCardDetectProvider.cardType == CreditCardType.unknown) return SizedBox();
+                      if (keicyCardDetectProvider.cardType == null || keicyCardDetectProvider.cardType == CreditCardType.unknown) return SizedBox();
                       widget.creditCard.brand = keicyCardDetectProvider.typeString;
                       return Image.asset(
                         "lib/Assets/Images/Cards/${keicyCardDetectProvider.typeString}.png",
@@ -325,8 +323,7 @@ class _ViewCardState extends State<ViewCard> {
                 onPressed: () {
                   _saveHandler(context);
                 },
-                child: Text((widget.isAddCard) ? CreditCardPageString.addCardTitle : '',
-                    style: widget.creditCardPageStyles.editCardButtonStyle),
+                child: Text((widget.isAddCard) ? CreditCardPageString.addCardTitle : '', style: widget.creditCardPageStyles.editCardButtonStyle),
               ),
             ),
             Consumer<PaymentMethodProvider>(

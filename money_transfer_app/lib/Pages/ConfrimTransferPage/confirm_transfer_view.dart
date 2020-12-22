@@ -100,7 +100,7 @@ class _ConfirmTransferViewState extends State<ConfirmTransferView> {
           titleOptions: StatusAlertTextConfiguration(
             style: TextStyle(fontSize: widget.confirmTransferPageStyles.fontSp * 16, color: AppColors.blackColor),
           ),
-          margin: EdgeInsets.all(widget.confirmTransferPageStyles.widthDp * 80),
+          margin: EdgeInsets.all(widget.confirmTransferPageStyles.widthDp * 60),
           padding: EdgeInsets.all(widget.confirmTransferPageStyles.widthDp * 20),
           configuration: IconConfiguration(
             icon: Icons.check_circle_outline,
@@ -124,7 +124,7 @@ class _ConfirmTransferViewState extends State<ConfirmTransferView> {
           titleOptions: StatusAlertTextConfiguration(
             style: TextStyle(fontSize: widget.confirmTransferPageStyles.fontSp * 16, color: AppColors.blackColor),
           ),
-          margin: EdgeInsets.all(widget.confirmTransferPageStyles.widthDp * 80),
+          margin: EdgeInsets.all(widget.confirmTransferPageStyles.widthDp * 60),
           padding: EdgeInsets.all(widget.confirmTransferPageStyles.widthDp * 20),
           configuration: IconConfiguration(
             icon: Icons.error_outline,

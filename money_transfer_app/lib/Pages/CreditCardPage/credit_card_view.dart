@@ -314,7 +314,7 @@ class _CreditCardViewState extends State<CreditCardView> with TickerProviderStat
       titleOptions: StatusAlertTextConfiguration(
         style: TextStyle(fontSize: widget.creditCardPageStyles.fontSp * 16, color: AppColors.blackColor),
       ),
-      margin: EdgeInsets.all(widget.creditCardPageStyles.widthDp * 80),
+      margin: EdgeInsets.all(widget.creditCardPageStyles.widthDp * 60),
       padding: EdgeInsets.all(widget.creditCardPageStyles.widthDp * 20),
       configuration: IconConfiguration(
         icon: Icons.check_circle_outline,

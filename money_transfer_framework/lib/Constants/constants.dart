@@ -8,8 +8,8 @@ class AppConstants {
     {"text": "United Sate of America", "value": 0},
   ];
 
-  static String maskString = '+242(00)000-0000';
-  // static String maskString = '+1(000)000-0000';
+  // static String maskString = '+242(00)000-0000';
+  static String maskString = '+1(000)000-0000';
 
   static List<String> reasonList = [
     "Medical",
@@ -770,19 +770,7 @@ class AppConstants {
       "Lake Oswego",
       "Keizer"
     ],
-    "Oklahoma": [
-      "Oklahoma City",
-      "Tulsa",
-      "Norman",
-      "Broken Arrow",
-      "Lawton",
-      "Edmond",
-      "Moore",
-      "Midwest City",
-      "Enid",
-      "Stillwater",
-      "Muskogee"
-    ],
+    "Oklahoma": ["Oklahoma City", "Tulsa", "Norman", "Broken Arrow", "Lawton", "Edmond", "Moore", "Midwest City", "Enid", "Stillwater", "Muskogee"],
     "Wisconsin": [
       "Milwaukee",
       "Madison",
@@ -889,30 +877,8 @@ class AppConstants {
       "Moorhead",
       "Shakopee"
     ],
-    "Kansas": [
-      "Wichita",
-      "Overland Park",
-      "Kansas City",
-      "Olathe",
-      "Topeka",
-      "Lawrence",
-      "Shawnee",
-      "Manhattan",
-      "Lenexa",
-      "Salina",
-      "Hutchinson"
-    ],
-    "Louisiana": [
-      "New Orleans",
-      "Baton Rouge",
-      "Shreveport",
-      "Lafayette",
-      "Lake Charles",
-      "Kenner",
-      "Bossier City",
-      "Monroe",
-      "Alexandria"
-    ],
+    "Kansas": ["Wichita", "Overland Park", "Kansas City", "Olathe", "Topeka", "Lawrence", "Shawnee", "Manhattan", "Lenexa", "Salina", "Hutchinson"],
+    "Louisiana": ["New Orleans", "Baton Rouge", "Shreveport", "Lafayette", "Lake Charles", "Kenner", "Bossier City", "Monroe", "Alexandria"],
     "Hawaii": ["Honolulu"],
     "Alaska": ["Anchorage"],
     "New Jersey": [

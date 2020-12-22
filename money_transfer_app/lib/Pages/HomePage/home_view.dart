@@ -470,9 +470,9 @@ class _TransferViewState extends State<HomeView> {
                   ),
                   SizedBox(height: widget.homePageStyles.widthDp * 5),
                   Column(
-                    children:
-                        List<int>.generate(transactionSnapshot.data.length < 2 ? transactionSnapshot.data.length : 2, (index) => index).map((index) {
-                      return StreamBuilder<Map<String, dynamic>>(
+                    children: List<int>.generate(transactionSnapshot.data.length < 2 ? transactionSnapshot.data.length : 2, (index) => index).map(
+                      (index) {
+                        return StreamBuilder<Map<String, dynamic>>(
                           stream: transactionSnapshot.data[index],
                           builder: (context, snapshot) {
                             if (!snapshot.hasData) {
@@ -489,130 +489,265 @@ class _TransferViewState extends State<HomeView> {
                             TransactionModel transactionModel = snapshot.data["transactionModel"];
                             RecipientModel recipientModel = snapshot.data["recipientModel"];
 
-                            return GestureDetector(
-                              onTap: () {
-                                // if (widget.onNavItemPressHandler != null) widget.onNavItemPressHandler(2);
-                              },
-                              child: Container(
-                                // height: widget.homePageStyles.historyCardHeight,
-                                margin: EdgeInsets.all(widget.homePageStyles.widthDp * 15),
-                                padding: EdgeInsets.symmetric(
-                                  horizontal: widget.homePageStyles.widthDp * 20,
-                                  vertical: widget.homePageStyles.widthDp * 10,
-                                ),
-                                decoration: BoxDecoration(
-                                  color: AppColors.whiteColor,
-                                  borderRadius: BorderRadius.circular(widget.homePageStyles.widthDp * 15),
-                                ),
-                                alignment: Alignment.center,
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: <Widget>[
-                                    Expanded(
-                                      child: Row(
-                                        children: [
-                                          KeicyAvatarImage(
-                                            url: recipientModel.avatarUrl,
-                                            userName: recipientModel.firstName,
-                                            width: widget.homePageStyles.widthDp * 49,
-                                            height: widget.homePageStyles.widthDp * 49,
-                                            borderRadius: widget.homePageStyles.widthDp * 10,
-                                            backColor: AppColors.recipientColor[index % AppColors.recipientColor.length]["backColor"],
-                                            textColor: AppColors.recipientColor[index % AppColors.recipientColor.length]["textColor"],
-                                          ),
-                                          SizedBox(width: widget.homePageStyles.widthDp * 15),
-                                          Expanded(
-                                            child: Column(
-                                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                                              crossAxisAlignment: CrossAxisAlignment.start,
-                                              children: [
-                                                Text(
-                                                  recipientModel.firstName +
-                                                      " " +
-                                                      recipientModel.lastName +
-                                                      " " +
-                                                      recipientModel.lastName +
-                                                      " " +
-                                                      recipientModel.lastName +
-                                                      " " +
-                                                      recipientModel.lastName +
-                                                      " " +
-                                                      recipientModel.lastName +
-                                                      " " +
-                                                      recipientModel.lastName,
-                                                  style: widget.homePageStyles.textStyle,
-                                                  overflow: TextOverflow.ellipsis,
-                                                  textAlign: TextAlign.center,
-                                                ),
-                                                SizedBox(height: widget.homePageStyles.widthDp * 5),
-                                                Text(
-                                                  "${KeicyDateTime.convertMillisecondsToDateString(ms: transactionModel.ts)}",
-                                                  style: widget.homePageStyles.birthDayStyle,
-                                                  overflow: TextOverflow.ellipsis,
-                                                  textAlign: TextAlign.start,
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
+                            if (transactionModel.jubaPayment["referenceNum"] == null) {
+                              return GestureDetector(
+                                onTap: () {},
+                                child: Container(
+                                  padding: EdgeInsets.symmetric(
+                                    horizontal: widget.homePageStyles.historyCardHorizontalPadding,
+                                  ),
+                                  child: Container(
+                                    // height: widget.homePageStyles.historyCardHeight,
+                                    margin: EdgeInsets.all(widget.homePageStyles.widthDp * 5),
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: widget.homePageStyles.widthDp * 10,
+                                      vertical: widget.homePageStyles.widthDp * 10,
                                     ),
-                                    Column(
+                                    decoration: BoxDecoration(
+                                      color: AppColors.whiteColor,
+                                      borderRadius: BorderRadius.circular(widget.homePageStyles.widthDp * 15),
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: Row(
                                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      crossAxisAlignment: CrossAxisAlignment.end,
-                                      children: [
-                                        Text(
-                                          "\$${transactionModel.amount}",
-                                          style: widget.homePageStyles.amountStyle,
-                                          overflow: TextOverflow.ellipsis,
-                                          textAlign: TextAlign.center,
+                                      crossAxisAlignment: CrossAxisAlignment.center,
+                                      children: <Widget>[
+                                        Expanded(
+                                          flex: 2,
+                                          child: Row(
+                                            children: [
+                                              KeicyAvatarImage(
+                                                url: recipientModel.avatarUrl,
+                                                userName: recipientModel.firstName,
+                                                width: widget.homePageStyles.widthDp * 49,
+                                                height: widget.homePageStyles.widthDp * 49,
+                                                borderRadius: widget.homePageStyles.widthDp * 10,
+                                                backColor: AppColors.recipientColor[index % AppColors.recipientColor.length]["backColor"],
+                                                textColor: AppColors.recipientColor[index % AppColors.recipientColor.length]["textColor"],
+                                              ),
+                                              SizedBox(width: widget.homePageStyles.widthDp * 15),
+                                              Expanded(
+                                                child: Column(
+                                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text(
+                                                      recipientModel.firstName + " " + recipientModel.lastName,
+                                                      style: widget.homePageStyles.textStyle,
+                                                      overflow: TextOverflow.ellipsis,
+                                                      textAlign: TextAlign.start,
+                                                      maxLines: 1,
+                                                    ),
+                                                    SizedBox(height: widget.homePageStyles.widthDp * 5),
+                                                    Text(
+                                                      "${KeicyDateTime.convertMillisecondsToDateString(ms: transactionModel.ts)}",
+                                                      style: widget.homePageStyles.birthDayStyle,
+                                                      overflow: TextOverflow.ellipsis,
+                                                      textAlign: TextAlign.center,
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ],
+                                          ),
                                         ),
-                                        transactionModel.jubaReferenceNum == ""
-                                            ? Text(
-                                                transactionModel.transactioinErrorString,
-                                                style: transactionModel.state == 0
+                                        Expanded(
+                                          flex: 1,
+                                          child: Column(
+                                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                            crossAxisAlignment: CrossAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                "\$${transactionModel.amount}",
+                                                style: widget.homePageStyles.amountStyle,
+                                                overflow: TextOverflow.ellipsis,
+                                                textAlign: TextAlign.center,
+                                              ),
+                                              Text(
+                                                transactionModel.status == 2 ? "Canceled Transaction" : transactionModel.jubaPayment["message"],
+                                                style: transactionModel.status == 0
                                                     ? widget.homePageStyles.pendingStyle
                                                     : widget.homePageStyles.sentStyle,
                                                 overflow: TextOverflow.ellipsis,
                                                 textAlign: TextAlign.right,
-                                                maxLines: 3,
-                                              )
-                                            : StreamBuilder<Map<String, dynamic>>(
-                                                stream: Stream.fromFuture(
-                                                  SendRemittanceStatusDataProvider.getSendRemittanceStatus(
-                                                    referenceNum: transactionModel.jubaReferenceNum,
-                                                  ),
-                                                ),
-                                                builder: (context, snapshot) {
-                                                  if (!snapshot.hasData) {
-                                                    return SizedBox();
-                                                  }
-
-                                                  if (snapshot.data == null) {
-                                                    return SizedBox();
-                                                  }
-
-                                                  Map<String, dynamic> jubaTransactionState = snapshot.data;
-
-                                                  return Text(
-                                                    AppConstants.jubaTransactionState[jubaTransactionState["Data"][0]["Status"]],
-                                                    style: transactionModel.state == 0
-                                                        ? widget.homePageStyles.pendingStyle
-                                                        : widget.homePageStyles.sentStyle,
-                                                    overflow: TextOverflow.ellipsis,
-                                                    textAlign: TextAlign.center,
-                                                  );
-                                                },
+                                                maxLines: 2,
                                               ),
+                                              // transactionModel.status != 2
+                                              //     ? GestureDetector(
+                                              //         onTap: () {
+                                              //           _showCancelDialog(transactionModel);
+                                              //         },
+                                              //         child: Padding(
+                                              //           padding: EdgeInsets.all(widget.homePageStyles.widthDp * 5),
+                                              //           child: Text(
+                                              //             "Cancel",
+                                              //             style: widget.homePageStyles.birthDayStyle.copyWith(
+                                              //               fontWeight: FontWeight.bold,
+                                              //               decorationStyle: TextDecorationStyle.solid,
+                                              //               decoration: TextDecoration.underline,
+                                              //               decorationThickness: 2,
+                                              //               decorationColor: Colors.black,
+                                              //             ),
+                                              //           ),
+                                              //         ),
+                                              //       )
+                                              //     : SizedBox(),
+                                            ],
+                                          ),
+                                        ),
                                       ],
                                     ),
-                                  ],
+                                  ),
                                 ),
-                              ),
-                            );
-                          });
-                    }).toList(),
+                              );
+                            } else {
+                              return StreamBuilder<Map<String, dynamic>>(
+                                stream: Stream.fromFuture(
+                                  SendRemittanceStatusDataProvider.getSendRemittanceStatus(
+                                    referenceNum: transactionModel.jubaPayment["referenceNum"],
+                                  ),
+                                ),
+                                builder: (context, snapshot) {
+                                  if (!snapshot.hasData) {
+                                    if (!snapshot.hasData) {
+                                      return Container(
+                                        height: widget.homePageStyles.historyCardHeight,
+                                        child: Center(child: KeicyCupertinoIndicator()),
+                                      );
+                                    }
+                                  }
+
+                                  Map<String, dynamic> jubaTransactionState = snapshot.data;
+
+                                  return GestureDetector(
+                                    onTap: () {},
+                                    child: Container(
+                                      padding: EdgeInsets.symmetric(
+                                        horizontal: widget.homePageStyles.historyCardHorizontalPadding,
+                                      ),
+                                      child: Container(
+                                        // height: widget.homePageStyles.historyCardHeight,
+                                        margin: EdgeInsets.all(widget.homePageStyles.widthDp * 5),
+                                        padding: EdgeInsets.symmetric(
+                                          horizontal: widget.homePageStyles.widthDp * 10,
+                                          vertical: widget.homePageStyles.widthDp * 10,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          color: AppColors.whiteColor,
+                                          borderRadius: BorderRadius.circular(widget.homePageStyles.widthDp * 15),
+                                        ),
+                                        alignment: Alignment.center,
+                                        child: Row(
+                                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                          crossAxisAlignment: CrossAxisAlignment.center,
+                                          children: <Widget>[
+                                            Expanded(
+                                              flex: 2,
+                                              child: Row(
+                                                children: [
+                                                  KeicyAvatarImage(
+                                                    url: recipientModel.avatarUrl,
+                                                    userName: recipientModel.firstName,
+                                                    width: widget.homePageStyles.widthDp * 49,
+                                                    height: widget.homePageStyles.widthDp * 49,
+                                                    borderRadius: widget.homePageStyles.widthDp * 10,
+                                                    backColor: AppColors.recipientColor[index % AppColors.recipientColor.length]["backColor"],
+                                                    textColor: AppColors.recipientColor[index % AppColors.recipientColor.length]["textColor"],
+                                                  ),
+                                                  SizedBox(width: widget.homePageStyles.widthDp * 15),
+                                                  Expanded(
+                                                    child: Column(
+                                                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                                      children: [
+                                                        Text(
+                                                          recipientModel.firstName + " " + recipientModel.lastName,
+                                                          style: widget.homePageStyles.textStyle,
+                                                          overflow: TextOverflow.ellipsis,
+                                                          textAlign: TextAlign.start,
+                                                          maxLines: 1,
+                                                        ),
+                                                        SizedBox(height: widget.homePageStyles.widthDp * 5),
+                                                        Text(
+                                                          "${KeicyDateTime.convertMillisecondsToDateString(ms: transactionModel.ts)}",
+                                                          style: widget.homePageStyles.birthDayStyle,
+                                                          overflow: TextOverflow.ellipsis,
+                                                          textAlign: TextAlign.center,
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ),
+                                                ],
+                                              ),
+                                            ),
+                                            Expanded(
+                                              flex: 1,
+                                              child: Column(
+                                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                                crossAxisAlignment: CrossAxisAlignment.end,
+                                                children: [
+                                                  Text(
+                                                    "\$${transactionModel.amount}",
+                                                    style: widget.homePageStyles.amountStyle,
+                                                    overflow: TextOverflow.ellipsis,
+                                                    textAlign: TextAlign.center,
+                                                  ),
+                                                  SizedBox(height: widget.homePageStyles.widthDp * 5),
+                                                  (snapshot.data == null)
+                                                      ? SizedBox()
+                                                      : Text(
+                                                          AppConstants.jubaTransactionState[jubaTransactionState["Data"][0]["Status"]],
+                                                          style: transactionModel.status == 0
+                                                              ? widget.homePageStyles.pendingStyle
+                                                              : widget.homePageStyles.sentStyle,
+                                                          overflow: TextOverflow.ellipsis,
+                                                          textAlign: TextAlign.start,
+                                                          maxLines: 2,
+                                                        ),
+                                                  SizedBox(height: widget.homePageStyles.widthDp * 5),
+                                                  // transactionModel.status == 2
+                                                  //     ? SizedBox()
+                                                  //     : GestureDetector(
+                                                  //         onTap: () {
+                                                  //           _showCancelDialog(transactionModel);
+                                                  //         },
+                                                  //         child: Padding(
+                                                  //           padding: EdgeInsets.all(widget.homePageStyles.widthDp * 5),
+                                                  //           child: Text(
+                                                  //             "Cancel",
+                                                  //             style: widget.homePageStyles.birthDayStyle.copyWith(
+                                                  //               fontWeight: FontWeight.bold,
+                                                  //               decorationStyle: TextDecorationStyle.solid,
+                                                  //               decoration: TextDecoration.underline,
+                                                  //               decorationThickness: 2,
+                                                  //               decorationColor: Colors.black,
+                                                  //             ),
+                                                  //           ),
+                                                  //         ),
+                                                  //       ),
+                                                ],
+                                              ),
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  );
+
+                                  return Text(
+                                    AppConstants.jubaTransactionState[jubaTransactionState["Data"][0]["Status"]],
+                                    style: transactionModel.status == 0 ? widget.homePageStyles.pendingStyle : widget.homePageStyles.sentStyle,
+                                    overflow: TextOverflow.ellipsis,
+                                    textAlign: TextAlign.center,
+                                  );
+                                },
+                              );
+                            }
+                          },
+                        );
+                        ;
+                      },
+                    ).toList(),
                   ),
                 ],
               );

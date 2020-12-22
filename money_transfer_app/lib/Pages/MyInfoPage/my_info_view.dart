@@ -190,7 +190,7 @@ class _MyInfoViewState extends State<MyInfoView> {
             titleOptions: StatusAlertTextConfiguration(
               style: TextStyle(fontSize: widget.myInfoPageStyles.fontSp * 16, color: AppColors.blackColor),
             ),
-            margin: EdgeInsets.all(widget.myInfoPageStyles.widthDp * 80),
+            margin: EdgeInsets.all(widget.myInfoPageStyles.widthDp * 60),
             padding: EdgeInsets.all(widget.myInfoPageStyles.widthDp * 20),
             configuration: IconConfiguration(
               icon: Icons.check_circle_outline,
@@ -211,7 +211,7 @@ class _MyInfoViewState extends State<MyInfoView> {
           titleOptions: StatusAlertTextConfiguration(
             style: TextStyle(fontSize: widget.myInfoPageStyles.fontSp * 16, color: AppColors.blackColor),
           ),
-          margin: EdgeInsets.all(widget.myInfoPageStyles.widthDp * 80),
+          margin: EdgeInsets.all(widget.myInfoPageStyles.widthDp * 60),
           padding: EdgeInsets.all(widget.myInfoPageStyles.widthDp * 20),
           configuration: IconConfiguration(
             icon: Icons.error_outline,
@@ -1009,7 +1009,7 @@ class _MyInfoViewState extends State<MyInfoView> {
         titleOptions: StatusAlertTextConfiguration(
           style: TextStyle(fontSize: widget.myInfoPageStyles.fontSp * 16, color: AppColors.blackColor),
         ),
-        margin: EdgeInsets.all(widget.myInfoPageStyles.widthDp * 80),
+        margin: EdgeInsets.all(widget.myInfoPageStyles.widthDp * 60),
         padding: EdgeInsets.all(widget.myInfoPageStyles.widthDp * 20),
         configuration: IconConfiguration(
           icon: Icons.error_outline,

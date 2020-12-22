@@ -126,7 +126,7 @@ class _RecipientViewPageState extends State<RecipientViewPage> {
           titleOptions: StatusAlertTextConfiguration(
             style: TextStyle(fontSize: _recipientViewPageStyles.fontSp * 16, color: AppColors.blackColor),
           ),
-          margin: EdgeInsets.all(_recipientViewPageStyles.widthDp * 80),
+          margin: EdgeInsets.all(_recipientViewPageStyles.widthDp * 60),
           padding: EdgeInsets.all(_recipientViewPageStyles.widthDp * 20),
           configuration: IconConfiguration(
             icon: Icons.check_circle_outline,
@@ -146,7 +146,7 @@ class _RecipientViewPageState extends State<RecipientViewPage> {
           titleOptions: StatusAlertTextConfiguration(
             style: TextStyle(fontSize: _recipientViewPageStyles.fontSp * 16, color: AppColors.blackColor),
           ),
-          margin: EdgeInsets.all(_recipientViewPageStyles.widthDp * 80),
+          margin: EdgeInsets.all(_recipientViewPageStyles.widthDp * 60),
           padding: EdgeInsets.all(_recipientViewPageStyles.widthDp * 20),
           configuration: IconConfiguration(
             icon: Icons.error_outline,
@@ -174,9 +174,7 @@ class _RecipientViewPageState extends State<RecipientViewPage> {
         child: Column(
           children: [
             HeaderWidget(
-              title: (widget.recipientModel.id == "")
-                  ? RecipientViewPageString.addTitle
-                  : RecipientViewPageString.updateTitle,
+              title: (widget.recipientModel.id == "") ? RecipientViewPageString.addTitle : RecipientViewPageString.updateTitle,
               widthDp: _recipientViewPageStyles.widthDp,
               fontSp: _recipientViewPageStyles.fontSp,
               haveBackIcon: true,
@@ -221,8 +219,7 @@ class _RecipientViewPageState extends State<RecipientViewPage> {
                   errorBorder: Border.all(color: Colors.redAccent),
                   contentHorizontalPadding: _recipientViewPageStyles.widthDp * 13,
                   prefixIcons: [
-                    Icon(Icons.person_outline,
-                        color: AppColors.secondaryColor, size: _recipientViewPageStyles.iconSize),
+                    Icon(Icons.person_outline, color: AppColors.secondaryColor, size: _recipientViewPageStyles.iconSize),
                   ],
                   textStyle: _recipientViewPageStyles.textStyle,
                   keyboardType: TextInputType.name,
@@ -232,8 +229,7 @@ class _RecipientViewPageState extends State<RecipientViewPage> {
                   textInputAction: TextInputAction.next,
                   hintText: RecipientViewPageString.fistNameHint,
                   hintStyle: _recipientViewPageStyles.hintStyle,
-                  validatorHandler: (input) =>
-                      (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
+                  validatorHandler: (input) => (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
                   onFieldSubmittedHandler: (input) {
                     FocusScope.of(context).requestFocus(_middleNameFocusNode);
                   },
@@ -253,8 +249,7 @@ class _RecipientViewPageState extends State<RecipientViewPage> {
                   errorBorder: Border.all(color: Colors.redAccent),
                   contentHorizontalPadding: _recipientViewPageStyles.widthDp * 13,
                   prefixIcons: [
-                    Icon(Icons.person_outline,
-                        color: AppColors.secondaryColor, size: _recipientViewPageStyles.iconSize),
+                    Icon(Icons.person_outline, color: AppColors.secondaryColor, size: _recipientViewPageStyles.iconSize),
                   ],
                   textStyle: _recipientViewPageStyles.textStyle,
                   keyboardType: TextInputType.name,
@@ -264,8 +259,7 @@ class _RecipientViewPageState extends State<RecipientViewPage> {
                   textInputAction: TextInputAction.next,
                   hintText: RecipientViewPageString.middleNameHint,
                   hintStyle: _recipientViewPageStyles.hintStyle,
-                  validatorHandler: (input) =>
-                      (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
+                  validatorHandler: (input) => (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
                   onFieldSubmittedHandler: (input) {
                     FocusScope.of(context).requestFocus(_lastNameFocusNode);
                   },
@@ -285,8 +279,7 @@ class _RecipientViewPageState extends State<RecipientViewPage> {
                   errorBorder: Border.all(color: Colors.redAccent),
                   contentHorizontalPadding: _recipientViewPageStyles.widthDp * 13,
                   prefixIcons: [
-                    Icon(Icons.person_outline,
-                        color: AppColors.secondaryColor, size: _recipientViewPageStyles.iconSize),
+                    Icon(Icons.person_outline, color: AppColors.secondaryColor, size: _recipientViewPageStyles.iconSize),
                   ],
                   textStyle: _recipientViewPageStyles.textStyle,
                   keyboardType: TextInputType.name,
@@ -296,8 +289,7 @@ class _RecipientViewPageState extends State<RecipientViewPage> {
                   textInputAction: TextInputAction.next,
                   hintText: RecipientViewPageString.lastNameHint,
                   hintStyle: _recipientViewPageStyles.hintStyle,
-                  validatorHandler: (input) =>
-                      (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
+                  validatorHandler: (input) => (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
                   onFieldSubmittedHandler: (input) {
                     FocusScope.of(context).requestFocus(_phoneFocusNode);
                   },
@@ -372,8 +364,7 @@ class _RecipientViewPageState extends State<RecipientViewPage> {
                   textInputAction: TextInputAction.done,
                   hintText: RecipientViewPageString.cityHint,
                   hintStyle: _recipientViewPageStyles.hintStyle,
-                  validatorHandler: (input) =>
-                      (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
+                  validatorHandler: (input) => (input.length < 3) ? ValidateErrorString.textlengthErrorText.replaceAll("{length}", "3") : null,
                   onFieldSubmittedHandler: (input) {
                     FocusScope.of(context).requestFocus(_descriptionFocusNode);
                   },
@@ -385,9 +376,7 @@ class _RecipientViewPageState extends State<RecipientViewPage> {
                   color: AppColors.secondaryColor,
                   borderRadius: _recipientViewPageStyles.formFieldBorderRadius,
                   child: Text(
-                    (widget.recipientModel.id == "")
-                        ? RecipientViewPageString.addButton
-                        : RecipientViewPageString.updateButton,
+                    (widget.recipientModel.id == "") ? RecipientViewPageString.addButton : RecipientViewPageString.updateButton,
                     style: _recipientViewPageStyles.buttonTextStyle,
                   ),
                   elevation: 0,
@@ -422,8 +411,7 @@ class _RecipientViewPageState extends State<RecipientViewPage> {
     }
     _recipientModel.city = _cityController.text.trim();
     _recipientModel.ts = DateTime.now().millisecondsSinceEpoch;
-    _recipientModel.createdDateTs =
-        (_recipientModel.createdDateTs != 0) ? _recipientModel.createdDateTs : DateTime.now().millisecondsSinceEpoch;
+    _recipientModel.createdDateTs = (_recipientModel.createdDateTs != 0) ? _recipientModel.createdDateTs : DateTime.now().millisecondsSinceEpoch;
 
     widget.recipientProvider.setRecipientState(
       widget.recipientProvider.recipientState.update(progressState: 1),

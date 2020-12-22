@@ -48,8 +48,8 @@ class _TransferViewState extends State<TransferView> {
   void initState() {
     super.initState();
 
-    _userProvider = UserProvider.of(context);
     _settingsDataProvider = SettingsDataProvider.of(context);
+    _userProvider = UserProvider.of(context);
     _transferProvider = TransferProvider.of(context);
     _recipientProvider = RecipientProvider.of(context);
 
@@ -665,7 +665,7 @@ class _TransferViewState extends State<TransferView> {
                       titleOptions: StatusAlertTextConfiguration(
                         style: TextStyle(fontSize: widget.transferPageStyles.fontSp * 16, color: AppColors.blackColor),
                       ),
-                      margin: EdgeInsets.all(widget.transferPageStyles.widthDp * 80),
+                      margin: EdgeInsets.all(widget.transferPageStyles.widthDp * 60),
                       padding: EdgeInsets.all(widget.transferPageStyles.widthDp * 20),
                       configuration: IconConfiguration(
                         icon: Icons.error_outline,
@@ -685,7 +685,7 @@ class _TransferViewState extends State<TransferView> {
                       titleOptions: StatusAlertTextConfiguration(
                         style: TextStyle(fontSize: widget.transferPageStyles.fontSp * 16, color: AppColors.blackColor),
                       ),
-                      margin: EdgeInsets.all(widget.transferPageStyles.widthDp * 80),
+                      margin: EdgeInsets.all(widget.transferPageStyles.widthDp * 60),
                       padding: EdgeInsets.all(widget.transferPageStyles.widthDp * 20),
                       configuration: IconConfiguration(
                         icon: Icons.error_outline,
@@ -705,7 +705,7 @@ class _TransferViewState extends State<TransferView> {
                       titleOptions: StatusAlertTextConfiguration(
                         style: TextStyle(fontSize: widget.transferPageStyles.fontSp * 16, color: AppColors.blackColor),
                       ),
-                      margin: EdgeInsets.all(widget.transferPageStyles.widthDp * 80),
+                      margin: EdgeInsets.all(widget.transferPageStyles.widthDp * 60),
                       padding: EdgeInsets.all(widget.transferPageStyles.widthDp * 20),
                       configuration: IconConfiguration(
                         icon: Icons.error_outline,
@@ -753,7 +753,7 @@ class _TransferViewState extends State<TransferView> {
           titleOptions: StatusAlertTextConfiguration(
             style: TextStyle(fontSize: widget.transferPageStyles.fontSp * 16, color: AppColors.blackColor),
           ),
-          margin: EdgeInsets.all(widget.transferPageStyles.widthDp * 80),
+          margin: EdgeInsets.all(widget.transferPageStyles.widthDp * 60),
           padding: EdgeInsets.all(widget.transferPageStyles.widthDp * 20),
           configuration: IconConfiguration(
             icon: Icons.error_outline,
@@ -773,7 +773,7 @@ class _TransferViewState extends State<TransferView> {
           titleOptions: StatusAlertTextConfiguration(
             style: TextStyle(fontSize: widget.transferPageStyles.fontSp * 16, color: AppColors.blackColor),
           ),
-          margin: EdgeInsets.all(widget.transferPageStyles.widthDp * 80),
+          margin: EdgeInsets.all(widget.transferPageStyles.widthDp * 60),
           padding: EdgeInsets.all(widget.transferPageStyles.widthDp * 20),
           configuration: IconConfiguration(
             icon: Icons.error_outline,
@@ -793,7 +793,7 @@ class _TransferViewState extends State<TransferView> {
           titleOptions: StatusAlertTextConfiguration(
             style: TextStyle(fontSize: widget.transferPageStyles.fontSp * 16, color: AppColors.blackColor),
           ),
-          margin: EdgeInsets.all(widget.transferPageStyles.widthDp * 80),
+          margin: EdgeInsets.all(widget.transferPageStyles.widthDp * 60),
           padding: EdgeInsets.all(widget.transferPageStyles.widthDp * 20),
           configuration: IconConfiguration(
             icon: Icons.error_outline,

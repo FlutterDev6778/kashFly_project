@@ -135,7 +135,7 @@ class _NotificationViewState extends State<NotificationView> with TickerProvider
                     titleOptions: StatusAlertTextConfiguration(
                       style: TextStyle(fontSize: widget.notificationPageStyles.fontSp * 16, color: AppColors.blackColor),
                     ),
-                    margin: EdgeInsets.all(widget.notificationPageStyles.widthDp * 80),
+                    margin: EdgeInsets.all(widget.notificationPageStyles.widthDp * 60),
                     padding: EdgeInsets.all(widget.notificationPageStyles.widthDp * 20),
                     configuration: IconConfiguration(
                       icon: Icons.check_circle_outline,
@@ -177,7 +177,7 @@ class _NotificationViewState extends State<NotificationView> with TickerProvider
                     titleOptions: StatusAlertTextConfiguration(
                       style: TextStyle(fontSize: widget.notificationPageStyles.fontSp * 16, color: AppColors.blackColor),
                     ),
-                    margin: EdgeInsets.all(widget.notificationPageStyles.widthDp * 80),
+                    margin: EdgeInsets.all(widget.notificationPageStyles.widthDp * 60),
                     padding: EdgeInsets.all(widget.notificationPageStyles.widthDp * 20),
                     configuration: IconConfiguration(
                       icon: Icons.check_circle_outline,

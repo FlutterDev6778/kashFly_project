@@ -155,7 +155,7 @@ class _VerificationViewState extends State<VerificationView> {
           titleOptions: StatusAlertTextConfiguration(
             style: TextStyle(fontSize: widget.verificationPageStyles.fontSp * 16, color: AppColors.blackColor),
           ),
-          margin: EdgeInsets.all(widget.verificationPageStyles.widthDp * 80),
+          margin: EdgeInsets.all(widget.verificationPageStyles.widthDp * 60),
           padding: EdgeInsets.all(widget.verificationPageStyles.widthDp * 20),
           configuration: IconConfiguration(
             icon: Icons.error_outline,

@@ -130,16 +130,13 @@ class _AmountViewState extends State<AmountView> {
 
   Widget _containerNextButton(BuildContext context) {
     return Consumer<UserProvider>(builder: (context, userProvider, _) {
-      int monthlyAvailableAmount =
-          _settingsDataProvider.settingsDataState.cashLimits['monthly'] - userProvider.userState.userModel.monthlyCount;
+      int monthlyAvailableAmount = _settingsDataProvider.settingsDataState.cashLimits['monthly'] - userProvider.userState.userModel.monthlyCount;
 
       int dailyAvailableAmount = (monthlyAvailableAmount < 5)
           ? monthlyAvailableAmount - userProvider.userState.userModel.dailyCount
           : _settingsDataProvider.settingsDataState.cashLimits['daily'] - userProvider.userState.userModel.dailyCount;
 
-      String str = (monthlyAvailableAmount <= 0)
-          ? "Montly  Limit is over"
-          : (dailyAvailableAmount <= 0) ? "Daily Limit is over" : "";
+      String str = (monthlyAvailableAmount <= 0) ? "Montly  Limit is over" : (dailyAvailableAmount <= 0) ? "Daily Limit is over" : "";
 
       return Column(
         children: [
@@ -184,12 +181,33 @@ class _AmountViewState extends State<AmountView> {
       StatusAlert.show(
         context,
         duration: Duration(seconds: 2),
-        title: AmountPageString.amountValidateString +
-            SettingsDataProvider.of(context).settingsDataState.minAmount.toString(),
+        title: AmountPageString.amountValidateString + SettingsDataProvider.of(context).settingsDataState.minAmount.toString(),
         titleOptions: StatusAlertTextConfiguration(
           style: TextStyle(fontSize: widget.amountPageStyles.fontSp * 16, color: AppColors.blackColor),
         ),
-        margin: EdgeInsets.all(widget.amountPageStyles.widthDp * 80),
+        margin: EdgeInsets.all(widget.amountPageStyles.widthDp * 60),
+        padding: EdgeInsets.all(widget.amountPageStyles.widthDp * 20),
+        configuration: IconConfiguration(
+          icon: Icons.error_outline,
+          color: Colors.redAccent,
+          size: widget.amountPageStyles.widthDp * 80,
+        ),
+        blurPower: 3,
+        backgroundColor: Colors.white,
+      );
+      Future.delayed(Duration(seconds: 2), () {
+        FocusScope.of(context).requestFocus(_amountFocusNode);
+      });
+      return;
+    } else if (amount >= 10000) {
+      StatusAlert.show(
+        context,
+        duration: Duration(seconds: 2),
+        title: AmountPageString.amountValidateString1 + "10000",
+        titleOptions: StatusAlertTextConfiguration(
+          style: TextStyle(fontSize: widget.amountPageStyles.fontSp * 16, color: AppColors.blackColor),
+        ),
+        margin: EdgeInsets.all(widget.amountPageStyles.widthDp * 60),
         padding: EdgeInsets.all(widget.amountPageStyles.widthDp * 20),
         configuration: IconConfiguration(
           icon: Icons.error_outline,
@@ -239,8 +257,7 @@ class _AmountViewState extends State<AmountView> {
 
     ///   --------------------------------------------
 
-    BottomNavbarProvider.of(context)
-        .setBottomNavbarState(BottomNavbarProvider.of(context).bottomNavbarState.update(type: 0));
+    BottomNavbarProvider.of(context).setBottomNavbarState(BottomNavbarProvider.of(context).bottomNavbarState.update(type: 0));
     await pushNewScreen(
       context,
       screen: TransferPage(amount: amount),
@@ -251,7 +268,6 @@ class _AmountViewState extends State<AmountView> {
       _amountController.clear();
       _amountController.text = "0.00";
     });
-    BottomNavbarProvider.of(context)
-        .setBottomNavbarState(BottomNavbarProvider.of(context).bottomNavbarState.update(type: 1));
+    BottomNavbarProvider.of(context).setBottomNavbarState(BottomNavbarProvider.of(context).bottomNavbarState.update(type: 1));
   }
 }

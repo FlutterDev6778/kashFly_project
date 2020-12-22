@@ -11,8 +11,7 @@ import 'package:provider/provider.dart';
 import 'index.dart';
 
 class TransferProvider extends ChangeNotifier {
-  static TransferProvider of(BuildContext context, {bool listen = false}) =>
-      Provider.of<TransferProvider>(context, listen: listen);
+  static TransferProvider of(BuildContext context, {bool listen = false}) => Provider.of<TransferProvider>(context, listen: listen);
 
   TransferState _transferState = TransferState.init();
   TransferState get transferState => _transferState;
@@ -34,13 +33,11 @@ class TransferProvider extends ChangeNotifier {
     TransactionModel transactionModel = TransactionModel();
     transactionModel.amount = (_transferState.amount).toStringAsFixed(2);
     transactionModel.fee = (_transferState.fee).toStringAsFixed(2);
-    transactionModel.paymentIntent = result["paymentIntent"];
+    transactionModel.stripePayment = result["paymentIntent"];
     transactionModel.senderID = userProvider.userState.userModel.id;
     transactionModel.recipientID = _transferState.recipientModel.id;
     transactionModel.ts = DateTime.now().millisecondsSinceEpoch;
-    transactionModel.state = 0;
-
-    print(base64Encode(result["paymentIntent"]["id"].toString().codeUnits));
+    transactionModel.status = 0;
 
     /// payment successs
     if (result["success"]) {
@@ -64,18 +61,23 @@ class TransferProvider extends ChangeNotifier {
       // data["Remarks"] = "sdfsdf";
 
       try {
-        var jubaResult = await SendTransactionDataProvider.sendTransaction(jubaTransactionModel: jubaTransactionModel);
-        if (jubaResult["Response"].runtimeType == List<dynamic>().runtimeType &&
-            jubaResult["Response"][0]["Code"] != "001") {
-          transactionModel.state = 0;
-          transactionModel.transactioinErrorString = jubaResult["Response"][0]["Message"];
+        var jubaResult = await JubaTransactionDataProvider.sendTransaction(jubaTransactionModel: jubaTransactionModel);
+        if (jubaResult["Response"].runtimeType == List<dynamic>().runtimeType && jubaResult["Response"][0]["Code"] != "001") {
+          transactionModel.status = 0;
+          transactionModel.jubaPayment = {
+            "message": jubaResult["Response"][0]["Message"],
+          };
         } else if (jubaResult["Response"]["Code"] != "001") {
-          transactionModel.state = 0;
-          transactionModel.transactioinErrorString = jubaResult["Response"]["Message"];
+          transactionModel.status = 0;
+          transactionModel.jubaPayment = {
+            "message": jubaResult["Response"]["Message"],
+          };
         } else {
-          transactionModel.state = 1;
-          transactionModel.transactioinErrorString = jubaResult["Response"]["Message"];
-          transactionModel.jubaReferenceNum = jubaResult["Data"]["ReferenceNum"];
+          transactionModel.status = 1;
+          transactionModel.jubaPayment = {
+            "message": jubaResult["Response"]["Message"],
+            "referenceNum": jubaResult["Data"]["ReferenceNum"],
+          };
         }
       } catch (e) {
         print(e);

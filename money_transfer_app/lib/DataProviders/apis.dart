@@ -3,4 +3,5 @@ class JubaApis {
   static String updateCustomer = "/CustomerUpdate/doUpdateCustomer";
   static String sendTransaction = "/SendRemittance/doSendTransactions";
   static String sendRemittanceStatus = "/SendRemittanceStatus/doGetSendRemittanceStatus";
+  static String cancelRemittance = "/CancelRemittance/doCancelRemittance";
 }

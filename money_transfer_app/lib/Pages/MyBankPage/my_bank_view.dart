@@ -146,7 +146,7 @@ class _MyBankViewState extends State<MyBankView> {
           titleOptions: StatusAlertTextConfiguration(
             style: TextStyle(fontSize: widget.myBankPageStyles.fontSp * 16, color: AppColors.blackColor),
           ),
-          margin: EdgeInsets.all(widget.myBankPageStyles.widthDp * 80),
+          margin: EdgeInsets.all(widget.myBankPageStyles.widthDp * 60),
           padding: EdgeInsets.all(widget.myBankPageStyles.widthDp * 20),
           configuration: IconConfiguration(
             icon: Icons.error_outline,

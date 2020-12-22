@@ -126,7 +126,7 @@ class _PinCodeViewState extends State<PinCodeView> {
           titleOptions: StatusAlertTextConfiguration(
             style: TextStyle(fontSize: widget.pinCodePageStyles.fontSp * 16, color: AppColors.blackColor),
           ),
-          margin: EdgeInsets.all(widget.pinCodePageStyles.widthDp * 80),
+          margin: EdgeInsets.all(widget.pinCodePageStyles.widthDp * 60),
           padding: EdgeInsets.all(widget.pinCodePageStyles.widthDp * 20),
           configuration: IconConfiguration(
             icon: Icons.error_outline,

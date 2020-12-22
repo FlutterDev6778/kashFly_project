@@ -101,7 +101,7 @@ class _ChangePinCodeViewState extends State<ChangePinCodeView> with TickerProvid
           titleOptions: StatusAlertTextConfiguration(
             style: TextStyle(fontSize: widget.changePinCodePageStyles.fontSp * 16, color: AppColors.blackColor),
           ),
-          margin: EdgeInsets.all(widget.changePinCodePageStyles.widthDp * 80),
+          margin: EdgeInsets.all(widget.changePinCodePageStyles.widthDp * 60),
           padding: EdgeInsets.all(widget.changePinCodePageStyles.widthDp * 20),
           configuration: IconConfiguration(
             icon: Icons.check_circle_outline,
@@ -123,7 +123,7 @@ class _ChangePinCodeViewState extends State<ChangePinCodeView> with TickerProvid
           titleOptions: StatusAlertTextConfiguration(
             style: TextStyle(fontSize: widget.changePinCodePageStyles.fontSp * 16, color: AppColors.blackColor),
           ),
-          margin: EdgeInsets.all(widget.changePinCodePageStyles.widthDp * 80),
+          margin: EdgeInsets.all(widget.changePinCodePageStyles.widthDp * 60),
           padding: EdgeInsets.all(widget.changePinCodePageStyles.widthDp * 20),
           configuration: IconConfiguration(
             icon: Icons.error_outline,

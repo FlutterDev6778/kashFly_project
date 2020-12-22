@@ -139,7 +139,7 @@ class _UploadDocumentViewState extends State<UploadDocumentView> {
           titleOptions: StatusAlertTextConfiguration(
             style: TextStyle(fontSize: widget.uploadDocumentPageStyles.fontSp * 16, color: AppColors.blackColor),
           ),
-          margin: EdgeInsets.all(widget.uploadDocumentPageStyles.widthDp * 80),
+          margin: EdgeInsets.all(widget.uploadDocumentPageStyles.widthDp * 60),
           padding: EdgeInsets.all(widget.uploadDocumentPageStyles.widthDp * 20),
           configuration: IconConfiguration(
             icon: Icons.check_circle_outline,
@@ -157,7 +157,7 @@ class _UploadDocumentViewState extends State<UploadDocumentView> {
           titleOptions: StatusAlertTextConfiguration(
             style: TextStyle(fontSize: widget.uploadDocumentPageStyles.fontSp * 16, color: AppColors.blackColor),
           ),
-          margin: EdgeInsets.all(widget.uploadDocumentPageStyles.widthDp * 80),
+          margin: EdgeInsets.all(widget.uploadDocumentPageStyles.widthDp * 60),
           padding: EdgeInsets.all(widget.uploadDocumentPageStyles.widthDp * 20),
           configuration: IconConfiguration(
             icon: Icons.error_outline,
@@ -616,7 +616,7 @@ class _UploadDocumentViewState extends State<UploadDocumentView> {
         titleOptions: StatusAlertTextConfiguration(
           style: TextStyle(fontSize: widget.uploadDocumentPageStyles.fontSp * 16, color: AppColors.blackColor),
         ),
-        margin: EdgeInsets.all(widget.uploadDocumentPageStyles.widthDp * 80),
+        margin: EdgeInsets.all(widget.uploadDocumentPageStyles.widthDp * 60),
         padding: EdgeInsets.all(widget.uploadDocumentPageStyles.widthDp * 20),
         configuration: IconConfiguration(
           icon: Icons.error_outline,
