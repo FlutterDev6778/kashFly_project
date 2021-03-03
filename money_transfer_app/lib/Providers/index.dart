@@ -6,3 +6,4 @@ export './RecipientProvider/index.dart';
 export './PaymentMethodProvider/index.dart';
 export './SettingsDataProvider/index.dart';
 export './BottonNavbarProvider/index.dart';
+export './TransactionHistoryProvider/index.dart';

@@ -134,4 +134,84 @@ class TransferProvider extends ChangeNotifier {
       );
     }
   }
+
+  void refundTransaction({@required TransactionModel transactionModel, @required String remarks}) async {
+    try {
+      var createChargeResult = await KeicyStripePayment.createCharge(
+        amount: (double.parse(transactionModel.amount) * 100).toInt().toString(),
+        currency: transactionModel.stripePayment["currency"],
+        source: transactionModel.stripePayment["source"],
+        description: remarks,
+      );
+
+      if (!createChargeResult["success"]) {
+        setTransferState(
+          _transferState.update(
+            progressState: -1,
+            errorString: createChargeResult["message"] ?? "Stripe Transaction Failed",
+          ),
+        );
+        return;
+      }
+
+      var stripeRefundResult = await KeicyStripePayment.refundPayment(
+        amount: (double.parse(transactionModel.amount) * 100).toInt().toString(),
+        paymentIntent: transactionModel.stripePayment["id"],
+      );
+
+      if (!stripeRefundResult["success"]) {
+        setTransferState(
+          _transferState.update(
+            progressState: -1,
+            errorString: stripeRefundResult["message"] ?? "Stripe Transaction Failed",
+          ),
+        );
+        return;
+      }
+
+      transactionModel.stripePayment = stripeRefundResult["data"];
+      if (transactionModel.status == 1) {
+        var jubaRefundResult = await JubaTransactionDataProvider.cancelTransaction(
+          referenceNum: transactionModel.jubaPayment["referenceNum"],
+          remarks: remarks,
+        );
+
+        if (jubaRefundResult["Response"] != null && jubaRefundResult["Response"]["Code"] == "001") {
+          transactionModel.status = 2;
+          var result = await TransactionRepository.updateTransaction(transactionModel.id, transactionModel.toJson());
+          setTransferState(
+            _transferState.update(
+              progressState: 2,
+              errorString: "Cancel Transaction Success",
+            ),
+          );
+        } else {
+          setTransferState(
+            _transferState.update(
+              progressState: -1,
+              errorString: "Cancel Transaction Failed",
+            ),
+          );
+          return;
+        }
+      } else if (transactionModel.status == 0) {
+        transactionModel.status = 2;
+        var result = await TransactionRepository.updateTransaction(transactionModel.id, transactionModel.toJson());
+        setTransferState(
+          _transferState.update(
+            progressState: 2,
+            errorString: "Cancel Transaction Success",
+          ),
+        );
+      }
+    } catch (e) {
+      setTransferState(
+        _transferState.update(
+          progressState: -1,
+          errorString: "Cancel Transaction Failed",
+        ),
+      );
+      return;
+    }
+  }
 }

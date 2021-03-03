@@ -516,9 +516,9 @@ class _MyBankViewState extends State<MyBankView> {
                         errorStringFontSize: 0,
                         fixedHeightState: false,
                         validatorHandler: (value) {
-                          if (value.isEmpty) {
-                            return " ";
-                          }
+                          // if (value.isEmpty) {
+                          //   return " ";
+                          // }
                           return null;
                         },
                         onFieldSubmittedHandler: (input) {

@@ -18,6 +18,7 @@ class TransactionHistoryPage extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(create: (_) => TransactionHistoryProvider()),
+        ChangeNotifierProvider(create: (_) => TransferProvider()),
       ],
       child: TransactionHistoryView(transactionHistoryPageStyles: _transactionHistoryPageStyles),
     );

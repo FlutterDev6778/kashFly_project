@@ -6,7 +6,7 @@ import 'package:keicy_text_form_field/keicy_text_form_field.dart';
 import 'package:money_transfer_app/Pages/Components/index.dart';
 import 'package:money_transfer_app/Pages/CreditCardPage/index.dart';
 import 'package:money_transfer_app/Pages/RecipientViewPage/recipient_view_page.dart';
-import 'package:money_transfer_app/Providers/TransactionHistoryProvider/transaction_history_provider.dart';
+import 'package:money_transfer_app/Providers/index.dart';
 import 'package:money_transfer_framework/money_transfer_framework.dart';
 import 'package:persistent_bottom_nav_bar/persistent-tab-view.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +37,7 @@ class TransactionHistoryView extends StatefulWidget {
 }
 
 class _TransferViewState extends State<TransactionHistoryView> with TickerProviderStateMixin {
-  TransactionHistoryProvider _transactionHistoryProvider;
+  TransferProvider _transferProvider;
   KeicyProgressDialog _keicyProgressDialog;
 
   TabController _tabController;
@@ -46,17 +46,17 @@ class _TransferViewState extends State<TransactionHistoryView> with TickerProvid
   void initState() {
     super.initState();
 
-    _transactionHistoryProvider = TransactionHistoryProvider.of(context);
+    _transferProvider = TransferProvider.of(context);
 
     _tabController = TabController(length: 2, initialIndex: 0, vsync: this);
 
-    _transactionHistoryProvider.setTransactionHistoryState(
-      _transactionHistoryProvider.transactionHistoryState.update(progressState: 0, errorString: ""),
+    _transferProvider.setTransferState(
+      _transferProvider.transferState.update(progressState: 0, errorString: ""),
       isNotifiable: false,
     );
 
     WidgetsBinding.instance.addPostFrameCallback((timeStamp) {
-      _transactionHistoryProvider.addListener(_transactionHistoryProviderListener);
+      _transferProvider.addListener(_transferProviderListener);
 
       _keicyProgressDialog = KeicyProgressDialog.of(
         context,
@@ -82,8 +82,8 @@ class _TransferViewState extends State<TransactionHistoryView> with TickerProvid
         message: "",
       );
 
-      if (_transactionHistoryProvider.transactionHistoryState.transactionListStream == null)
-        _transactionHistoryProvider.getTransactioinListStream(
+      if (TransactionHistoryProvider.of(context).transactionHistoryState.transactionListStream == null)
+        TransactionHistoryProvider.of(context).getTransactioinListStream(
           UserProvider.of(context).userState.userModel.id,
           UserProvider.of(context).userState.userModel.customerReferenceNo,
           5,
@@ -93,24 +93,58 @@ class _TransferViewState extends State<TransactionHistoryView> with TickerProvid
 
   @override
   void dispose() {
-    _transactionHistoryProvider.removeListener(_transactionHistoryProviderListener);
+    _transferProvider.removeListener(_transferProviderListener);
 
     super.dispose();
   }
 
-  void _transactionHistoryProviderListener() async {
-    if (_transactionHistoryProvider.transactionHistoryState.progressState != 1 && _keicyProgressDialog.isShowing()) {
+  void _transferProviderListener() async {
+    if (_transferProvider.transferState.progressState != 1 && _keicyProgressDialog.isShowing()) {
       await _keicyProgressDialog.hide();
     }
 
-    switch (_transactionHistoryProvider.transactionHistoryState.progressState) {
+    switch (_transferProvider.transferState.progressState) {
       case 0:
         break;
       case 1:
         break;
       case 2:
+        StatusAlert.show(
+          context,
+          duration: Duration(seconds: 2),
+          title: "Cancel Transaction Success",
+          titleOptions: StatusAlertTextConfiguration(
+            style: TextStyle(fontSize: widget.transactionHistoryPageStyles.fontSp * 16, color: AppColors.blackColor),
+          ),
+          margin: EdgeInsets.all(widget.transactionHistoryPageStyles.widthDp * 60),
+          padding: EdgeInsets.all(widget.transactionHistoryPageStyles.widthDp * 20),
+          configuration: IconConfiguration(
+            icon: Icons.check_circle_outline,
+            color: AppColors.primaryColor,
+            size: widget.transactionHistoryPageStyles.widthDp * 80,
+          ),
+          blurPower: 3,
+          backgroundColor: Colors.white,
+        );
         break;
       case -1:
+        StatusAlert.show(
+          context,
+          duration: Duration(seconds: 2),
+          title: _transferProvider.transferState.errorString,
+          titleOptions: StatusAlertTextConfiguration(
+            style: TextStyle(fontSize: widget.transactionHistoryPageStyles.fontSp * 16, color: AppColors.blackColor),
+          ),
+          margin: EdgeInsets.all(widget.transactionHistoryPageStyles.widthDp * 60),
+          padding: EdgeInsets.all(widget.transactionHistoryPageStyles.widthDp * 20),
+          configuration: IconConfiguration(
+            icon: Icons.error_outline,
+            color: Colors.redAccent,
+            size: widget.transactionHistoryPageStyles.widthDp * 80,
+          ),
+          blurPower: 3,
+          backgroundColor: Colors.white,
+        );
         break;
       default:
     }
@@ -557,123 +591,124 @@ class _TransferViewState extends State<TransactionHistoryView> with TickerProvid
 
   void _refundTransaction(TransactionModel transactionModel, String remarks) async {
     await _keicyProgressDialog.show();
-    try {
-      var stripeRefundResult = await KeicyStripePayment.refundPayment(
-        amount: (double.parse(transactionModel.amount) * 100).toInt().toString(),
-        paymentIntent: transactionModel.stripePayment["id"],
-      );
-      if (stripeRefundResult["success"]) {
-        transactionModel.stripePayment = stripeRefundResult["data"];
-        if (transactionModel.status == 1) {
-          var jubaRefundResult = await JubaTransactionDataProvider.cancelTransaction(
-            referenceNum: transactionModel.jubaPayment["referenceNum"],
-            remarks: remarks,
-          );
+    _transferProvider.refundTransaction(transactionModel: transactionModel, remarks: remarks);
+    // try {
+    //   var stripeRefundResult = await KeicyStripePayment.refundPayment(
+    //     amount: (double.parse(transactionModel.amount) * 100).toInt().toString(),
+    //     paymentIntent: transactionModel.stripePayment["id"],
+    //   );
+    //   if (stripeRefundResult["success"]) {
+    //     transactionModel.stripePayment = stripeRefundResult["data"];
+    //     if (transactionModel.status == 1) {
+    //       var jubaRefundResult = await JubaTransactionDataProvider.cancelTransaction(
+    //         referenceNum: transactionModel.jubaPayment["referenceNum"],
+    //         remarks: remarks,
+    //       );
 
-          if (jubaRefundResult["Response"] != null && jubaRefundResult["Response"]["Code"] == "001") {
-            transactionModel.status = 2;
-            var result = await TransactionRepository.updateTransaction(transactionModel.id, transactionModel.toJson());
-            await _keicyProgressDialog.hide();
-            StatusAlert.show(
-              context,
-              duration: Duration(seconds: 2),
-              title: "Cancel Transaction Success",
-              titleOptions: StatusAlertTextConfiguration(
-                style: TextStyle(fontSize: widget.transactionHistoryPageStyles.fontSp * 16, color: AppColors.blackColor),
-              ),
-              margin: EdgeInsets.all(widget.transactionHistoryPageStyles.widthDp * 60),
-              padding: EdgeInsets.all(widget.transactionHistoryPageStyles.widthDp * 20),
-              configuration: IconConfiguration(
-                icon: Icons.check_circle_outline,
-                color: AppColors.primaryColor,
-                size: widget.transactionHistoryPageStyles.widthDp * 80,
-              ),
-              blurPower: 3,
-              backgroundColor: Colors.white,
-            );
-          } else {
-            await _keicyProgressDialog.hide();
-            StatusAlert.show(
-              context,
-              duration: Duration(seconds: 2),
-              title: jubaRefundResult["Response"]["message"] ?? "Juba Cancel Transaction Failed",
-              titleOptions: StatusAlertTextConfiguration(
-                style: TextStyle(fontSize: widget.transactionHistoryPageStyles.fontSp * 16, color: AppColors.blackColor),
-              ),
-              margin: EdgeInsets.all(widget.transactionHistoryPageStyles.widthDp * 60),
-              padding: EdgeInsets.all(widget.transactionHistoryPageStyles.widthDp * 20),
-              configuration: IconConfiguration(
-                icon: Icons.error_outline,
-                color: Colors.redAccent,
-                size: widget.transactionHistoryPageStyles.widthDp * 80,
-              ),
-              blurPower: 3,
-              backgroundColor: Colors.white,
-            );
-          }
-        } else if (transactionModel.status == 0) {
-          transactionModel.status = 2;
-          var result = await TransactionRepository.updateTransaction(transactionModel.id, transactionModel.toJson());
-          await _keicyProgressDialog.hide();
-          StatusAlert.show(
-            context,
-            duration: Duration(seconds: 2),
-            title: "Cancel Transaction Success",
-            titleOptions: StatusAlertTextConfiguration(
-              style: TextStyle(fontSize: widget.transactionHistoryPageStyles.fontSp * 16, color: AppColors.blackColor),
-            ),
-            margin: EdgeInsets.all(widget.transactionHistoryPageStyles.widthDp * 60),
-            padding: EdgeInsets.all(widget.transactionHistoryPageStyles.widthDp * 20),
-            configuration: IconConfiguration(
-              icon: Icons.check_circle_outline,
-              color: AppColors.primaryColor,
-              size: widget.transactionHistoryPageStyles.widthDp * 80,
-            ),
-            blurPower: 3,
-            backgroundColor: Colors.white,
-          );
-        }
-      } else {
-        /// refund Error
-        await _keicyProgressDialog.hide();
-        StatusAlert.show(
-          context,
-          duration: Duration(seconds: 2),
-          title: stripeRefundResult["message"] ?? "Stripe Transaction Failed",
-          titleOptions: StatusAlertTextConfiguration(
-            style: TextStyle(fontSize: widget.transactionHistoryPageStyles.fontSp * 16, color: AppColors.blackColor),
-          ),
-          margin: EdgeInsets.all(widget.transactionHistoryPageStyles.widthDp * 60),
-          padding: EdgeInsets.all(widget.transactionHistoryPageStyles.widthDp * 20),
-          configuration: IconConfiguration(
-            icon: Icons.error_outline,
-            color: Colors.redAccent,
-            size: widget.transactionHistoryPageStyles.widthDp * 80,
-          ),
-          blurPower: 3,
-          backgroundColor: Colors.white,
-        );
-      }
-    } catch (e) {
-      await _keicyProgressDialog.hide();
+    //       if (jubaRefundResult["Response"] != null && jubaRefundResult["Response"]["Code"] == "001") {
+    //         transactionModel.status = 2;
+    //         var result = await TransactionRepository.updateTransaction(transactionModel.id, transactionModel.toJson());
+    //         await _keicyProgressDialog.hide();
+    //         StatusAlert.show(
+    //           context,
+    //           duration: Duration(seconds: 2),
+    //           title: "Cancel Transaction Success",
+    //           titleOptions: StatusAlertTextConfiguration(
+    //             style: TextStyle(fontSize: widget.transactionHistoryPageStyles.fontSp * 16, color: AppColors.blackColor),
+    //           ),
+    //           margin: EdgeInsets.all(widget.transactionHistoryPageStyles.widthDp * 60),
+    //           padding: EdgeInsets.all(widget.transactionHistoryPageStyles.widthDp * 20),
+    //           configuration: IconConfiguration(
+    //             icon: Icons.check_circle_outline,
+    //             color: AppColors.primaryColor,
+    //             size: widget.transactionHistoryPageStyles.widthDp * 80,
+    //           ),
+    //           blurPower: 3,
+    //           backgroundColor: Colors.white,
+    //         );
+    //       } else {
+    //         await _keicyProgressDialog.hide();
+    //         StatusAlert.show(
+    //           context,
+    //           duration: Duration(seconds: 2),
+    //           title: jubaRefundResult["Response"]["message"] ?? "Juba Cancel Transaction Failed",
+    //           titleOptions: StatusAlertTextConfiguration(
+    //             style: TextStyle(fontSize: widget.transactionHistoryPageStyles.fontSp * 16, color: AppColors.blackColor),
+    //           ),
+    //           margin: EdgeInsets.all(widget.transactionHistoryPageStyles.widthDp * 60),
+    //           padding: EdgeInsets.all(widget.transactionHistoryPageStyles.widthDp * 20),
+    //           configuration: IconConfiguration(
+    //             icon: Icons.error_outline,
+    //             color: Colors.redAccent,
+    //             size: widget.transactionHistoryPageStyles.widthDp * 80,
+    //           ),
+    //           blurPower: 3,
+    //           backgroundColor: Colors.white,
+    //         );
+    //       }
+    //     } else if (transactionModel.status == 0) {
+    //       transactionModel.status = 2;
+    //       var result = await TransactionRepository.updateTransaction(transactionModel.id, transactionModel.toJson());
+    //       await _keicyProgressDialog.hide();
+    //       StatusAlert.show(
+    //         context,
+    //         duration: Duration(seconds: 2),
+    //         title: "Cancel Transaction Success",
+    //         titleOptions: StatusAlertTextConfiguration(
+    //           style: TextStyle(fontSize: widget.transactionHistoryPageStyles.fontSp * 16, color: AppColors.blackColor),
+    //         ),
+    //         margin: EdgeInsets.all(widget.transactionHistoryPageStyles.widthDp * 60),
+    //         padding: EdgeInsets.all(widget.transactionHistoryPageStyles.widthDp * 20),
+    //         configuration: IconConfiguration(
+    //           icon: Icons.check_circle_outline,
+    //           color: AppColors.primaryColor,
+    //           size: widget.transactionHistoryPageStyles.widthDp * 80,
+    //         ),
+    //         blurPower: 3,
+    //         backgroundColor: Colors.white,
+    //       );
+    //     }
+    //   } else {
+    //     /// refund Error
+    //     await _keicyProgressDialog.hide();
+    //     StatusAlert.show(
+    //       context,
+    //       duration: Duration(seconds: 2),
+    //       title: stripeRefundResult["message"] ?? "Stripe Transaction Failed",
+    //       titleOptions: StatusAlertTextConfiguration(
+    //         style: TextStyle(fontSize: widget.transactionHistoryPageStyles.fontSp * 16, color: AppColors.blackColor),
+    //       ),
+    //       margin: EdgeInsets.all(widget.transactionHistoryPageStyles.widthDp * 60),
+    //       padding: EdgeInsets.all(widget.transactionHistoryPageStyles.widthDp * 20),
+    //       configuration: IconConfiguration(
+    //         icon: Icons.error_outline,
+    //         color: Colors.redAccent,
+    //         size: widget.transactionHistoryPageStyles.widthDp * 80,
+    //       ),
+    //       blurPower: 3,
+    //       backgroundColor: Colors.white,
+    //     );
+    //   }
+    // } catch (e) {
+    //   await _keicyProgressDialog.hide();
 
-      StatusAlert.show(
-        context,
-        duration: Duration(seconds: 2),
-        title: "Cancel Transaction Failed",
-        titleOptions: StatusAlertTextConfiguration(
-          style: TextStyle(fontSize: widget.transactionHistoryPageStyles.fontSp * 16, color: AppColors.blackColor),
-        ),
-        margin: EdgeInsets.all(widget.transactionHistoryPageStyles.widthDp * 60),
-        padding: EdgeInsets.all(widget.transactionHistoryPageStyles.widthDp * 20),
-        configuration: IconConfiguration(
-          icon: Icons.error_outline,
-          color: Colors.redAccent,
-          size: widget.transactionHistoryPageStyles.widthDp * 80,
-        ),
-        blurPower: 3,
-        backgroundColor: Colors.white,
-      );
-    }
+    //   StatusAlert.show(
+    //     context,
+    //     duration: Duration(seconds: 2),
+    //     title: "Cancel Transaction Failed",
+    //     titleOptions: StatusAlertTextConfiguration(
+    //       style: TextStyle(fontSize: widget.transactionHistoryPageStyles.fontSp * 16, color: AppColors.blackColor),
+    //     ),
+    //     margin: EdgeInsets.all(widget.transactionHistoryPageStyles.widthDp * 60),
+    //     padding: EdgeInsets.all(widget.transactionHistoryPageStyles.widthDp * 20),
+    //     configuration: IconConfiguration(
+    //       icon: Icons.error_outline,
+    //       color: Colors.redAccent,
+    //       size: widget.transactionHistoryPageStyles.widthDp * 80,
+    //     ),
+    //     blurPower: 3,
+    //     backgroundColor: Colors.white,
+    //   );
+    // }
   }
 }

@@ -8,8 +8,8 @@ class AppConstants {
     {"text": "United Sate of America", "value": 0},
   ];
 
-  // static String maskString = '+242(00)000-0000';
-  static String maskString = '+1(000)000-0000';
+  static String maskString = '+242(00)000-0000';
+  // static String maskString = '+1(000)000-0000';
 
   static List<String> reasonList = [
     "Medical",
@@ -407,21 +407,7 @@ class AppConstants {
       "Friendswood",
       "Weslaco"
     ],
-    "Pennsylvania": [
-      "Philadelphia",
-      "Pittsburgh",
-      "Allentown",
-      "Erie",
-      "Reading",
-      "Scranton",
-      "Bethlehem",
-      "Lancaster",
-      "Harrisburg",
-      "Altoona",
-      "York",
-      "State College",
-      "Wilkes-Barre"
-    ],
+    "Pennsylvania": ["Philadelphia", "Pittsburgh", "Allentown", "Erie", "Reading", "Scranton", "Bethlehem", "Lancaster", "Harrisburg", "Altoona", "York", "State College", "Wilkes-Barre"],
     "Arizona": [
       "Phoenix",
       "Tucson",
@@ -754,22 +740,7 @@ class AppConstants {
     "District of Columbia": ["Washington"],
     "Maryland": ["Baltimore", "Frederick", "Rockville", "Gaithersburg", "Bowie", "Hagerstown", "Annapolis"],
     "Kentucky": ["Louisville/Jefferson County", "Lexington-Fayette", "Bowling Green", "Owensboro", "Covington"],
-    "Oregon": [
-      "Portland",
-      "Eugene",
-      "Salem",
-      "Gresham",
-      "Hillsboro",
-      "Beaverton",
-      "Bend",
-      "Medford",
-      "Springfield",
-      "Corvallis",
-      "Albany",
-      "Tigard",
-      "Lake Oswego",
-      "Keizer"
-    ],
+    "Oregon": ["Portland", "Eugene", "Salem", "Gresham", "Hillsboro", "Beaverton", "Bend", "Medford", "Springfield", "Corvallis", "Albany", "Tigard", "Lake Oswego", "Keizer"],
     "Oklahoma": ["Oklahoma City", "Tulsa", "Norman", "Broken Arrow", "Lawton", "Edmond", "Moore", "Midwest City", "Enid", "Stillwater", "Muskogee"],
     "Wisconsin": [
       "Milwaukee",
@@ -906,47 +877,9 @@ class AppConstants {
       "Atlantic City"
     ],
     "Idaho": ["Boise City", "Nampa", "Meridian", "Idaho Falls", "Pocatello", "Caldwell", "Coeur d'Alene", "Twin Falls"],
-    "Alabama": [
-      "Birmingham",
-      "Montgomery",
-      "Mobile",
-      "Huntsville",
-      "Tuscaloosa",
-      "Hoover",
-      "Dothan",
-      "Auburn",
-      "Decatur",
-      "Madison",
-      "Florence",
-      "Gadsden"
-    ],
-    "Iowa": [
-      "Des Moines",
-      "Cedar Rapids",
-      "Davenport",
-      "Sioux City",
-      "Iowa City",
-      "Waterloo",
-      "Council Bluffs",
-      "Ames",
-      "West Des Moines",
-      "Dubuque",
-      "Ankeny",
-      "Urbandale",
-      "Cedar Falls"
-    ],
-    "Arkansas": [
-      "Little Rock",
-      "Fort Smith",
-      "Fayetteville",
-      "Springdale",
-      "Jonesboro",
-      "North Little Rock",
-      "Conway",
-      "Rogers",
-      "Pine Bluff",
-      "Bentonville"
-    ],
+    "Alabama": ["Birmingham", "Montgomery", "Mobile", "Huntsville", "Tuscaloosa", "Hoover", "Dothan", "Auburn", "Decatur", "Madison", "Florence", "Gadsden"],
+    "Iowa": ["Des Moines", "Cedar Rapids", "Davenport", "Sioux City", "Iowa City", "Waterloo", "Council Bluffs", "Ames", "West Des Moines", "Dubuque", "Ankeny", "Urbandale", "Cedar Falls"],
+    "Arkansas": ["Little Rock", "Fort Smith", "Fayetteville", "Springdale", "Jonesboro", "North Little Rock", "Conway", "Rogers", "Pine Bluff", "Bentonville"],
     "Utah": [
       "Salt Lake City",
       "West Valley City",
@@ -1100,22 +1033,8 @@ class AppConstants {
       "nationality": "Comorian",
       "dial_code": "+269",
     },
-    {
-      "num_code": "180",
-      "alpha_2_code": "CD",
-      "alpha_3_code": "COD",
-      "en_short_name": "Congo (Democratic Republic of the)",
-      "nationality": "Congolese",
-      "dial_code": "+243"
-    },
-    {
-      "num_code": "178",
-      "alpha_2_code": "CG",
-      "alpha_3_code": "COG",
-      "en_short_name": "Congo (Republic of the)",
-      "nationality": "Congolese",
-      "dial_code": "+242"
-    },
+    {"num_code": "180", "alpha_2_code": "CD", "alpha_3_code": "COD", "en_short_name": "Congo (Democratic Republic of the)", "nationality": "Congolese", "dial_code": "+243"},
+    {"num_code": "178", "alpha_2_code": "CG", "alpha_3_code": "COG", "en_short_name": "Congo (Republic of the)", "nationality": "Congolese", "dial_code": "+242"},
     {
       "num_code": "262",
       "alpha_2_code": "DJ",
@@ -1132,14 +1051,7 @@ class AppConstants {
       "nationality": "Egyptian",
       "dial_code": "+20",
     },
-    {
-      "num_code": "226",
-      "alpha_2_code": "GQ",
-      "alpha_3_code": "GNQ",
-      "en_short_name": "Equatorial Guinea",
-      "nationality": "Equatorial Guinean, Equatoguinean",
-      "dial_code": "+240"
-    },
+    {"num_code": "226", "alpha_2_code": "GQ", "alpha_3_code": "GNQ", "en_short_name": "Equatorial Guinea", "nationality": "Equatorial Guinean, Equatoguinean", "dial_code": "+240"},
     {
       "num_code": "232",
       "alpha_2_code": "ER",
@@ -1196,14 +1108,7 @@ class AppConstants {
       "nationality": "Guinean",
       "dial_code": "+224",
     },
-    {
-      "num_code": "624",
-      "alpha_2_code": "GW",
-      "alpha_3_code": "GNB",
-      "en_short_name": "Guinea-Bissau",
-      "nationality": "Bissau-Guinean",
-      "dial_code": "+245"
-    },
+    {"num_code": "624", "alpha_2_code": "GW", "alpha_3_code": "GNB", "en_short_name": "Guinea-Bissau", "nationality": "Bissau-Guinean", "dial_code": "+245"},
     {
       "num_code": "384",
       "alpha_2_code": "CI",
@@ -1268,14 +1173,7 @@ class AppConstants {
       "nationality": "Malian, Malinese",
       "dial_code": "+223",
     },
-    {
-      "num_code": "478",
-      "alpha_2_code": "MR",
-      "alpha_3_code": "MRT",
-      "en_short_name": "Mauritania",
-      "nationality": "Mauritanian",
-      "dial_code": "+222"
-    },
+    {"num_code": "478", "alpha_2_code": "MR", "alpha_3_code": "MRT", "en_short_name": "Mauritania", "nationality": "Mauritanian", "dial_code": "+222"},
     {
       "num_code": "480",
       "alpha_2_code": "MU",
@@ -1332,14 +1230,7 @@ class AppConstants {
       "nationality": "Rwandan",
       "dial_code": "+250",
     },
-    {
-      "num_code": "678",
-      "alpha_2_code": "ST",
-      "alpha_3_code": "STP",
-      "en_short_name": "Sao Tome and Principe",
-      "nationality": "São Toméan",
-      "dial_code": "+239"
-    },
+    {"num_code": "678", "alpha_2_code": "ST", "alpha_3_code": "STP", "en_short_name": "Sao Tome and Principe", "nationality": "São Toméan", "dial_code": "+239"},
     {
       "num_code": "686",
       "alpha_2_code": "SN",
@@ -1348,46 +1239,11 @@ class AppConstants {
       "nationality": "Senegalese",
       "dial_code": "+221",
     },
-    {
-      "num_code": "690",
-      "alpha_2_code": "SC",
-      "alpha_3_code": "SYC",
-      "en_short_name": "Seychelles",
-      "nationality": "Seychellois",
-      "dial_code": "+248"
-    },
-    {
-      "num_code": "694",
-      "alpha_2_code": "SL",
-      "alpha_3_code": "SLE",
-      "en_short_name": "Sierra Leone",
-      "nationality": "Sierra Leonean",
-      "dial_code": "+232"
-    },
-    {
-      "num_code": "706",
-      "alpha_2_code": "SO",
-      "alpha_3_code": "SOM",
-      "en_short_name": "Somalia",
-      "nationality": "Somali, Somalian",
-      "dial_code": "+252"
-    },
-    {
-      "num_code": "710",
-      "alpha_2_code": "ZA",
-      "alpha_3_code": "ZAF",
-      "en_short_name": "South Africa",
-      "nationality": "South African",
-      "dial_code": "+27"
-    },
-    {
-      "num_code": "728",
-      "alpha_2_code": "SS",
-      "alpha_3_code": "SSD",
-      "en_short_name": "South Sudan",
-      "nationality": "South Sudanese",
-      "dial_code": "+211"
-    },
+    {"num_code": "690", "alpha_2_code": "SC", "alpha_3_code": "SYC", "en_short_name": "Seychelles", "nationality": "Seychellois", "dial_code": "+248"},
+    {"num_code": "694", "alpha_2_code": "SL", "alpha_3_code": "SLE", "en_short_name": "Sierra Leone", "nationality": "Sierra Leonean", "dial_code": "+232"},
+    {"num_code": "706", "alpha_2_code": "SO", "alpha_3_code": "SOM", "en_short_name": "Somalia", "nationality": "Somali, Somalian", "dial_code": "+252"},
+    {"num_code": "710", "alpha_2_code": "ZA", "alpha_3_code": "ZAF", "en_short_name": "South Africa", "nationality": "South African", "dial_code": "+27"},
+    {"num_code": "728", "alpha_2_code": "SS", "alpha_3_code": "SSD", "en_short_name": "South Sudan", "nationality": "South Sudanese", "dial_code": "+211"},
     {
       "num_code": "729",
       "alpha_2_code": "SD",
@@ -1404,14 +1260,7 @@ class AppConstants {
       "nationality": "Swazi",
       "dial_code": "+268",
     },
-    {
-      "num_code": "834",
-      "alpha_2_code": "TZ",
-      "alpha_3_code": "TZA",
-      "en_short_name": "Tanzania, United Republic of",
-      "nationality": "Tanzanian",
-      "dial_code": "+255"
-    },
+    {"num_code": "834", "alpha_2_code": "TZ", "alpha_3_code": "TZA", "en_short_name": "Tanzania, United Republic of", "nationality": "Tanzanian", "dial_code": "+255"},
     {
       "num_code": "768",
       "alpha_2_code": "TG",

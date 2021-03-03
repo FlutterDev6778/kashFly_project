@@ -87,9 +87,7 @@ class PaymentMethodProvider extends ChangeNotifier {
     try {
       UserModel userModel = UserModel.fromJson(userProvider.userState.userModel.toJson());
       userModel.seledtedPaymentMethod = (userModel.seledtedPaymentMethod == userModel.paymentMethodList[index]["id"])
-          ? userModel.paymentMethodList.length == 0
-              ? ""
-              : userModel.paymentMethodList[0]["id"]
+          ? userModel.paymentMethodList.length == 0 ? "" : userModel.paymentMethodList[0]["id"]
           : userModel.seledtedPaymentMethod;
 
       userModel.paymentMethodList.removeAt(index);
